@@ -32,3 +32,5 @@ INSERT INTO series (series_title, series_name, person_name) VALUES ('Mission Imp
 INSERT INTO series (series_title, series_name, person_name) VALUES ('Scream', 'scream', 'NICK');
 INSERT INTO series (series_title, series_name, person_name) VALUES ('Blade Runner', 'blade_runner', 'DAN');
 INSERT INTO series (series_title, series_name, person_name) VALUES ('Underworld', 'underworld', 'DAN');
+INSERT INTO series (series_title, series_name, person_name) VALUES ('V/H/S', 'vhs', 'NICK');
+INSERT INTO series (series_title, series_name, person_name) VALUES ('A Quiet Place', 'a_quiet_place', 'DAN');

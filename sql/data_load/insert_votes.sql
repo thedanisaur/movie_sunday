@@ -419,3 +419,16 @@ INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('underworld_rise
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('underworld_awakening', 'NICK', 'BAD');
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('underworld_blood_wars', 'NICK', 'BAD');
 
+/* V/H/S */
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('vhs', 'DAN', 'GOOD');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('vhs_viral', 'DAN', 'GOOD');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('vhs94', 'DAN', 'BAD');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('vhs', 'NICK', 'GOOD');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('vhs_viral', 'NICK', 'GOOD');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('vhs94', 'NICK', 'BAD');
+
+/* A Quiet Place */
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('a_quiet_place', 'DAN', 'GOOD');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('a_quiet_place_pt2', 'DAN', 'GOOD');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('a_quiet_place', 'NICK', 'GOOD');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('a_quiet_place_pt2', 'NICK', 'GOOD');

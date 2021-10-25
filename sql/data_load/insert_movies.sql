@@ -242,3 +242,12 @@ INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VA
 INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('underworld_rise_of_the_lycans', 'underworld', 'Underworld: Rise of the Lycans', '2021-01-01');
 INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('underworld_awakening', 'underworld', 'Underworld: Awakening', '2021-01-01');
 INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('underworld_blood_wars', 'underworld', 'Underworld: Blood Wars', '2021-01-01');
+
+/* V/H/S */
+INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('vhs', 'vhs', 'V/H/S', '2021-01-01');
+INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('vhs_viral', 'vhs', 'V/H/S: Viral', '2021-01-01');
+INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('vhs94', 'vhs', 'V/H/S/94', '2021-01-01');
+
+/* A Quiet Place */
+INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('a_quiet_place', 'a_quiet_place', 'A Quiet Place', '2021-01-01');
+INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('a_quiet_place_pt2', 'a_quiet_place', 'A Quiet Place part 2', '2021-01-01');
