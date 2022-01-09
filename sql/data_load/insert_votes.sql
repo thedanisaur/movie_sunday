@@ -432,3 +432,30 @@ INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('a_quiet_place',
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('a_quiet_place_pt2', 'DAN', 'GOOD');
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('a_quiet_place', 'NICK', 'GOOD');
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('a_quiet_place_pt2', 'NICK', 'GOOD');
+
+/* The Hills Have Eyes */
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('the_hills_have_eyes', 'DAN', 'GOOD');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('the_hills_have_eyes_part_2', 'DAN', 'BAD');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('the_hills_have_eyes', 'NICK', '');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('the_hills_have_eyes_part_2', 'NICK', '');
+
+/* Hostel */
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('hostel', 'DAN', 'GOOD');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('hostel_2', 'DAN', 'GOOD');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('hostel_3', 'DAN', 'GOOD');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('hostel', 'NICK', 'GOOD');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('hostel_2', 'NICK', 'GOOD');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('hostel_3', 'NICK', 'BAD');
+
+/* The Purge */
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('the_purge', 'DAN', 'BAD');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('the_purge_anarchy', 'DAN', 'BAD');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('the_purge_election_year', 'DAN', 'BAD');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('the_purge_election_year', 'DAN', 'BAD');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('the_first_purge', 'DAN', '');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('the_forever_purge', 'DAN', '');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('the_purge', 'NICK', 'GOOD');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('the_purge_anarchy', 'NICK', 'GOOD');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('the_purge_election_year', 'NICK', '');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('the_first_purge', 'NICK', '');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('the_forever_purge', 'NICK', '');

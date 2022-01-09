@@ -251,3 +251,19 @@ INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VA
 /* A Quiet Place */
 INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('a_quiet_place', 'a_quiet_place', 'A Quiet Place', '2021-01-01');
 INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('a_quiet_place_pt2', 'a_quiet_place', 'A Quiet Place part 2', '2021-01-01');
+
+/* The Hills Have Eyes */
+INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('the_hills_have_eyes', 'hills_have_eyes', 'The Hills Have Eyes', '2021-01-01');
+INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('the_hills_have_eyes_part_2', 'hills_have_eyes', 'The Hills Have Eyes Part 2', '2021-01-01');
+
+/* Hostel */
+INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('hostel', 'hostel', 'Hostel', '2021-01-01');
+INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('hostel_2', 'hostel', 'Hostel II', '2021-01-01');
+INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('hostel_3', 'hostel', 'Hostel III', '2021-01-01');
+
+/* The Purge */
+INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('the_purge', 'purge', 'The Purge', '2021-01-01');
+INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('the_purge_anarchy', 'purge', 'The Purge: Anarchy', '2021-01-01');
+INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('the_purge_election_year', 'purge', 'The Purge: Election Year', '2021-01-01');
+INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('the_first_purge', 'purge', 'The First Purge', '2021-01-01');
+INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('the_forever_purge', 'purge', 'The Forever Purge', '2021-01-01');

@@ -34,3 +34,6 @@ INSERT INTO series (series_title, series_name, person_name) VALUES ('Blade Runne
 INSERT INTO series (series_title, series_name, person_name) VALUES ('Underworld', 'underworld', 'DAN');
 INSERT INTO series (series_title, series_name, person_name) VALUES ('V/H/S', 'vhs', 'NICK');
 INSERT INTO series (series_title, series_name, person_name) VALUES ('A Quiet Place', 'a_quiet_place', 'DAN');
+INSERT INTO series (series_title, series_name, person_name) VALUES ('The Hills Have Eyes', 'hills_have_eyes', 'DAN');
+INSERT INTO series (series_title, series_name, person_name) VALUES ('Hostel', 'hostel', 'NICK');
+INSERT INTO series (series_title, series_name, person_name) VALUES ('The Purge', 'purge', 'NICK');
