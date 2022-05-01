@@ -37,3 +37,5 @@ INSERT INTO series (series_title, series_name, person_name) VALUES ('A Quiet Pla
 INSERT INTO series (series_title, series_name, person_name) VALUES ('The Hills Have Eyes', 'hills_have_eyes', 'DAN');
 INSERT INTO series (series_title, series_name, person_name) VALUES ('Hostel', 'hostel', 'NICK');
 INSERT INTO series (series_title, series_name, person_name) VALUES ('The Purge', 'purge', 'NICK');
+INSERT INTO series (series_title, series_name, person_name) VALUES ('Broken Lizard', 'broken_lizard', 'DAN');
+INSERT INTO series (series_title, series_name, person_name) VALUES ('Wyrmwood', 'wyrmwood', 'NICK');

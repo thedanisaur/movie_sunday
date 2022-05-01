@@ -436,8 +436,8 @@ INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('a_quiet_place_p
 /* The Hills Have Eyes */
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('the_hills_have_eyes', 'DAN', 'GOOD');
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('the_hills_have_eyes_part_2', 'DAN', 'BAD');
-INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('the_hills_have_eyes', 'NICK', '');
-INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('the_hills_have_eyes_part_2', 'NICK', '');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('the_hills_have_eyes', 'NICK', 'GOOD');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('the_hills_have_eyes_part_2', 'NICK', 'GOOD');
 
 /* Hostel */
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('hostel', 'DAN', 'GOOD');
@@ -451,11 +451,32 @@ INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('hostel_3', 'NIC
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('the_purge', 'DAN', 'BAD');
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('the_purge_anarchy', 'DAN', 'BAD');
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('the_purge_election_year', 'DAN', 'BAD');
-INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('the_purge_election_year', 'DAN', 'BAD');
-INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('the_first_purge', 'DAN', '');
-INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('the_forever_purge', 'DAN', '');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('the_first_purge', 'DAN', 'BAD');
+-- INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('the_forever_purge', 'DAN', 'BAD');
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('the_purge', 'NICK', 'GOOD');
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('the_purge_anarchy', 'NICK', 'GOOD');
-INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('the_purge_election_year', 'NICK', '');
-INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('the_first_purge', 'NICK', '');
-INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('the_forever_purge', 'NICK', '');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('the_purge_election_year', 'NICK', 'GOOD');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('the_first_purge', 'NICK', 'GOOD');
+-- INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('the_forever_purge', 'NICK', '');
+
+/* Broken Lizard */
+-- INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('puddle_cruiser', 'DAN', '');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('super_troopers', 'DAN', 'GOOD');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('club_dread', 'DAN', 'BAD');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('beerfest', 'DAN', 'GOOD');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('slamin_salmon', 'DAN', 'GOOD');
+-- INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('freeloaders', 'DAN', '');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('super_troopers_2', 'DAN', 'GOOD');
+-- INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('puddle_cruiser', 'NICK', '');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('super_troopers', 'NICK', 'GOOD');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('club_dread', 'NICK', 'GOOD');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('beerfest', 'NICK', 'GOOD');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('slamin_salmon', 'NICK', 'BAD');
+-- INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('freeloaders', 'NICK', '');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('super_troopers_2', 'NICK', 'GOOD');
+
+/* Wyrmwood */
+-- INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('wyrmwood_road_of_the_dead', 'DAN', 'GOOD');
+-- INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('wyrmwood_apocalypse', 'DAN', '');
+-- INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('wyrmwood_road_of_the_dead', 'NICK', '');
+-- INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('wyrmwood_apocalypse', 'NICK', '');

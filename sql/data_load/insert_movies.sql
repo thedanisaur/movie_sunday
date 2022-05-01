@@ -267,3 +267,16 @@ INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VA
 INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('the_purge_election_year', 'purge', 'The Purge: Election Year', '2021-01-01');
 INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('the_first_purge', 'purge', 'The First Purge', '2021-01-01');
 INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('the_forever_purge', 'purge', 'The Forever Purge', '2021-01-01');
+
+/* Broken Lizard */
+INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('puddle_cruiser', 'broken_lizard', 'Puddle Cruiser', '2021-01-01');
+INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('super_troopers', 'broken_lizard', 'Super Troopers', '2021-01-01');
+INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('club_dread', 'broken_lizard', 'Club Dread', '2021-01-01');
+INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('beerfest', 'broken_lizard', 'Beerfest', '2021-01-01');
+INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('slamin_salmon', 'broken_lizard', 'Slammin'' Salmon', '2021-01-01');
+INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('freeloaders', 'broken_lizard', 'Freeloaders', '2021-01-01');
+INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('super_troopers_2', 'broken_lizard', 'Super Troopers 2', '2021-01-01');
+
+/* Wyrmwood */
+INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('wyrmwood_road_of_the_dead', 'wyrmwood', 'Wyrmwood: Road of the Dead', '2021-01-01');
+INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('wyrmwood_apocalypse', 'wyrmwood', 'Wyrmwood: Apocalypse', '2021-01-01');
