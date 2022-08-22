@@ -4,4 +4,4 @@ Application that determines which movie series is the best. Movies can only be v
 
 Star Wars is bad.
 
-[Votes sql file](https://github.com/thedanisaur/movie_sunday/bolb/master/sql/data_load/insert_votes.sql)
+[Votes sql file](https://github.com/thedanisaur/movie_sunday/blob/master/sql/data_load/insert_votes.sql)
