@@ -139,8 +139,8 @@ INSERT INTO votes (movie_name, vote_value, person_name) VALUES ('jurassic_world'
 INSERT INTO votes (movie_name, vote_value, person_name) VALUES ('jurassic_world', 'GOOD', 'NICK');
 INSERT INTO votes (movie_name, vote_value, person_name) VALUES ('jurassic_world_fallen_kingdom', 'GOOD', 'DAN');
 INSERT INTO votes (movie_name, vote_value, person_name) VALUES ('jurassic_world_fallen_kingdom', 'GOOD', 'NICK');
--- INSERT INTO votes (movie_name, vote_value, person_name) VALUES ('jurassic_world_dominion', '', 'DAN');
--- INSERT INTO votes (movie_name, vote_value, person_name) VALUES ('jurassic_world_dominion', '', 'NICK');
+INSERT INTO votes (movie_name, vote_value, person_name) VALUES ('jurassic_world_dominion', 'BAD', 'DAN');
+INSERT INTO votes (movie_name, vote_value, person_name) VALUES ('jurassic_world_dominion', 'BAD', 'NICK');
 
 /* American Pie */
 INSERT INTO votes (movie_name, vote_value, person_name) VALUES ('american_pie', 'GOOD', 'DAN');
