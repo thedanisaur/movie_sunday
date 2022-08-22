@@ -59,10 +59,12 @@ INSERT INTO votes (movie_name, vote_value, person_name) VALUES ('saw_v', 'GOOD',
 INSERT INTO votes (movie_name, vote_value, person_name) VALUES ('saw_v', 'GOOD', 'NICK');
 INSERT INTO votes (movie_name, vote_value, person_name) VALUES ('saw_vi', 'GOOD', 'DAN');
 INSERT INTO votes (movie_name, vote_value, person_name) VALUES ('saw_vi', 'BAD', 'NICK');
-INSERT INTO votes (movie_name, vote_value, person_name) VALUES ('saw_3d', 'BAD', 'DAN');
-INSERT INTO votes (movie_name, vote_value, person_name) VALUES ('saw_3d', 'BAD', 'NICK');
+INSERT INTO votes (movie_name, vote_value, person_name) VALUES ('saw_the_final_chapter', 'BAD', 'DAN');
+INSERT INTO votes (movie_name, vote_value, person_name) VALUES ('saw_the_final_chapter', 'BAD', 'NICK');
 INSERT INTO votes (movie_name, vote_value, person_name) VALUES ('saw_legacy', 'GOOD', 'DAN');
 INSERT INTO votes (movie_name, vote_value, person_name) VALUES ('saw_legacy', 'GOOD', 'NICK');
+-- INSERT INTO votes (movie_name, vote_value, person_name) VALUES ('spiral', '', 'DAN');
+-- INSERT INTO votes (movie_name, vote_value, person_name) VALUES ('spiral', 'BAD', 'NICK');
 
 /* Alien */
 INSERT INTO votes (movie_name, vote_value, person_name) VALUES ('alien', 'GOOD', 'DAN');
@@ -89,6 +91,8 @@ INSERT INTO votes (movie_name, vote_value, person_name) VALUES ('alien_covenant'
 INSERT INTO votes (movie_name, vote_value, person_name) VALUES ('alien_covenant', 'GOOD', 'NICK');
 INSERT INTO votes (movie_name, vote_value, person_name) VALUES ('predator_2018', 'GOOD', 'DAN');
 INSERT INTO votes (movie_name, vote_value, person_name) VALUES ('predator_2018', 'GOOD', 'NICK');
+-- INSERT INTO votes (movie_name, vote_value, person_name) VALUES ('prey', '', 'DAN');
+-- INSERT INTO votes (movie_name, vote_value, person_name) VALUES ('prey', 'BAD', 'NICK');
 
 /* Death Note */
 INSERT INTO votes (movie_name, vote_value, person_name) VALUES ('death_note', 'GOOD', 'DAN');
@@ -97,6 +101,8 @@ INSERT INTO votes (movie_name, vote_value, person_name) VALUES ('death_note_2', 
 INSERT INTO votes (movie_name, vote_value, person_name) VALUES ('death_note_2', 'GOOD', 'NICK');
 INSERT INTO votes (movie_name, vote_value, person_name) VALUES ('l_change_the_world', 'BAD', 'DAN');
 INSERT INTO votes (movie_name, vote_value, person_name) VALUES ('l_change_the_world', 'BAD', 'NICK');
+INSERT INTO votes (movie_name, vote_value, person_name) VALUES ('light_up_the_new_world', 'GOOD', 'DAN');
+-- INSERT INTO votes (movie_name, vote_value, person_name) VALUES ('light_up_the_new_world', '', 'NICK');
 
 /* Terminator */
 INSERT INTO votes (movie_name, vote_value, person_name) VALUES ('terminator', 'GOOD', 'DAN');
@@ -119,6 +125,8 @@ INSERT INTO votes (movie_name, vote_value, person_name) VALUES ('the_matrix_relo
 INSERT INTO votes (movie_name, vote_value, person_name) VALUES ('the_matrix_reloaded', 'GOOD', 'NICK');
 INSERT INTO votes (movie_name, vote_value, person_name) VALUES ('the_matrix_revolution', 'BAD', 'DAN');
 INSERT INTO votes (movie_name, vote_value, person_name) VALUES ('the_matrix_revolution', 'BAD', 'NICK');
+INSERT INTO votes (movie_name, vote_value, person_name) VALUES ('the_matrix_resurrections', 'GOOD', 'DAN');
+-- INSERT INTO votes (movie_name, vote_value, person_name) VALUES ('the_matrix_resurrections', 'BAD', 'NICK');
 
 /* Jurassic Park */
 INSERT INTO votes (movie_name, vote_value, person_name) VALUES ('jurassic_park', 'GOOD', 'DAN');
@@ -131,6 +139,8 @@ INSERT INTO votes (movie_name, vote_value, person_name) VALUES ('jurassic_world'
 INSERT INTO votes (movie_name, vote_value, person_name) VALUES ('jurassic_world', 'GOOD', 'NICK');
 INSERT INTO votes (movie_name, vote_value, person_name) VALUES ('jurassic_world_fallen_kingdom', 'GOOD', 'DAN');
 INSERT INTO votes (movie_name, vote_value, person_name) VALUES ('jurassic_world_fallen_kingdom', 'GOOD', 'NICK');
+-- INSERT INTO votes (movie_name, vote_value, person_name) VALUES ('jurassic_world_dominion', '', 'DAN');
+-- INSERT INTO votes (movie_name, vote_value, person_name) VALUES ('jurassic_world_dominion', '', 'NICK');
 
 /* American Pie */
 INSERT INTO votes (movie_name, vote_value, person_name) VALUES ('american_pie', 'GOOD', 'DAN');
@@ -175,6 +185,7 @@ INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('casino_royale',
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('quantum_of_solace', 'DAN', 'GOOD');
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('skyfall', 'DAN', 'BAD');
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('spectre', 'DAN', 'BAD');
+-- INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('no_time_to_die', 'DAN', '');
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('dr_no', 'NICK', 'BAD');
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('from_russia_with_love', 'NICK', 'BAD');
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('goldfinger', 'NICK', 'BAD');
@@ -199,15 +210,18 @@ INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('casino_royale',
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('quantum_of_solace', 'NICK', 'GOOD');
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('skyfall', 'NICK', 'GOOD');
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('spectre', 'NICK', 'BAD');
+-- INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('no_time_to_die', 'NICK', '');
 
 
 /* Insidious */
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('insidious', 'DAN', 'GOOD');
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('insidious_chapter_2', 'DAN', 'BAD');
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('insidious_chapter_3', 'DAN', 'BAD');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('insidious_the_last_key', 'DAN', 'BAD');
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('insidious', 'NICK', 'GOOD');
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('insidious_chapter_2', 'NICK', 'GOOD');
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('insidious_chapter_3', 'NICK', 'BAD');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('insidious_the_last_key', 'NICK', 'BAD');
 
 /* The Raid */
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('the_raid', 'DAN', 'GOOD');
@@ -240,6 +254,7 @@ INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('death_proof', '
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('inglorious_bastards', 'DAN', 'GOOD');
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('django_unchained', 'DAN', 'GOOD');
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('heatful_eight', 'DAN', 'GOOD');
+-- INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('once_upon_a_time_in_hollywood', 'DAN', '');
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('reservoir_dogs', 'NICK', 'GOOD');
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('pulp_fiction', 'NICK', 'GOOD');
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('kill_bill_vol_1', 'NICK', 'GOOD');
@@ -250,6 +265,7 @@ INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('death_proof', '
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('inglorious_bastards', 'NICK', 'GOOD');
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('django_unchained', 'NICK', 'GOOD');
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('heatful_eight', 'NICK', 'GOOD');
+-- INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('once_upon_a_time_in_hollywood', 'NICK', 'GOOD');
 
 /* The Dark Knight */
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('batman_begins', 'DAN', 'GOOD');
@@ -326,8 +342,10 @@ INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('a_good_day_to_d
 /* Ocean's */
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('oceans_eleven', 'DAN', 'GOOD');
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('oceans_twelve', 'DAN', 'GOOD');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('oceans_thirteen', 'DAN', 'GOOD');
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('oceans_eleven', 'NICK', 'GOOD');
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('oceans_twelve', 'NICK', 'GOOD');
+-- INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('oceans_thirteen', 'NICK', '');
 
 /* Fast & Furious */
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('the_fast_and_the_furious', 'DAN', 'GOOD');
@@ -339,6 +357,7 @@ INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('fast_furious_6'
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('furious_7', 'DAN', 'GOOD');
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('the_fate_of_the_furious', 'DAN', 'GOOD');
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('fast_furious_presents_hobbs_shaw', 'DAN', 'GOOD');
+-- INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('fast_and_furious_nine', 'DAN', '');
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('the_fast_and_the_furious', 'NICK', 'GOOD');
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('2_fast_2_furious', 'NICK', 'GOOD');
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('the_fast_and_the_furious_tokyo_drift', 'NICK', 'GOOD');
@@ -348,6 +367,7 @@ INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('fast_furious_6'
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('furious_7', 'NICK', 'GOOD');
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('the_fate_of_the_furious', 'NICK', 'GOOD');
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('fast_furious_presents_hobbs_shaw', 'NICK', 'GOOD');
+-- INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('fast_and_furious_nine', 'NICK', 'GOOD');
 
 /* Thing */
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('the_thing_1982', 'DAN', 'GOOD');
@@ -378,34 +398,44 @@ INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('john_wick_3', '
 /* Train to Busan */
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('train_to_busan', 'DAN', 'GOOD');
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('seoul_station', 'DAN', 'BAD');
+-- INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('peninsula', 'DAN', '');
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('train_to_busan', 'NICK', 'GOOD');
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('seoul_station', 'NICK', 'BAD');
+-- INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('peninsula', 'NICK', '');
 
 /* Mission Impossible */
-INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('mission_impossible', 'DAN', 'GOOD');
-INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('mission_impossible_ii', 'DAN', 'GOOD');
-INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('mission_impossible_iii', 'DAN', 'GOOD');
-INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('mission_impossible_iv', 'DAN', 'GOOD');
-INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('mission_impossible_v', 'DAN', 'GOOD');
-INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('mission_impossible', 'NICK', 'GOOD');
-INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('mission_impossible_ii', 'NICK', 'BAD');
-INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('mission_impossible_iii', 'NICK', 'GOOD');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('mission_impossible_1', 'DAN', 'GOOD');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('mission_impossible_2', 'DAN', 'GOOD');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('mission_impossible_3', 'DAN', 'GOOD');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('mission_impossible_4', 'DAN', 'GOOD');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('mission_impossible_5', 'DAN', 'GOOD');
+-- INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('mission_impossible_6', 'DAN', '');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('mission_impossible_1', 'NICK', 'GOOD');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('mission_impossible_2', 'NICK', 'BAD');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('mission_impossible_3', 'NICK', 'GOOD');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('mission_impossible_4', 'NICK', 'GOOD');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('mission_impossible_5', 'NICK', 'GOOD');
+-- INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('mission_impossible_6', 'NICK', 'GOOD');
 
 /* Scream */
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('scream', 'DAN', 'BAD');
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('scream_ii', 'DAN', 'BAD');
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('scream_iii', 'DAN', 'BAD');
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('scream_iv', 'DAN', 'BAD');
+-- INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('scream_2022', 'DAN', '');
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('scream', 'NICK', 'GOOD');
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('scream_ii', 'NICK', 'BAD');
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('scream_iii', 'NICK', 'BAD');
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('scream_iv', 'NICK', 'GOOD');
+-- INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('scream_2022', 'NICK', 'BAD');
 
 /* Blade Runner */
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('blade_runner', 'DAN', 'GOOD');
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('blade_runner_2049', 'DAN', 'BAD');
+-- INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('soldier', 'DAN', '');
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('blade_runner', 'NICK', 'GOOD');
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('blade_runner_2049', 'NICK', 'BAD');
+-- INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('soldier', 'NICK', '');
 
 /* Underworld */
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('underworld', 'DAN', 'GOOD');
@@ -423,9 +453,11 @@ INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('underworld_bloo
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('vhs', 'DAN', 'GOOD');
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('vhs_viral', 'DAN', 'GOOD');
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('vhs94', 'DAN', 'BAD');
+-- INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('vhs99', 'DAN', '');
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('vhs', 'NICK', 'GOOD');
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('vhs_viral', 'NICK', 'GOOD');
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('vhs94', 'NICK', 'BAD');
+-- INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('vhs99', 'NICK', '');
 
 /* A Quiet Place */
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('a_quiet_place', 'DAN', 'GOOD');
@@ -476,7 +508,35 @@ INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('slamin_salmon',
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('super_troopers_2', 'NICK', 'GOOD');
 
 /* Wyrmwood */
--- INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('wyrmwood_road_of_the_dead', 'DAN', 'GOOD');
--- INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('wyrmwood_apocalypse', 'DAN', '');
--- INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('wyrmwood_road_of_the_dead', 'NICK', '');
--- INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('wyrmwood_apocalypse', 'NICK', '');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('wyrmwood_road_of_the_dead', 'DAN', 'GOOD');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('wyrmwood_apocalypse', 'DAN', 'GOOD');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('wyrmwood_road_of_the_dead', 'NICK', 'GOOD');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('wyrmwood_apocalypse', 'NICK', 'GOOD');
+
+/* Tremors */
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('tremors_1', 'DAN', 'GOOD');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('tremors_2', 'DAN', 'GOOD');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('tremors_3', 'DAN', 'GOOD');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('tremors_4', 'DAN', 'BAD');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('tremors_5', 'DAN', 'GOOD');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('tremors_6', 'DAN', 'GOOD');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('tremors_7', 'DAN', 'BAD');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('tremors_1', 'NICK', 'GOOD');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('tremors_2', 'NICK', 'GOOD');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('tremors_3', 'NICK', 'GOOD');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('tremors_4', 'NICK', 'BAD');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('tremors_5', 'NICK', 'GOOD');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('tremors_6', 'NICK', 'GOOD');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('tremors_7', 'NICK', 'BAD');
+
+/* Starship Troopers */
+-- INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('starship_troopers', 'DAN', '');
+-- INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('starship_troopers', 'NICK', '');
+-- INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('starship_troopers_2', 'DAN', '');
+-- INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('starship_troopers_2', 'NICK', '');
+-- INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('starship_troopers_3', 'DAN', '');
+-- INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('starship_troopers_3', 'NICK', '');
+-- INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('starship_troopers_4', 'DAN', '');
+-- INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('starship_troopers_4', 'NICK', '');
+-- INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('starship_troopers_5', 'DAN', '');
+-- INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('starship_troopers_5', 'NICK', '');
