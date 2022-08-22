@@ -40,4 +40,4 @@ INSERT INTO series (series_title, series_name, person_name) VALUES ('The Purge',
 INSERT INTO series (series_title, series_name, person_name) VALUES ('Broken Lizard', 'broken_lizard', 'DAN');
 INSERT INTO series (series_title, series_name, person_name) VALUES ('Wyrmwood', 'wyrmwood', 'NICK');
 INSERT INTO series (series_title, series_name, person_name) VALUES ('Tremors', 'tremors', 'NICK');
--- INSERT INTO series (series_title, series_name, person_name) VALUES ('Starship Troopers', 'starship_troopers', 'DAN');
+INSERT INTO series (series_title, series_name, person_name) VALUES ('Starship Troopers', 'starship_troopers', 'DAN');
