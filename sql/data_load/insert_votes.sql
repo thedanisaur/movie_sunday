@@ -357,7 +357,7 @@ INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('fast_furious_6'
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('furious_7', 'DAN', 'GOOD');
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('the_fate_of_the_furious', 'DAN', 'GOOD');
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('fast_furious_presents_hobbs_shaw', 'DAN', 'GOOD');
--- INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('fast_and_furious_nine', 'DAN', '');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('fast_and_furious_nine', 'DAN', 'BAD');
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('the_fast_and_the_furious', 'NICK', 'GOOD');
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('2_fast_2_furious', 'NICK', 'GOOD');
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('the_fast_and_the_furious_tokyo_drift', 'NICK', 'GOOD');
@@ -367,7 +367,7 @@ INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('fast_furious_6'
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('furious_7', 'NICK', 'GOOD');
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('the_fate_of_the_furious', 'NICK', 'GOOD');
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('fast_furious_presents_hobbs_shaw', 'NICK', 'GOOD');
--- INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('fast_and_furious_nine', 'NICK', 'GOOD');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('fast_and_furious_nine', 'NICK', 'GOOD');
 
 /* Thing */
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('the_thing_1982', 'DAN', 'GOOD');
@@ -530,13 +530,19 @@ INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('tremors_6', 'NI
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('tremors_7', 'NICK', 'BAD');
 
 /* Starship Troopers */
--- INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('starship_troopers', 'DAN', '');
--- INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('starship_troopers', 'NICK', '');
--- INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('starship_troopers_2', 'DAN', '');
--- INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('starship_troopers_2', 'NICK', '');
--- INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('starship_troopers_3', 'DAN', '');
--- INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('starship_troopers_3', 'NICK', '');
--- INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('starship_troopers_4', 'DAN', '');
--- INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('starship_troopers_4', 'NICK', '');
--- INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('starship_troopers_5', 'DAN', '');
--- INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('starship_troopers_5', 'NICK', '');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('starship_troopers', 'DAN', 'GOOD');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('starship_troopers', 'NICK', 'GOOD');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('starship_troopers_2', 'DAN', 'GOOD');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('starship_troopers_2', 'NICK', 'GOOD');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('starship_troopers_3', 'DAN', 'GOOD');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('starship_troopers_3', 'NICK', 'GOOD');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('starship_troopers_4', 'DAN', '');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('starship_troopers_4', 'NICK', '');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('starship_troopers_5', 'DAN', 'GOOD');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('starship_troopers_5', 'NICK', 'GOOD');
+
+/* Terrifier */
+-- INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('terrifier', 'DAN', '');
+-- INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('terrifier', 'NICK', '');
+-- INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('terrifier_2', 'DAN', '');
+-- INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('terrifier_2', 'NICK', '');
