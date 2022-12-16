@@ -1,3 +1,3 @@
 CREATE TABLE persons (
-      person_name TEXT PRIMARY KEY
+      person_name VARCHAR(32) PRIMARY KEY
 );

@@ -530,13 +530,13 @@ INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('tremors_6', 'NI
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('tremors_7', 'NICK', 'BAD');
 
 /* Starship Troopers */
--- INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('starship_troopers', 'DAN', '');
--- INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('starship_troopers', 'NICK', '');
--- INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('starship_troopers_2', 'DAN', '');
--- INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('starship_troopers_2', 'NICK', '');
--- INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('starship_troopers_3', 'DAN', '');
--- INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('starship_troopers_3', 'NICK', '');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('starship_troopers', 'DAN', 'GOOD');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('starship_troopers', 'NICK', 'GOOD');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('starship_troopers_2', 'DAN', 'GOOD');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('starship_troopers_2', 'NICK', 'GOOD');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('starship_troopers_3', 'DAN', 'GOOD');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('starship_troopers_3', 'NICK', 'GOOD');
 -- INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('starship_troopers_4', 'DAN', '');
 -- INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('starship_troopers_4', 'NICK', '');
--- INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('starship_troopers_5', 'DAN', '');
--- INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('starship_troopers_5', 'NICK', '');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('starship_troopers_5', 'DAN', 'GOOD');
+INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('starship_troopers_5', 'NICK', 'GOOD');
