@@ -1,8 +1,8 @@
 CREATE TABLE movies (
-      movie_name TEXT PRIMARY KEY
+      movie_name VARCHAR(255) PRIMARY KEY
     , movie_title TEXT NOT NULL
     , movie_year_watched DATE
-    , series_name TEXT NOT NULL
+    , series_name VARCHAR(255) NOT NULL
     
     , CONSTRAINT movies_series_name_fkey FOREIGN KEY (series_name)
         REFERENCES series (series_name) MATCH SIMPLE

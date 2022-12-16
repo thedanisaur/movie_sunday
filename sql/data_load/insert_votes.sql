@@ -536,8 +536,8 @@ INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('starship_troope
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('starship_troopers_2', 'NICK', 'GOOD');
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('starship_troopers_3', 'DAN', 'GOOD');
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('starship_troopers_3', 'NICK', 'GOOD');
-INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('starship_troopers_4', 'DAN', '');
-INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('starship_troopers_4', 'NICK', '');
+-- INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('starship_troopers_4', 'DAN', '');
+-- INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('starship_troopers_4', 'NICK', '');
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('starship_troopers_5', 'DAN', 'GOOD');
 INSERT INTO votes (movie_name, person_name, vote_value) VALUES ('starship_troopers_5', 'NICK', 'GOOD');
 

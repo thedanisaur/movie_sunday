@@ -33,7 +33,7 @@ INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VA
 INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('saw_vi', 'saw', 'Saw VI', '2015-01-01');
 INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('saw_the_final_chapter', 'saw', 'Saw: The Final Chapter (Saw 3D)', '2015-01-01');
 INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('saw_legacy', 'saw', 'Saw Legacy (Jigsaw)', '2015-01-01');
-INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('spiral', 'saw', 'Spiral: From the Book of Saw', '');
+INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('spiral', 'saw', 'Spiral: From the Book of Saw', '2022-09-01');
 
 /* Alien */
 INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('alien', 'alien', 'Alien', '2015-01-01');
@@ -54,7 +54,7 @@ INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VA
 INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('death_note', 'death_note', 'Death Note', '2016-01-01');
 INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('death_note_2', 'death_note', 'Death Note 2', '2016-01-01');
 INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('l_change_the_world', 'death_note', 'L: Change the World', '2017-01-01');
-INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('light_up_the_new_world', 'death_note', 'Deathnote: Light Up the New World', '');
+INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('light_up_the_new_world', 'death_note', 'Deathnote: Light Up the New World', '2022-09-01');
 
 /* Terminator */
 INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('terminator', 'terminator', 'Terminator', '2016-01-01');
@@ -76,7 +76,7 @@ INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VA
 INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('jurassic_park_3', 'jurassic_park', 'Jurassic Park 3', '2016-01-01');
 INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('jurassic_world', 'jurassic_park', 'Jurassic World', '2016-01-01');
 INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('jurassic_world_fallen_kingdom', 'jurassic_park', 'Jurassic World: Fallen Kingdom', '2018-01-01');
-INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('jurassic_world_dominion', 'jurassic_park', 'Jurassic World: Dominion', '');
+INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('jurassic_world_dominion', 'jurassic_park', 'Jurassic World: Dominion', '2022-08-01');
 
 /* American Pie */
 INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('american_pie', 'american_pie', 'American Pie', '2016-01-01');
@@ -195,7 +195,7 @@ INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VA
 /* Ocean's */
 INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('oceans_eleven', 'oceans', 'Ocean''s Eleven', '2018-01-01');
 INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('oceans_twelve', 'oceans', 'Ocean''s Twelve', '2018-01-01');
-INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('oceans_thirteen', 'oceans', 'Ocean''s Thirteen', '');
+INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('oceans_thirteen', 'oceans', 'Ocean''s Thirteen', '2022-08-01');
 
 /* Fast and Furious */
 INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('the_fast_and_the_furious', 'fast_furious', 'The Fast and the Furious', '2019-01-01');
@@ -207,7 +207,7 @@ INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VA
 INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('furious_7', 'fast_furious', 'Furious 7', '2019-01-01');
 INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('the_fate_of_the_furious', 'fast_furious', 'The Fate of the Furious', '2019-01-01');
 INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('fast_furious_presents_hobbs_shaw', 'fast_furious', 'Fast & Furious Presents: Hobbs & Shaw', '2019-01-01');
-INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('fast_and_furious_nine', 'fast_furious', 'Fast & Furious 9', '');
+INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('fast_and_furious_nine', 'fast_furious', 'Fast & Furious 9', '2022-08-01');
 
 /* Thing */
 INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('the_thing_1982', 'thing', 'The Thing (1982)', '2019-01-01');
@@ -248,7 +248,7 @@ INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VA
 /* Blade Runner */
 INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('blade_runner', 'blade_runner', 'Blade Runner', '2020-01-01');
 INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('blade_runner_2049', 'blade_runner', 'Blade Runner 2049', '2020-01-01');
-INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('soldier', 'blade_runner', 'Soldier', '');
+INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('soldier', 'blade_runner', 'Soldier', '2023-01-01');
 
 /* Underworld */
 INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('underworld', 'underworld', 'Underworld', '2021-01-01');
@@ -306,12 +306,12 @@ INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VA
 INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('tremors_7', 'tremors', 'Tremors 7: Shrieker Island', '2022-01-01');
 
 /* Starship Troopers */
-INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('starship_troopers', 'starship_troopers', 'Starship Troopers', '2022-01-01');
-INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('starship_troopers_2', 'starship_troopers', 'Starship Troopers: Hero of the Federation', '2022-01-01');
-INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('starship_troopers_3', 'starship_troopers', 'Starship Troopers: Maurader', '2022-01-01');
-INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('starship_troopers_4', 'starship_troopers', 'Starship Troopers: Invasion', '2022-01-01');
-INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('starship_troopers_5', 'starship_troopers', 'Starship Troopers: Tratior of Mars', '2022-01-01');
+INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('starship_troopers', 'starship_troopers', 'Starship Troopers', '2022-11-01');
+INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('starship_troopers_2', 'starship_troopers', 'Starship Troopers: Hero of the Federation', '2022-11-01');
+INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('starship_troopers_3', 'starship_troopers', 'Starship Troopers: Maurader', '2022-11-01');
+INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('starship_troopers_4', 'starship_troopers', 'Starship Troopers: Invasion', '2022-11-01');
+INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('starship_troopers_5', 'starship_troopers', 'Starship Troopers: Tratior of Mars', '2022-11-01');
 
 /* Terrifier */
-INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('terrifier', 'terrifier', 'Terrifier', '2022-01-01');
-INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('terrifier_2', 'terrifier', 'Terrifier 2', '2022-01-01');
+INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('terrifier', 'terrifier', 'Terrifier', '2022-12-01');
+INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('terrifier_2', 'terrifier', 'Terrifier 2', '2022-12-01');
