@@ -1,4 +1,4 @@
-DROP VIEW ranking_vw;
+DROP VIEW IF EXISTS ranking_vw;
 
 CREATE OR REPLACE VIEW ranking_vw
 AS
@@ -20,14 +20,14 @@ AS
                   , movies_in_series_vw mis_vw
                   , (
                         SELECT  mv_vw.series_name
-                            , CAST(COUNT(*) AS NUMERIC) "number"
+                            , COUNT(*) "number"
                         FROM    movies_votes_vw mv_vw
                         WHERE   mv_vw.dan = 'GOOD'
                         GROUP BY mv_vw.series_name
                     ) dan_liked
                   , (
                         SELECT  mv_vw.series_name
-                            , CAST(COUNT(*) AS NUMERIC) "number"
+                            , COUNT(*) "number"
                         FROM    movies_votes_vw mv_vw
                         WHERE   mv_vw.nick = 'GOOD'
                         GROUP BY mv_vw.series_name

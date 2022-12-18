@@ -10,7 +10,7 @@ CREATE TABLE votes (
         REFERENCES movies (movie_name) MATCH SIMPLE
         ON UPDATE NO ACTION ON DELETE NO ACTION
     
-    , CONSTRAINT persons_person_name_vote_fkey FOREIGN KEY (person_name)
-        REFERENCES persons (person_name) MATCH SIMPLE
+    , CONSTRAINT people_person_name_vote_fkey FOREIGN KEY (person_name)
+        REFERENCES people (person_name) MATCH SIMPLE
         ON UPDATE NO ACTION ON DELETE NO ACTION
 );

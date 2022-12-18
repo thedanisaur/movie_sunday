@@ -1,4 +1,4 @@
-DROP VIEW movies_in_series_vw;
+DROP VIEW IF EXISTS movies_in_series_vw;
 
 CREATE OR REPLACE VIEW movies_in_series_vw
 AS

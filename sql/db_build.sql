@@ -1,5 +1,5 @@
 CREATE SCHEMA `movie_sunday` CHARACTER SET utf8 COLLATE utf8_bin ;
-\i tables/create_person.sql
+\i tables/create_people.sql
 \i tables/create_series.sql
 \i tables/create_movies.sql
 \i tables/create_votes.sql

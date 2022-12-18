@@ -1,4 +1,4 @@
-DROP VIEW overview_vw;
+DROP VIEW IF EXISTS overview_vw;
 
 CREATE OR REPLACE VIEW overview_vw
 AS

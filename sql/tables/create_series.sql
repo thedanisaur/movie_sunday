@@ -3,7 +3,7 @@ CREATE TABLE series (
     , series_title TEXT NOT NULL
     , person_name VARCHAR(32) NOT NULL
     
-    , CONSTRAINT persons_person_name_series_fkey FOREIGN KEY (person_name)
-        REFERENCES persons (person_name) MATCH SIMPLE
+    , CONSTRAINT people_person_name_series_fkey FOREIGN KEY (person_name)
+        REFERENCES people (person_name) MATCH SIMPLE
         ON UPDATE NO ACTION ON DELETE NO ACTION
 );

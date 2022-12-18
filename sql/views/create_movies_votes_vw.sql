@@ -1,4 +1,4 @@
-DROP VIEW movies_votes_vw;
+DROP VIEW IF EXISTS movies_votes_vw;
 
 CREATE OR REPLACE VIEW movies_votes_vw
 AS

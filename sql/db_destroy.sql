@@ -6,6 +6,6 @@ DROP VIEW movies_in_series_vw;
 DROP TABLE votes;
 DROP TABLE movies;
 DROP TABLE series;
-DROP TABLE persons;
+DROP TABLE people;
 
-DROP SEQUENCE votes_id_seq;
+DROP SCHEMA movie_sunday;
