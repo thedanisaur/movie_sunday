@@ -59,7 +59,7 @@
           />
         </q-toolbar-title>
 
-        <!-- <div>Movie Sunday v{{ $q.version }}</div> -->
+        <div>Movie Sunday v{{ $q.version }}</div>
 
         <q-btn
           flat

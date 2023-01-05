@@ -4,16 +4,41 @@
     <div class="q-pa-md q-gutter-md">
       <q-card v-for="series in seriess" :key="series" bordered>
         <q-card-section horizontal class="col-4">
-          <q-parallax 
-            src="https://cdn.quasar.dev/img/mountains.jpg"
+          <!-- <q-parallax 
+            src="../assets/module-6.jpg"
             :height="65 + series.movies.length * 65"
-          />
+          /> -->
+          <q-img src="../assets/module-6.jpg"/>
 
           <q-card-section class="col-8">
-            <div class="text-h6 q-pa-md q-gutter-md">{{ series.name }}</div>
+            <!-- HEADER -->
+            <q-card-section horizontal>
+              <q-item class="col-12">
+                <q-item-section class="text-h6 q-pa-md q-gutter-md">{{ series.name }}</q-item-section>
+                <q-item-section side>
+                  <q-item-label class="text-h6 q-pa-md q-gutter-md">#39</q-item-label>
+                </q-item-section>
+              </q-item>
+              <!-- <q-item class="text-h6 q-pa-md q-gutter-md">{{ series.name }}</q-item>
+              <q-item class="text-h6 q-pa-md q-gutter-md">#39</q-item> -->
+            </q-card-section>
             <q-separator />
+            <!-- BODY -->
             <q-card-section v-for="movie in series.movies" :key="movie">
-              <div class="text-subtitle2">{{ movie }}</div>
+              <q-card-section horizontal class="col-8">
+                <div class="text-subtitle2 q-pa-md q-gutter-md">{{ movie }}</div>
+                <div class="text-subtitle2 q-pa-md q-gutter-md">Good</div>
+                <div class="text-subtitle2 q-pa-md q-gutter-md">Bad</div>
+                <div class="text-subtitle2 q-pa-md q-gutter-md">%</div>
+              </q-card-section>
+            </q-card-section>
+            <!-- FOOTER -->
+            <q-card-section horizontal>
+              <q-item dense class="col-12">
+                <q-item-section>
+                  <q-item-label>Dan</q-item-label>
+                </q-item-section>
+              </q-item>
             </q-card-section>
           </q-card-section>
         </q-card-section>

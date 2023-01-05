@@ -9,18 +9,20 @@ AS
     FROM      movies m
             , (
                 SELECT    v.movie_name
-                        , v.person_name
+                        , v.person_id
                         , v.vote_value
                 FROM    votes v
                 GROUP BY  v.movie_name
-                        , v.person_name
+                        , v.person_id
                         , v.vote_value
               ) vw
             , votes n
             , votes d
+            , people pn
+            , people pd
     WHERE   m.movie_name = vw.movie_name
-    AND     vw.movie_name = n.movie_name AND n.person_name = 'NICK'
-    AND     vw.movie_name = d.movie_name AND d.person_name = 'DAN'
+    AND     vw.movie_name = n.movie_name AND n.person_id = pn.person_id AND pn.person_username = 'NICK'
+    AND     vw.movie_name = d.movie_name AND d.person_id = pd.person_id AND pd.person_username = 'DAN'
     GROUP BY  vw.movie_name
             , m.series_name
             , n.vote_value

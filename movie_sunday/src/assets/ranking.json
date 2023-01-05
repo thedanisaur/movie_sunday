@@ -1,0 +1,398 @@
+[
+    {
+        "series": "Terminator",
+        "chosen_by": "DAN",
+        "movies_in_series": 6,
+        "good_votes": "12",
+        "bad_votes": "0",
+        "total_votes": "12",
+        "rating": 100
+    },
+    {
+        "series": "Final Destination",
+        "chosen_by": "DAN",
+        "movies_in_series": 5,
+        "good_votes": "10",
+        "bad_votes": "0",
+        "total_votes": "10",
+        "rating": 100
+    },
+    {
+        "series": "Starship Troopers",
+        "chosen_by": "DAN",
+        "movies_in_series": 5,
+        "good_votes": "8",
+        "bad_votes": "0",
+        "total_votes": "8",
+        "rating": 100
+    },
+    {
+        "series": "Austin Powers",
+        "chosen_by": "DAN",
+        "movies_in_series": 3,
+        "good_votes": "6",
+        "bad_votes": "0",
+        "total_votes": "6",
+        "rating": 100
+    },
+    {
+        "series": "John Wick",
+        "chosen_by": "DAN",
+        "movies_in_series": 3,
+        "good_votes": "6",
+        "bad_votes": "0",
+        "total_votes": "6",
+        "rating": 100
+    },
+    {
+        "series": "Ocean's",
+        "chosen_by": "DAN",
+        "movies_in_series": 3,
+        "good_votes": "5",
+        "bad_votes": "0",
+        "total_votes": "5",
+        "rating": 100
+    },
+    {
+        "series": "Riddick",
+        "chosen_by": "DAN",
+        "movies_in_series": 3,
+        "good_votes": "6",
+        "bad_votes": "0",
+        "total_votes": "6",
+        "rating": 100
+    },
+    {
+        "series": "The Dark Knight",
+        "chosen_by": "DAN",
+        "movies_in_series": 3,
+        "good_votes": "6",
+        "bad_votes": "0",
+        "total_votes": "6",
+        "rating": 100
+    },
+    {
+        "series": "A Quiet Place",
+        "chosen_by": "DAN",
+        "movies_in_series": 2,
+        "good_votes": "4",
+        "bad_votes": "0",
+        "total_votes": "4",
+        "rating": 100
+    },
+    {
+        "series": "Dark Knight Returns",
+        "chosen_by": "NICK",
+        "movies_in_series": 2,
+        "good_votes": "4",
+        "bad_votes": "0",
+        "total_votes": "4",
+        "rating": 100
+    },
+    {
+        "series": "Drunken Master",
+        "chosen_by": "DAN",
+        "movies_in_series": 2,
+        "good_votes": "4",
+        "bad_votes": "0",
+        "total_votes": "4",
+        "rating": 100
+    },
+    {
+        "series": "The Raid",
+        "chosen_by": "DAN",
+        "movies_in_series": 2,
+        "good_votes": "4",
+        "bad_votes": "0",
+        "total_votes": "4",
+        "rating": 100
+    },
+    {
+        "series": "Thing",
+        "chosen_by": "NICK",
+        "movies_in_series": 2,
+        "good_votes": "4",
+        "bad_votes": "0",
+        "total_votes": "4",
+        "rating": 100
+    },
+    {
+        "series": "Wyrmwood",
+        "chosen_by": "NICK",
+        "movies_in_series": 2,
+        "good_votes": "4",
+        "bad_votes": "0",
+        "total_votes": "4",
+        "rating": 100
+    },
+    {
+        "series": "Tarantino",
+        "chosen_by": "NICK",
+        "movies_in_series": 11,
+        "good_votes": "21",
+        "bad_votes": "1",
+        "total_votes": "22",
+        "rating": 95.5
+    },
+    {
+        "series": "Fast \u0026 Furious",
+        "chosen_by": "NICK",
+        "movies_in_series": 10,
+        "good_votes": "19",
+        "bad_votes": "1",
+        "total_votes": "20",
+        "rating": 95
+    },
+    {
+        "series": "Mission Impossible",
+        "chosen_by": "DAN",
+        "movies_in_series": 6,
+        "good_votes": "11",
+        "bad_votes": "1",
+        "total_votes": "12",
+        "rating": 91.7
+    },
+    {
+        "series": "Hostel",
+        "chosen_by": "NICK",
+        "movies_in_series": 3,
+        "good_votes": "5",
+        "bad_votes": "1",
+        "total_votes": "6",
+        "rating": 83.3
+    },
+    {
+        "series": "Rush Hour",
+        "chosen_by": "NICK",
+        "movies_in_series": 3,
+        "good_votes": "5",
+        "bad_votes": "1",
+        "total_votes": "6",
+        "rating": 83.3
+    },
+    {
+        "series": "Die Hard",
+        "chosen_by": "DAN",
+        "movies_in_series": 5,
+        "good_votes": "8",
+        "bad_votes": "2",
+        "total_votes": "10",
+        "rating": 80
+    },
+    {
+        "series": "SAW",
+        "chosen_by": "NICK",
+        "movies_in_series": 9,
+        "good_votes": "14",
+        "bad_votes": "4",
+        "total_votes": "18",
+        "rating": 77.8
+    },
+    {
+        "series": "Death Note",
+        "chosen_by": "NICK",
+        "movies_in_series": 4,
+        "good_votes": "6",
+        "bad_votes": "2",
+        "total_votes": "8",
+        "rating": 75
+    },
+    {
+        "series": "The Hills Have Eyes",
+        "chosen_by": "DAN",
+        "movies_in_series": 2,
+        "good_votes": "3",
+        "bad_votes": "1",
+        "total_votes": "4",
+        "rating": 75
+    },
+    {
+        "series": "Broken Lizard",
+        "chosen_by": "DAN",
+        "movies_in_series": 7,
+        "good_votes": "8",
+        "bad_votes": "3",
+        "total_votes": "11",
+        "rating": 72.7
+    },
+    {
+        "series": "Tremors",
+        "chosen_by": "NICK",
+        "movies_in_series": 7,
+        "good_votes": "10",
+        "bad_votes": "4",
+        "total_votes": "14",
+        "rating": 71.4
+    },
+    {
+        "series": "Bourne",
+        "chosen_by": "DAN",
+        "movies_in_series": 5,
+        "good_votes": "7",
+        "bad_votes": "3",
+        "total_votes": "10",
+        "rating": 70
+    },
+    {
+        "series": "Underworld",
+        "chosen_by": "DAN",
+        "movies_in_series": 5,
+        "good_votes": "7",
+        "bad_votes": "3",
+        "total_votes": "10",
+        "rating": 70
+    },
+    {
+        "series": "Jurassic Park",
+        "chosen_by": "DAN",
+        "movies_in_series": 6,
+        "good_votes": "8",
+        "bad_votes": "4",
+        "total_votes": "12",
+        "rating": 66.7
+    },
+    {
+        "series": "V/H/S",
+        "chosen_by": "NICK",
+        "movies_in_series": 4,
+        "good_votes": "4",
+        "bad_votes": "2",
+        "total_votes": "6",
+        "rating": 66.7
+    },
+    {
+        "series": "Cloverfield",
+        "chosen_by": "NICK",
+        "movies_in_series": 3,
+        "good_votes": "4",
+        "bad_votes": "2",
+        "total_votes": "6",
+        "rating": 66.7
+    },
+    {
+        "series": "Train to Busan",
+        "chosen_by": "NICK",
+        "movies_in_series": 3,
+        "good_votes": "4",
+        "bad_votes": "2",
+        "total_votes": "6",
+        "rating": 66.7
+    },
+    {
+        "series": "Hannibal",
+        "chosen_by": "NICK",
+        "movies_in_series": 4,
+        "good_votes": "5",
+        "bad_votes": "3",
+        "total_votes": "8",
+        "rating": 62.5
+    },
+    {
+        "series": "The Matrix",
+        "chosen_by": "NICK",
+        "movies_in_series": 4,
+        "good_votes": "5",
+        "bad_votes": "3",
+        "total_votes": "8",
+        "rating": 62.5
+    },
+    {
+        "series": "Alien",
+        "chosen_by": "DAN",
+        "movies_in_series": 13,
+        "good_votes": "16",
+        "bad_votes": "10",
+        "total_votes": "26",
+        "rating": 61.5
+    },
+    {
+        "series": "Gantz",
+        "chosen_by": "NICK",
+        "movies_in_series": 2,
+        "good_votes": "2",
+        "bad_votes": "2",
+        "total_votes": "4",
+        "rating": 50
+    },
+    {
+        "series": "Shanghai Noon",
+        "chosen_by": "NICK",
+        "movies_in_series": 2,
+        "good_votes": "2",
+        "bad_votes": "2",
+        "total_votes": "4",
+        "rating": 50
+    },
+    {
+        "series": "Star Wars",
+        "chosen_by": "NICK",
+        "movies_in_series": 17,
+        "good_votes": "16",
+        "bad_votes": "18",
+        "total_votes": "34",
+        "rating": 47.1
+    },
+    {
+        "series": "James Bond",
+        "chosen_by": "DAN",
+        "movies_in_series": 25,
+        "good_votes": "23",
+        "bad_votes": "27",
+        "total_votes": "50",
+        "rating": 46
+    },
+    {
+        "series": "The Purge",
+        "chosen_by": "NICK",
+        "movies_in_series": 5,
+        "good_votes": "4",
+        "bad_votes": "6",
+        "total_votes": "10",
+        "rating": 40
+    },
+    {
+        "series": "Blade Runner",
+        "chosen_by": "DAN",
+        "movies_in_series": 3,
+        "good_votes": "2",
+        "bad_votes": "3",
+        "total_votes": "5",
+        "rating": 40
+    },
+    {
+        "series": "American Pie",
+        "chosen_by": "NICK",
+        "movies_in_series": 8,
+        "good_votes": "6",
+        "bad_votes": "10",
+        "total_votes": "16",
+        "rating": 37.5
+    },
+    {
+        "series": "Insidious",
+        "chosen_by": "NICK",
+        "movies_in_series": 4,
+        "good_votes": "3",
+        "bad_votes": "5",
+        "total_votes": "8",
+        "rating": 37.5
+    },
+    {
+        "series": "Scream",
+        "chosen_by": "NICK",
+        "movies_in_series": 5,
+        "good_votes": "2",
+        "bad_votes": "6",
+        "total_votes": "8",
+        "rating": 25
+    },
+    {
+        "series": "Terrifier",
+        "chosen_by": "NICK",
+        "movies_in_series": 2,
+        "good_votes": "0",
+        "bad_votes": "0",
+        "total_votes": "0",
+        "rating": 0
+    }
+]

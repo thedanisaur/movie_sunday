@@ -1,4 +1,4 @@
-module main.go
+module go_fetch
 
 go 1.19
 
