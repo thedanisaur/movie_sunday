@@ -2,11 +2,10 @@ DROP VIEW IF EXISTS movies_votes_vw;
 
 CREATE OR REPLACE VIEW movies_votes_vw
 AS
-    SELECT    m.movie_title
-            , m.movie_name
+    SELECT    vw.movie_name
             , m.series_name
-            , d.vote_value AS "dan_vote"
-            , n.vote_value AS "nick_vote"
+            , d.vote_value AS "dan"
+            , n.vote_value AS "nick"
     FROM      movies m
             , (
                 SELECT    v.movie_name

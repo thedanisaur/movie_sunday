@@ -1,6 +1,6 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-drawer
+    <!-- <q-drawer
       v-model="leftDrawerOpen"
       overlay=true
       show-if-above
@@ -17,7 +17,7 @@
           v-bind="link"
         />
       </q-list>
-    </q-drawer>
+    </q-drawer> -->
     
     <q-header elevated>
       <q-toolbar>
@@ -30,10 +30,11 @@
           @click="toggleLeftDrawer"
           title="Movie Sunday"
           label="Movie Sunday"
+          class="col-2"
         />
 
-        <q-toolbar-title>
-          <q-btn
+        <q-tabs no-caps align="justify" class="col-9">
+          <q-route-tab
             flat
             dense
             size="lg"
@@ -41,15 +42,15 @@
             title="Series"
             label="Series"
           />
-          <q-btn
+          <q-route-tab
             flat
             dense
             size="lg"
-            to="/ranking"
-            title="Ranking"
-            label="Ranking"
+            to="/rating"
+            title="Rating"
+            label="Rating"
           />
-          <q-btn
+          <q-route-tab
             flat
             dense
             size="lg"
@@ -57,18 +58,21 @@
             title="Trackers"
             label="Trackers"
           />
-        </q-toolbar-title>
+        </q-tabs>
 
-        <div>Movie Sunday v{{ $q.version }}</div>
-
-        <q-btn
-          flat
-          dense
-          round
-          icon="menu"
-          aria-label="Menu"
-          @click="toggleLeftDrawer"
-        />
+        <div>
+          <!-- v{{ $q.version }} -->
+          v0.1.0
+          <q-btn
+            flat
+            dense
+            round
+            icon="menu"
+            aria-label="Menu"
+            @click="toggleLeftDrawer"
+            class="col-2"
+          />
+        </div>
       </q-toolbar>
     </q-header>
 
@@ -102,13 +106,13 @@ export default defineComponent({
   name: 'MainLayout',
 
   components: {
-    EssentialLink
+    // EssentialLink
   },
   setup () {
     const leftDrawerOpen = ref(false)
 
     return {
-      essentialLinks: linksList,
+      // essentialLinks: linksList,
       leftDrawerOpen,
       toggleLeftDrawer () {
         leftDrawerOpen.value = !leftDrawerOpen.value

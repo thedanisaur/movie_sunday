@@ -9,56 +9,56 @@ import (
 	"go_fetch/db"
 )
 
-func RankingRoute() string {
-	return "/ranking"
+func RatingRoute() string {
+	return "/rating"
 }
 
-func RankingHandler(writer http.ResponseWriter, request *http.Request) {
+func RatingHandler(writer http.ResponseWriter, request *http.Request) {
 	// txid := uuid.New()
 	txid := types.UUID{ID: "1234567"}
-	fmt.Printf("RankingHandler | %s\n", txid.String())
+	fmt.Printf("RatingHandler | %s\n", txid.String())
 	switch request.Method {
 	case "GET":
-		result := rankingGet()
+		result := ratingGet()
 		if result == nil {
-			msg := fmt.Sprintf("%s %s failed: %s", request.Method, RankingRoute(), txid.String())
+			msg := fmt.Sprintf("%s %s failed: %s", request.Method, RatingRoute(), txid.String())
 			err := types.Error{Msg: msg}
 			json.NewEncoder(writer).Encode(err)
 		} else {
 			json.NewEncoder(writer).Encode(result)
 		}
 	default:
-		msg := fmt.Sprintf("%s %s unavailable: %s", request.Method, RankingRoute(), txid.String())
+		msg := fmt.Sprintf("%s %s unavailable: %s", request.Method, RatingRoute(), txid.String())
 		result := types.Error{Msg: msg}
 		json.NewEncoder(writer).Encode(result)
 	}
 }
 
-func rankingGet() []types.Ranking {
-	fmt.Println("rankingGet")
+func ratingGet() []types.Rating {
+	fmt.Println("ratingGet")
 	database := db.GetInstance()
 	// Execute the query
-	rows, err := database.Query("SELECT * FROM ranking_vw")
+	rows, err := database.Query("SELECT series_title, chosen_by, movies_in_series, good_votes, bad_votes, total_votes, rating FROM rating_vw")
 	if err != nil {
 		fmt.Printf("Failed to query databse\n%s\n", err.Error())
 		return nil
 	}
 
-	var ranking []types.Ranking
+	var ratings []types.Rating
 	for rows.Next() {
-		var rank types.Ranking
-		err = rows.Scan(&rank.Series,
-			&rank.ChosenBy,
-			&rank.MoviesInSeries,
-			&rank.Good,
-			&rank.Bad,
-			&rank.Total,
-			&rank.Rating)
+		var rating types.Rating
+		err = rows.Scan(&rating.Series,
+			&rating.ChosenBy,
+			&rating.MoviesInSeries,
+			&rating.Good,
+			&rating.Bad,
+			&rating.Total,
+			&rating.Rating)
 		if err != nil {
 			fmt.Printf("Failed to scan row\n%s\n", err.Error())
 			return nil
 		}
-		ranking = append(ranking, rank)
+		ratings = append(ratings, rating)
 	}
 
 	err = rows.Err()
@@ -67,5 +67,5 @@ func rankingGet() []types.Ranking {
 		return nil
 	}
 
-	return ranking
+	return ratings
 }

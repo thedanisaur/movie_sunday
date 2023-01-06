@@ -1,5 +1,5 @@
 DROP VIEW overview_vw;
-DROP VIEW ranking_vw;
+DROP VIEW rating_vw;
 DROP VIEW good_votes_vw;
 DROP VIEW bad_votes_vw;
 DROP VIEW movies_votes_vw;

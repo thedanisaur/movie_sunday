@@ -302,7 +302,7 @@ INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VA
 INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('tremors_3', 'tremors', 'Tremors 3: Back to Perfection', '2022-01-01');
 INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('tremors_4', 'tremors', 'Tremors 4: The Legend Begins', '2022-01-01');
 INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('tremors_5', 'tremors', 'Tremors 5: Bloodlines', '2022-01-01');
-INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('tremors_6', 'tremors', 'Tremors 6: Cold day in Hell', '2022-01-01');
+INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('tremors_6', 'tremors', 'Tremors 6: Cold Day in Hell', '2022-01-01');
 INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('tremors_7', 'tremors', 'Tremors 7: Shrieker Island', '2022-01-01');
 
 /* Starship Troopers */
@@ -310,7 +310,7 @@ INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VA
 INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('starship_troopers_2', 'starship_troopers', 'Starship Troopers: Hero of the Federation', '2022-11-01');
 INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('starship_troopers_3', 'starship_troopers', 'Starship Troopers: Maurader', '2022-11-01');
 INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('starship_troopers_4', 'starship_troopers', 'Starship Troopers: Invasion', '2022-11-01');
-INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('starship_troopers_5', 'starship_troopers', 'Starship Troopers: Tratior of Mars', '2022-11-01');
+INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('starship_troopers_5', 'starship_troopers', 'Starship Troopers: Traitor of Mars', '2022-11-01');
 
 /* Terrifier */
 INSERT INTO movies (movie_name, series_name, movie_title, movie_year_watched) VALUES ('terrifier', 'terrifier', 'Terrifier', '2022-12-01');

@@ -23,14 +23,14 @@ AS
                         SELECT  mv_vw.series_name
                             , COUNT(*) "number"
                         FROM    movies_votes_vw mv_vw
-                        WHERE   mv_vw.dan = 'GOOD'
+                        WHERE   mv_vw.dan_vote = 'GOOD'
                         GROUP BY mv_vw.series_name
                     ) dan_liked
                   , (
                         SELECT  mv_vw.series_name
                             , COUNT(*) "number"
                         FROM    movies_votes_vw mv_vw
-                        WHERE   mv_vw.nick = 'GOOD'
+                        WHERE   mv_vw.nick_vote = 'GOOD'
                         GROUP BY mv_vw.series_name
                     ) nick_liked
             WHERE   s.series_name = mis_vw.series_name

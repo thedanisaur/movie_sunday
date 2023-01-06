@@ -1,17 +1,20 @@
-DROP VIEW IF EXISTS ranking_vw;
+DROP VIEW IF EXISTS rating_vw;
 
-CREATE OR REPLACE VIEW ranking_vw
+CREATE OR REPLACE VIEW rating_vw
 AS
     SELECT  series_title
+          , series_name
+          , series_order
           , chosen_by
           , movies_in_series
           , good_votes
           , bad_votes
           , total_votes
-          , IFNULL(ROUND(good_votes / total_votes, 5) * 100, 0) AS "rnk"
+          , IFNULL(ROUND(good_votes / total_votes, 5) * 100, 0) AS "rating"
     FROM  (
             SELECT  series.series_title
                   , series.series_name
+                  , series.series_order
                   , people.person_username AS "chosen_by"
                   , movies_in_series_vw.movies_in_series
                   , IFNULL(good_votes_vw.number, 0) AS "good_votes"
@@ -26,8 +29,8 @@ AS
                   series.series_name = movies_in_series_vw.series_name
             INNER JOIN people ON
                   series.person_id = people.person_id
-          ) series_ranks
-    ORDER BY rnk DESC
+          ) series_rating
+    ORDER BY rating DESC
             , movies_in_series DESC
-            , series_ranks.series_name
+            , series_rating.series_name
 ;
