@@ -15,10 +15,10 @@ const routes = [
     ]
   },
   {
-    path: '/rating',
+    path: '/ratings',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/RatingPage.vue') }
+      { path: '', component: () => import('pages/RatingsPage.vue') }
     ]
   },
   {

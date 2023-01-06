@@ -10,7 +10,7 @@ import (
 )
 
 func RatingRoute() string {
-	return "/rating"
+	return "/ratings"
 }
 
 func RatingHandler(writer http.ResponseWriter, request *http.Request) {

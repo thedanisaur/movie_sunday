@@ -543,6 +543,6 @@ INSERT INTO votes (movie_name, vote_value, person_id) SELECT 'starship_troopers_
 
 /* Terrifier */
 -- INSERT INTO votes (movie_name, vote_value, person_id) SELECT 'terrifier', 'DAN', '');
--- INSERT INTO votes (movie_name, vote_value, person_id) SELECT 'terrifier', 'NICK', '');
+-- INSERT INTO votes (movie_name, vote_value, person_id) SELECT 'terrifier', 'NICK', 'GOOD');
 -- INSERT INTO votes (movie_name, vote_value, person_id) SELECT 'terrifier_2', 'DAN', '');
--- INSERT INTO votes (movie_name, vote_value, person_id) SELECT 'terrifier_2', 'NICK', '');
+-- INSERT INTO votes (movie_name, vote_value, person_id) SELECT 'terrifier_2', 'NICK', 'GOOD');

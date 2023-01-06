@@ -46,9 +46,9 @@
             flat
             dense
             size="lg"
-            to="/rating"
-            title="Rating"
-            label="Rating"
+            to="/ratings"
+            title="Ratings"
+            label="Ratings"
           />
           <q-route-tab
             flat

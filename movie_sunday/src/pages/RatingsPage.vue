@@ -89,14 +89,14 @@ import { defineComponent } from 'vue'
 import ratingData from "../assets/rating.json"
 
 export default defineComponent({
-  name: 'RatingPage',
+  name: 'RatingsPage',
   data() {
     return {
       ratings: ratingData
     }
   },
   created() {
-    // const response = await axios.get("https://localhost:1234/rating")
+    // const response = await axios.get("https://localhost:1234/ratings")
     // console.log(response.data)
   },
   methods: {
