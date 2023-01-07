@@ -15,6 +15,8 @@ func TimelineRoute() string {
 }
 
 func TimelineHandler(writer http.ResponseWriter, request *http.Request) {
+	writer.Header().Set("Access-Control-Allow-Origin", "*")
+	writer.Header().Set("Access-Control-Allow-Headers", "Content-Type")
 	// txid := uuid.New()
 	txid := types.UUID{ID: "1234567"}
 	fmt.Printf("TimelineHandler | %s\n", txid.String())

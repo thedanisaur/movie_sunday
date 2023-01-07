@@ -4,19 +4,19 @@ const routes = [
     path: '/',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/IndexPage.vue') }
+      { path: '', component: () => import('pages/TimelinePage.vue') }
     ]
   },
   {
     path: '/series',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/SeriesPage.vue') }
+      { path: '', component: () => import('pages/TimelinePage.vue') }
     ]
   },
   {
     path: '/ratings',
-    component: () => import('layouts/MainLayout.vue'),
+    component: () => import('layouts/RatingsLayout.vue'),
     children: [
       { path: '', component: () => import('pages/RatingsPage.vue') }
     ]

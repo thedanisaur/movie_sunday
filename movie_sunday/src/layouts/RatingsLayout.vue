@@ -1,24 +1,5 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <!-- <q-drawer
-      v-model="leftDrawerOpen"
-      overlay=true
-      show-if-above
-      bordered
-    >
-      <q-list>
-        <q-item-label header>
-          Essential Links
-        </q-item-label>
-
-        <EssentialLink
-          v-for="link in essentialLinks"
-          :key="link.title"
-          v-bind="link"
-        />
-      </q-list>
-    </q-drawer> -->
-    
     <q-header elevated>
       <q-toolbar>
         <q-btn
@@ -77,6 +58,14 @@
           />
         </div>
       </q-toolbar>
+      <q-toolbar class="bg-white">
+        <q-icon name="movie" class="col-1" size="xl" color=primary />
+        <q-item v-for="item in headerItems" :key="item" class="col-2">
+          <q-icon :name="item.icon_name" size="md" color=primary class="q-gutter-sm q-mt-md" />
+          <q-item class="text-black q-pl-sm q-mt-md">{{ item.text }}</q-item>
+          <q-separator />
+        </q-item>
+      </q-toolbar>
     </q-header>
 
     <q-page-container>
@@ -87,29 +76,43 @@
 
 <script>
 import { defineComponent, ref } from 'vue'
-import EssentialLink from 'components/EssentialLink.vue'
-import { fasFontAwesome } from '@quasar/extras/fontawesome-v6'
-
-const linksList = [
-  {
-    title: 'Docs',
-    caption: 'quasar.dev',
-    icon: 'school',
-    link: 'https://quasar.dev'
-  },
-  {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
-    icon: 'code',
-    link: 'https://github.com/quasarframework'
-  },
-]
 
 export default defineComponent({
   name: 'MainLayout',
 
   components: {
     // EssentialLink
+  },
+  data () {
+    return {
+      headerItems: [
+        { 
+          icon_name: "camera_roll",
+          text: "Series"
+        },
+        { 
+          icon_name: "accessible",
+          text: "Chosen By"
+        },
+        { 
+          icon_name: "tag",
+          text: "Movies"
+        },
+        { 
+          icon_name: "thumb_up",
+          text: "Good Votes"
+        },
+        { 
+          icon_name: "thumb_down",
+          text: "Bad Votes"
+        },
+        { 
+          icon_name: "star",
+          text: "Rating"
+        },
+
+      ]
+    }
   },
   setup () {
     const leftDrawerOpen = ref(false)

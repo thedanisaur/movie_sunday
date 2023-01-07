@@ -1,8 +1,8 @@
 <template>
   <q-page class="flex flex-center">
-    <q-label>
+    <q-item>
       Trackers!
-    </q-label>
+    </q-item>
   </q-page>
 </template>
 
