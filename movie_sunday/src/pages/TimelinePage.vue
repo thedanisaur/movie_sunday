@@ -1,8 +1,10 @@
 <template>
   <q-page class="flex flex-center">
-    <div class="q-pa-md q-gutter-md" style="width: 95%; min-width: 600px;">
+    <div class="q-pa-md q-gutter-md" style="width: 90%; min-width: 600px;">
+      <q-item-label class="q-gutter-xl text-h3 text-bold">{{ week }}</q-item-label>
       <q-carousel
         v-model="slide"
+        ref="slide"
         transition_prev="slide-right"
         transition_next="slide-left"
         transition_duration="100"
@@ -20,8 +22,9 @@
         class="rounded-borders shadow-4"
         @mouseenter="autoplay = false"
         @mouseleave="autoplay = true"
+        @transition="updateWeek()"
       >
-        <q-carousel-slide v-for="series in timeline" :key="series" :name="series.series_title" img-src="../assets/module-6.jpg">
+        <q-carousel-slide v-for="series in timeline" :key="series" :name="series.series_title" :img-src="require('../assets/' + series.series_image)">
           <q-item dense class="text-h2 text-white text-weight-bolder q-mt-xl" style="text-shadow: 2px 2px black;">
             <q-item-section>
               <q-item-label>
@@ -42,8 +45,6 @@
             </q-item-section>
           </q-item>
           <q-item class="q-mt-lg">
-            <!-- <q-item-section>
-            </q-item-section> -->
             <q-chip>Chosen By: {{ toTitleCase(series.series_chosen_by) }}</q-chip>
             <q-chip>Series: #{{ series.series_order }}</q-chip>
             <q-chip>Number of Movies:{{ series.series_movies ? series.series_movies.length : 0 }}</q-chip>
@@ -68,35 +69,40 @@ export default defineComponent({
   },
   async created() {
     const response = await axios.get("http://localhost:1234/timeline")
+    response.data.forEach((item, arr) => {
+      item.series_image = this.randomImage()
+    })
     this.timeline = response.data
     this.slide = this.timeline[0].series_title
   },
   setup() {
     return {
-      autoplay: ref(true)
+      autoplay: ref(true),
+      week: ref('CURRENTLY VIEWING: ')
     }
   },
   methods: {
-    calcSmiley(dan_vote, nick_vote) {
-      let d = 0.0
-      let n = 0.0
-      if (dan_vote == "GOOD") {
-        d = 1.0
-      }
-      if (nick_vote == "GOOD") {
-        n = 1.0
-      }
-      const value = (d + n) / 2
-      if (value > .5) {
-        return {smiley: "mood", color: "secondary"}
-      } else if (value == .5) {
-        return {smiley: "sentiment_neutral", color: "primary"}
-      } else {
-        return {smiley: "mood_bad", color: "red"}
-      }
-    },
     toTitleCase (str) {
       return str.charAt(0).toUpperCase() + str.substr(1).toLowerCase()
+    },
+    updateWeek() {
+      const title = this.$refs.slide.modelValue
+      const series = this.timeline.find(s => s.series_title == title)
+      if (series.series_title === this.timeline[0].series_title) {
+        this.week = 'CURRENTLY VIEWING: '
+      } else {
+        this.week = series.series_created_on + ":"
+      }
+    },
+    randomImage() {
+      const images = [
+          'module-6.jpg',
+          'i8148hnowoo91.jpg',
+          'mb34g6daf4h91.jpg',
+          'nw0prizii5x91.jpg',
+        ]
+      const image = images[Math.floor(Math.random() * images.length)]
+      return image
     }
   }
 })

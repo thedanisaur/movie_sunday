@@ -5,7 +5,10 @@ type Timeline struct {
 	SeriesTitle string `json:"series_title"`
 	SeriesRank int `json:"series_rank"`
 	SeriesRating string `json:"series_rating"`
+	SeriesGoodVotes string `json:"series_good_votes"`
+	SeriesBadVotes string `json:"series_bad_votes"`
 	SeriesChosenBy string `json:"series_chosen_by"`
+	SeriesCreatedOn string `json:"series_created_on"`
 	SeriesMovies []Movie `json:"series_movies"`
 }
 
@@ -13,6 +16,9 @@ type SeriesRating struct {
 	SeriesName string `json:"series_name"`
 	SeriesOrder int `json:"series_order"`
 	SeriesTitle string `json:"series_title"`
+	SeriesCreatedOn string `json:"series_created_on"`
+	SeriesGoodVotes string `json:"series_good_votes"`
+	SeriesBadVotes string `json:"series_bad_votes"`
 	SeriesRating string `json:"series_rating"`
 	SeriesChosenBy string `json:"series_chosen_by"`
 }

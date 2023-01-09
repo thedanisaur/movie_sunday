@@ -15,3 +15,12 @@ CREATE TABLE votes (
         REFERENCES people (person_id) MATCH SIMPLE
         ON UPDATE NO ACTION ON DELETE NO ACTION
 );
+
+DROP TRIGGER IF EXISTS bi_votes;
+DELIMITER $$
+CREATE TRIGGER bi_votes BEFORE INSERT ON votes FOR EACH ROW
+BEGIN
+    IF (NEW.vote_created_on IS NULL) THEN
+        SET NEW.vote_created_on = (SELECT IFNULL(movie_created_on, CURDATE()) FROM movies WHERE movie_name = NEW.movie_name);
+    END IF;
+END;

@@ -5,6 +5,7 @@ AS
     SELECT  series_title
           , series_name
           , series_order
+          , series_created_on
           , chosen_by
           , movies_in_series
           , good_votes
@@ -15,6 +16,7 @@ AS
             SELECT  series.series_title
                   , series.series_name
                   , series.series_order
+                  , series.series_created_on
                   , people.person_username AS "chosen_by"
                   , movies_in_series_vw.movies_in_series
                   , IFNULL(good_votes_vw.number, 0) AS "good_votes"

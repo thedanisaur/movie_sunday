@@ -1,6 +1,6 @@
 INSERT INTO series (series_title, series_name, series_created_on, person_id) SELECT 'Star Wars', 'star_wars', '2015-07-01', person_id FROM people WHERE person_username = 'NICK';
 INSERT INTO series (series_title, series_name, series_created_on, person_id) SELECT 'Bourne', 'bourne', '2015-09-01', person_id FROM people WHERE person_username = 'DAN';
-INSERT INTO series (series_title, series_name, series_created_on, person_id) SELECT 'SAW', 'saw', '2015-20-01', person_id FROM people WHERE person_username = 'NICK';
+INSERT INTO series (series_title, series_name, series_created_on, person_id) SELECT 'SAW', 'saw', '2015-02-01', person_id FROM people WHERE person_username = 'NICK';
 INSERT INTO series (series_title, series_name, series_created_on, person_id) SELECT 'Alien', 'alien', '2015-11-01', person_id FROM people WHERE person_username = 'DAN';
 INSERT INTO series (series_title, series_name, series_created_on, person_id) SELECT 'Death Note', 'death_note', '2016-01-01', person_id FROM people WHERE person_username = 'NICK';
 INSERT INTO series (series_title, series_name, series_created_on, person_id) SELECT 'Terminator', 'terminator', '2016-02-01', person_id FROM people WHERE person_username = 'DAN';

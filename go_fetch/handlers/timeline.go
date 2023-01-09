@@ -41,7 +41,7 @@ func timelineGet() []types.Timeline {
 	fmt.Println("timelineGet")
 	database := db.GetInstance()
 	// Execute the query
-	series_rating_rows, err := database.Query("SELECT series_name, series_order, series_title, rating, chosen_by FROM rating_vw r_vw")
+	series_rating_rows, err := database.Query("SELECT series_name, series_order, series_title, series_created_on, good_votes, bad_votes, rating, chosen_by FROM rating_vw r_vw")
 	if err != nil {
 		fmt.Printf("Failed to query rating_vw\n%s\n", err.Error())
 		return nil
@@ -53,6 +53,9 @@ func timelineGet() []types.Timeline {
 		err = series_rating_rows.Scan(&rating.SeriesName,
 			&rating.SeriesOrder,
 			&rating.SeriesTitle,
+			&rating.SeriesCreatedOn,
+			&rating.SeriesGoodVotes,
+			&rating.SeriesBadVotes,
 			&rating.SeriesRating,
 			&rating.SeriesChosenBy)
 		if err != nil {
@@ -107,8 +110,11 @@ func timelineGet() []types.Timeline {
 			SeriesOrder: series_rating[i].SeriesOrder,
 			SeriesTitle: series_rating[i].SeriesTitle,
 			SeriesRank: i,
+			SeriesGoodVotes: series_rating[i].SeriesGoodVotes,
+			SeriesBadVotes: series_rating[i].SeriesBadVotes,
 			SeriesRating: series_rating[i].SeriesRating,
 			SeriesChosenBy: series_rating[i].SeriesChosenBy,
+			SeriesCreatedOn: series_rating[i].SeriesCreatedOn,
 			SeriesMovies: series_movies})
 	}
 

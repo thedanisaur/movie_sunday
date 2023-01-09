@@ -1,9 +1,9 @@
 <template>
-  <q-page class="flex column">
-    <div class="q-pa-md q-gutter-md">
-      <q-card v-for="rating in ratings" :key="rating" bordered>
-        <q-card-section horizontal class="col-8">
-          <q-icon name="camera" class="col-1" size="xl" color=primary />
+  <q-page class="flex col-12">
+    <div class="q-pa-md" style="min-width: 100%">
+      <q-card v-for="rating in ratings" :key="rating" bordered class="q-ma-sm">
+        <q-card-section horizontal>
+          <q-icon name="camera" size="xl" color=primary class="col-1"/>
           <q-card-section class="col-2">
             <div>{{ rating.series_title }}</div>
           </q-card-section>
@@ -50,3 +50,8 @@ export default defineComponent({
   }
 })
 </script>
+<style lang="scss" scoped>
+div {
+  background-color: $amber-1;
+}
+</style>

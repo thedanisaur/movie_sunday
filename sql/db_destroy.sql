@@ -5,7 +5,7 @@ DROP VIEW good_votes_vw;
 DROP VIEW movies_votes_vw;
 DROP VIEW movies_in_series_vw;
 
-DROP TABLE movies_trackers;
+DROP TABLE movie_trackers;
 DROP TABLE trackers;
 DROP TABLE votes;
 DROP TABLE movies;

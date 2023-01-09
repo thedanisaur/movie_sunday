@@ -1,7 +1,41 @@
-Movie Sunday
-
-Application that determines which movie series is the best. Movies can only be voted good or bad. The more movies in a series and the more good votes it has the better the series is.
+# Movie Sunday
 
 Star Wars is bad.
 
-[Votes sql file](https://github.com/thedanisaur/movie_sunday/blob/master/sql/data_load/insert_votes.sql)
+
+## Setup dev environment
+MySql
+
+```
+mysql.server start
+
+mysql -u root -e "CREATE SCHEMA movie_sunday CHARACTER SET utf8 COLLATE utf8_bin ;"
+
+mysql -u root movie_sunday < ./sql/db_build.sql
+
+mysql -u root movie_sunday < ./sql/db_populate.sql
+
+cd movie_sunday
+quasar dev
+
+go run ./go_fetch/main.gop
+```
+
+Quasar
+```
+cd movie_sunday
+quasar dev
+```
+
+Go
+
+```
+go run ./go_fetch/main.gop
+```
+
+## Teardown dev environment
+MySql
+
+```
+mysql -u root movie_sunday < ./sql/db_destroy.sql
+```
