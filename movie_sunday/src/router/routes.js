@@ -11,7 +11,7 @@ const routes = [
     path: '/series',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/TimelinePage.vue') }
+      { path: '', component: () => import('pages/SeriesPage.vue') }
     ]
   },
   {

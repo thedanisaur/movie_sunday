@@ -1,10 +1,12 @@
-DROP VIEW overview_vw;
+DROP VIEW trackers_vw;
 DROP VIEW rating_vw;
-DROP VIEW good_votes_vw;
 DROP VIEW bad_votes_vw;
+DROP VIEW good_votes_vw;
 DROP VIEW movies_votes_vw;
 DROP VIEW movies_in_series_vw;
 
+DROP TABLE movies_trackers;
+DROP TABLE trackers;
 DROP TABLE votes;
 DROP TABLE movies;
 DROP TABLE series;

@@ -12,6 +12,7 @@ func main() {
 	http.HandleFunc(handlers.UserRoute(), handlers.UserHandler)
 	http.HandleFunc(handlers.RatingRoute(), handlers.RatingHandler)
 	http.HandleFunc(handlers.TimelineRoute(), handlers.TimelineHandler)
+	http.HandleFunc(handlers.TrackerRoute(), handlers.TrackerHandler)
 	err := http.ListenAndServe(":1234", nil)
 	if err != nil {
 		log.Fatal("Error starting http server:", err)

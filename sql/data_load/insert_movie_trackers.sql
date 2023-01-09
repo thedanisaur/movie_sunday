@@ -45,7 +45,7 @@ SELECT p.movie_tracker_id
 FROM (
 		SELECT  UUID_TO_BIN(UUID()) AS movie_tracker_id
 				, 'mission_impossible_3' AS movie_name
-				, 3 AS tracker_count
+				, 4 AS tracker_count
 				, person_id AS movie_tracker_created_by 
 				, CURDATE() AS movie_tracker_created_on
 		FROM    people
@@ -75,7 +75,7 @@ SELECT p.movie_tracker_id
 FROM (
 		SELECT  UUID_TO_BIN(UUID()) AS movie_tracker_id
 				, 'mission_impossible_4' AS movie_name
-				, 3 AS tracker_count
+				, 0 AS tracker_count
 				, person_id AS movie_tracker_created_by 
 				, CURDATE() AS movie_tracker_created_on
 		FROM    people

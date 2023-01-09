@@ -21,3 +21,11 @@ CREATE TABLE movie_trackers (
         REFERENCES people (person_id) MATCH SIMPLE
         ON UPDATE NO ACTION ON DELETE NO ACTION
 );
+
+DROP TRIGGER IF EXISTS bu_movie_trackers;
+CREATE TRIGGER bu_movie_trackers BEFORE UPDATE ON movie_trackers FOR EACH ROW
+    SET NEW.movie_tracker_updated_on = CURDATE();
+
+DROP TRIGGER IF EXISTS au_trackers;
+CREATE TRIGGER au_trackers AFTER UPDATE ON movie_trackers FOR EACH ROW
+    UPDATE trackers SET tracker_updated_on = CURDATE() WHERE tracker_id = NEW.tracker_id;

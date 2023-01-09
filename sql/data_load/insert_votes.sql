@@ -542,7 +542,7 @@ INSERT INTO votes (movie_name, vote_value, person_id) SELECT 'starship_troopers_
 INSERT INTO votes (movie_name, vote_value, person_id) SELECT 'starship_troopers_5', 'GOOD', person_id FROM people WHERE person_username = 'NICK';
 
 /* Terrifier */
--- INSERT INTO votes (movie_name, vote_value, person_id) SELECT 'terrifier', 'DAN', '');
--- INSERT INTO votes (movie_name, vote_value, person_id) SELECT 'terrifier', 'NICK', 'GOOD');
--- INSERT INTO votes (movie_name, vote_value, person_id) SELECT 'terrifier_2', 'DAN', '');
--- INSERT INTO votes (movie_name, vote_value, person_id) SELECT 'terrifier_2', 'NICK', 'GOOD');
+-- INSERT INTO votes (movie_name, vote_value, person_id) SELECT 'terrifier', '', person_id FROM people WHERE person_username = 'DAN';
+INSERT INTO votes (movie_name, vote_value, person_id) SELECT 'terrifier', 'GOOD', person_id FROM people WHERE person_username = 'NICK';
+-- INSERT INTO votes (movie_name, vote_value, person_id) SELECT 'terrifier_2, '', person_id FROM people WHERE person_username = 'DAN';
+INSERT INTO votes (movie_name, vote_value, person_id) SELECT 'terrifier_2', 'GOOD', person_id FROM people WHERE person_username = 'NICK';

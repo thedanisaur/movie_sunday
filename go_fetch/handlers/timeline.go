@@ -69,9 +69,9 @@ func timelineGet() []types.Timeline {
 	}
 
 	// Get all the movies
-	movie_votes_rows, err := database.Query("SELECT series_name, movie_title, dan_vote, nick_vote FROM movies_votes_vw")
+	movie_votes_rows, err := database.Query("SELECT series_name, movie_title, dan_vote, nick_vote FROM dn_movies_votes_vw")
 	if err != nil {
-		fmt.Printf("Failed to query movies_votes_vw\n%s\n", err.Error())
+		fmt.Printf("Failed to query dn_movies_votes_vw\n%s\n", err.Error())
 		return nil
 	}
 

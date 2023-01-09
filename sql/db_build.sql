@@ -1,11 +1,21 @@
 CREATE SCHEMA `movie_sunday` CHARACTER SET utf8 COLLATE utf8_bin ;
+-- Build
 \i tables/create_people.sql
 \i tables/create_series.sql
 \i tables/create_movies.sql
 \i tables/create_votes.sql
+\i tables/create_trackers.sql
+\i tables/create_movies_trackers.sql
 \i views/create_movies_in_series_vw.sql
 \i views/create_movies_votes_vw.sql
 \i views/create_good_votes_vw.sql
 \i views/create_bad_votes_vw.sql
 \i views/create_rating_vw.sql
-\i views/create_overview_vw.sql
+\i views/create_trackers_vw.sql
+-- Populate
+\i data_load/insert_people.sql
+\i data_load/insert_series.sql
+\i data_load/insert_movies.sql
+\i data_load/insert_votes.sql
+\i data_load/insert_trackers.sql
+\i data_load/insert_movie_trackers.sql
