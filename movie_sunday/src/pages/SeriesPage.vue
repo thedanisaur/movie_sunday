@@ -45,7 +45,7 @@
           </template>
         </q-btn-toggle>
     </q-toolbar>
-      <q-infinite-scroll ref="iscroller" @load="onScroll" class="q-pa-md" style="min-width: 100%">
+      <q-infinite-scroll ref="iscroller" @load="onScroll" style="min-width: 100%">
         <div class="q-pa-md q-mt-xl q-gutter-md row flex-center">
         <q-card v-for="series in timeline" :key="series" bordered style="min-height: 200px;">
           <q-card-section>
