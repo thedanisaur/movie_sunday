@@ -1,17 +1,17 @@
 <template>
   <q-page class="flex flex-center">
     <div class="q-pa-md q-gutter-md row flex-center">
-      <q-card v-for="tracker in trackers" :key="tracker" bordered style="min-width: 250px; max-width: 350px">
+      <q-card v-for="tracker in trackers" :key="tracker" bordered style="min-width: 300px; max-width: 350px">
         <q-card-section>
           <!-- HEADER -->
           <q-parallax src="../assets/module-6.jpg" :height="150" style="opacity: 0.8;">
             <q-item class="q-pa-sm">
-              <q-item-section>
+              <q-item-section class="side">
                 <q-avatar color="grey-10" size="56px" class="text-h2 text-white text-weight-bold">
                   {{ tracker.tracker_count }}
                 </q-avatar>
               </q-item-section>
-              <q-item-section>
+              <q-item-section class="side">
                 <q-item-label dense class="text-h5 text-white text-weight-bolder text-right" style="text-shadow: 2px 2px black;">
                   {{ tracker.tracker_text }}
                 </q-item-label>
@@ -28,7 +28,6 @@
     </div>
   </q-page>
 </template>
-
 <script>
 import { defineComponent } from 'vue'
 import axios from 'axios'

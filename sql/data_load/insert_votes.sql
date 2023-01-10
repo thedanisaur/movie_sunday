@@ -492,12 +492,12 @@ INSERT INTO votes (movie_name, vote_value, person_id) SELECT 'the_first_purge', 
 INSERT INTO votes (movie_name, vote_value, person_id) SELECT 'the_forever_purge', 'BAD', person_id FROM people WHERE person_username = 'NICK';
 
 /* Broken Lizard */
--- INSERT INTO votes (movie_name, vote_value, person_id) SELECT 'puddle_cruiser', 'DAN', '');
+INSERT INTO votes (movie_name, vote_value, person_id) SELECT 'puddle_cruiser', 'DAN', 'BAD');
 INSERT INTO votes (movie_name, vote_value, person_id) SELECT 'super_troopers', 'GOOD', person_id FROM people WHERE person_username = 'DAN';
 INSERT INTO votes (movie_name, vote_value, person_id) SELECT 'club_dread', 'BAD', person_id FROM people WHERE person_username = 'DAN';
 INSERT INTO votes (movie_name, vote_value, person_id) SELECT 'beerfest', 'GOOD', person_id FROM people WHERE person_username = 'DAN';
 INSERT INTO votes (movie_name, vote_value, person_id) SELECT 'slamin_salmon', 'GOOD', person_id FROM people WHERE person_username = 'DAN';
-INSERT INTO votes (movie_name, vote_value, person_id) SELECT 'freeloaders', 'BAD', person_id FROM people WHERE person_username = 'DAN';
+INSERT INTO votes (movie_name, vote_value, person_id) SELECT 'freeloaders', 'GOOD', person_id FROM people WHERE person_username = 'DAN';
 INSERT INTO votes (movie_name, vote_value, person_id) SELECT 'super_troopers_2', 'GOOD', person_id FROM people WHERE person_username = 'DAN';
 -- INSERT INTO votes (movie_name, vote_value, person_id) SELECT 'puddle_cruiser', 'NICK', '');
 INSERT INTO votes (movie_name, vote_value, person_id) SELECT 'super_troopers', 'GOOD', person_id FROM people WHERE person_username = 'NICK';

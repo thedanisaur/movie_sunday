@@ -45,8 +45,8 @@
           </template>
         </q-btn-toggle>
     </q-toolbar>
-    <div class="q-gutter-md">
-      <q-infinite-scroll ref="iscroller" @load="onScroll" class="q-pa-md q-mt-xl q-gutter-md row flex-center">
+      <q-infinite-scroll ref="iscroller" @load="onScroll" class="q-pa-md" style="min-width: 100%">
+        <div class="q-pa-md q-mt-xl q-gutter-md row flex-center">
         <q-card v-for="series in timeline" :key="series" bordered style="min-height: 200px;">
           <q-card-section>
             <q-parallax src="../assets/module-6.jpg" :height="100" style="opacity: 0.8;">
@@ -62,7 +62,7 @@
             <q-separator />
             <q-tab-panels v-model="tabs" animated transition-prev="jump-left" transition-next="jump-right" style="height: 200px; min-width: 350px;">
               <q-tab-panel round horizontal name="overview" class="q-pa-none bg-grey-1">
-                <q-card-section round horizontal>
+                <q-card-section round horizontal class="q-mt-sm">
                   <q-icon name="movie" size="md" color=primary class="q-ml-sm col-1" />
                   <q-space />
                   <q-item dense class="text-h6 text-bold">Movies in Series: {{ series.series_movies.length }}</q-item>
@@ -85,7 +85,7 @@
                 </q-card-section>
               </q-tab-panel>
               <q-tab-panel round horizontal name="votes" class="q-pa-none bg-grey-1">
-                <q-card-section round horizontal class="bg-grey-4">
+                <q-card-section round horizontal class="q-pt-sm bg-grey-4">
                   <q-item dense class="q-pl-lg col-6">Title</q-item>
                   <q-item dense class="col-2">Dan</q-item>
                   <q-item dense class="col-2">Nick</q-item>
@@ -126,13 +126,13 @@
             </q-card-section>
           </q-card-section>
         </q-card>
+        </div>
         <template v-slot:loading>
-          <div class="justify-center q-my-md">
+          <div class="row flex-center q-my-md">
             <q-spinner-dots color="primary" size="40px" />
           </div>
         </template>
       </q-infinite-scroll>
-    </div>
   </q-page>
 </template>
 
@@ -180,6 +180,14 @@ export default defineComponent({
         return {smiley: "mood_bad", color: "red"}
       }
     },
+    onScroll(index, done) {
+      setTimeout(() => {
+        const i = index - 1
+        const offset = 9
+        this.timeline = Object.values(this.timeline).concat(Object.values(this.seriess.slice(i * offset, i * offset + offset)))
+        done(i * offset + offset > this.seriess.length)
+      }, 2000)
+    },
     sortSeries() {
       switch (this.ttr_toggle) {
         case 'series_order':
@@ -210,14 +218,6 @@ export default defineComponent({
       this.$refs.iscroller.reset()
       this.$refs.iscroller.resume()
       this.$refs.iscroller.trigger()
-    },
-    onScroll(index, done) {
-      setTimeout(() => {
-        const i = index - 1
-        const offset = 9
-        this.timeline = Object.values(this.timeline).concat(Object.values(this.seriess.slice(i * offset, i * offset + offset)))
-        done(i * offset + offset > this.seriess.length)
-      }, 2000)
     },
     toTitleCase (str) {
       return str.charAt(0).toUpperCase() + str.substr(1).toLowerCase()

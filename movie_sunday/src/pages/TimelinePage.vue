@@ -64,7 +64,8 @@ export default defineComponent({
   data() {
     return {
       timeline: null,
-      slide: null
+      slide: null,
+      week: ref('CURRENTLY VIEWING: ')
     }
   },
   async created() {
@@ -78,7 +79,6 @@ export default defineComponent({
   setup() {
     return {
       autoplay: ref(true),
-      week: ref('CURRENTLY VIEWING: ')
     }
   },
   methods: {

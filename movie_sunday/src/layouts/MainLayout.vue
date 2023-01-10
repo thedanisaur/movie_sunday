@@ -31,7 +31,7 @@
           @click="toggleLeftDrawer"
           title="Movie Sunday"
           label="Movie Sunday"
-          class="col-2"
+          class="q-mr-md col-2"
         />
 
         <q-tabs no-caps align="justify" class="col-9">
