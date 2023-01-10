@@ -61,14 +61,14 @@ import axios from 'axios'
 
 export default defineComponent({
   name: 'TimelinePage',
-  data() {
+  data () {
     return {
       timeline: null,
       slide: null,
       week: ref('CURRENTLY VIEWING: ')
     }
   },
-  async created() {
+  async created () {
     const response = await axios.get("http://localhost:1234/timeline")
     response.data.forEach((item, arr) => {
       item.series_image = this.randomImage()
@@ -76,7 +76,7 @@ export default defineComponent({
     this.timeline = response.data
     this.slide = this.timeline[0].series_title
   },
-  setup() {
+  setup () {
     return {
       autoplay: ref(true),
     }

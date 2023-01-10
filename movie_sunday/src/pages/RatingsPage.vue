@@ -34,12 +34,12 @@ import axios from 'axios'
 
 export default defineComponent({
   name: 'RatingsPage',
-  data() {
+  data () {
     return {
       ratings: null
     }
   },
-  async created() {
+  async created () {
     const response = await axios.get("http://localhost:1234/ratings")
     this.ratings = response.data
   },

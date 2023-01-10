@@ -146,14 +146,14 @@ import axios from 'axios'
 
 export default defineComponent({
   name: 'SeriesPage',
-  data() {
+  data () {
     return {
       seriess: null,
       timeline: {},
       scrollStop: false
     }
   },
-  setup() {
+  setup () {
     return {
       tabs: ref('overview'),
       iscroller: ref('iscroller'),
@@ -161,7 +161,7 @@ export default defineComponent({
       ad_toggle: ref('descending'),
     }
   },
-  async created() {
+  async created () {
     const response = await axios.get("http://localhost:1234/timeline")
     this.seriess = response.data
   },

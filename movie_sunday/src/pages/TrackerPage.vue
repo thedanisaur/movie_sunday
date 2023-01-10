@@ -1,6 +1,26 @@
 <template>
   <q-page class="flex flex-center">
-    <div class="q-pa-md q-gutter-md row flex-center">
+    <q-toolbar class="absolute-top bg-grey-2">
+      <q-btn
+          dense
+          size="md"
+          color="primary"
+          icon="add"
+          @click="add = true"
+          title="Add Tracker"
+          label=""
+        />
+      <q-space />
+    </q-toolbar>
+    <div class="q-pa-md q-mt-lg q-gutter-md row flex-center">
+      <!-- TODO no-backdrop-dismiss fixes a bug on my dev machine -->
+    <q-dialog no-backdrop-dismiss v-model="add">
+      <q-card>
+        <q-card-section>
+          <q-btn icon="close" color="primary" v-close-popup />
+        </q-card-section>
+      </q-card>
+    </q-dialog>
       <q-card v-for="tracker in trackers" :key="tracker" bordered style="min-width: 300px; max-width: 350px">
         <q-card-section>
           <!-- HEADER -->
@@ -29,19 +49,23 @@
   </q-page>
 </template>
 <script>
-import { defineComponent } from 'vue'
+import { ref, defineComponent } from 'vue'
 import axios from 'axios'
 
 export default defineComponent({
   name: 'TrackerPage',
-  data() {
+  data () {
     return {
       trackers: null
     }
   },
-  async created() {
+  setup () {
+    return {
+      add: ref(false)
+    }
+  },
+  async created () {
     const response = await axios.get("http://localhost:1234/trackers")
-    console.log(response.data)
     this.trackers = response.data
   },
   methods: {
