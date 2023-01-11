@@ -5,7 +5,7 @@
           size="md"
           color="primary"
           icon="add"
-          @click="add = true"
+          @click="addSeriesDialog = true"
           title="Add Series"
           label="Add Series"
         />
@@ -145,20 +145,72 @@
         </div>
       </template>
     </q-infinite-scroll>
+    <!-- DIALOGS -->
+    <!-- TODO no-backdrop-dismiss fixes a bug on my dev machine -->
+    <q-dialog no-backdrop-dismiss v-model="addSeriesDialog">
+      <q-card class="q-pa-md">
+        <q-form
+          @submit="onSubmit"
+          @reset="onReset"
+          class="q-gutter-md"
+          style="min-width: 500px"
+        >
+          <div class="row">
+            <q-item-label>Add Series</q-item-label>
+          </div>
+          <q-input
+            v-model="inputSeriesTitle"
+            filled
+            label="Series"
+            required
+            hint="None"
+          />
+          <div class="row">
+            <q-item-label>Add Movies</q-item-label>
+            <q-space />
+            <q-btn color="primary" icon="add" @click="addMovieData()" class="q-mr-xs"/>
+          </div>
+          <q-scroll-area class="bg-grey-2" style="height: 280px;">
+            <div v-for="movie in movieData" :key="movie.id">
+              <q-separator />
+              <q-input
+                dense
+                v-model="movie.title"
+                filled
+                label="Title"
+                class="q-ma-sm"
+              >
+                <template v-slot:append>
+                  <q-btn v-if="movieData.length > 1" dense color="primary" icon="remove" @click="removeMovieData(movie)" />
+                </template>
+              </q-input>
+            </div>
+          </q-scroll-area>
+          <div class="row">
+            <q-btn dense flat color="primary" label="Cancel" @click="onReset()" v-close-popup />
+            <q-space />
+            <q-btn dense flat color="primary" label="Clear" type="reset" class="q-mr-md" />
+            <q-btn dense color="primary" label="Submit" type="submit" />
+          </div>
+        </q-form>
+      </q-card>
+    </q-dialog>
   </q-page>
 </template>
 
 <script>
 import { defineComponent, ref } from 'vue'
 import axios from 'axios'
+import { useQuasar } from 'quasar'
 
 export default defineComponent({
   name: 'SeriesPage',
   data () {
     return {
-      seriess: null,
+      series: null,
       timeline: {},
-      scrollStop: false
+      scrollStop: false,
+      movieData: [ { id: 0, title: '' } ]
     }
   },
   setup () {
@@ -167,13 +219,22 @@ export default defineComponent({
       iscroller: ref('iscroller'),
       ttr_toggle: ref('series_order'),
       ad_toggle: ref('descending'),
+      addSeriesDialog: ref(false),
+      inputSeriesTitle: ref(''),
     }
   },
   async created () {
     const response = await axios.get("http://localhost:1234/timeline")
-    this.seriess = response.data
+    this.series = response.data
   },
   methods: {
+    addMovieData() {
+      const id = this.movieData[this.movieData.length - 1].id + 1
+      this.movieData.push({ id: id, title: '' })
+    },
+    removeMovieData(movie) {
+      this.movieData.splice(this.movieData.indexOf(movie), 1)
+    },
     calcSmiley(dan_vote, nick_vote) {
       let d = 0.0
       let n = 0.0
@@ -192,42 +253,54 @@ export default defineComponent({
         return {smiley: "mood_bad", color: "red"}
       }
     },
+    onReset () {
+      this.inputSeriesTitle = ''
+      this.movieData.splice(1)
+    },
+    onSubmit () {
+      this.useQuasar().notify({
+        color: 'green-4',
+        textColor: 'white',
+        icon: 'cloud_done',
+        message: 'Submitted'
+      })
+    },
     onScroll(index, done) {
       setTimeout(() => {
         const i = index - 1
         const offset = 9
-        this.timeline = Object.values(this.timeline).concat(Object.values(this.seriess.slice(i * offset, i * offset + offset)))
-        done(i * offset + offset > this.seriess.length)
+        this.timeline = Object.values(this.timeline).concat(Object.values(this.series.slice(i * offset, i * offset + offset)))
+        done(i * offset + offset > this.series.length)
       }, 2000)
     },
     sortSeries() {
       switch (this.ttr_toggle) {
         case 'series_order':
           if (this.ad_toggle === 'ascending') {
-            this.seriess.sort((a, b) => { return a.series_order > b.series_order; })
+            this.series.sort((a, b) => { return a.series_order > b.series_order; })
           } else {
-            this.seriess.sort((a, b) => { return a.series_order < b.series_order; })
+            this.series.sort((a, b) => { return a.series_order < b.series_order; })
           }
           break
         case 'series_title':
           if (this.ad_toggle === 'ascending') {
-            this.seriess.sort((a, b) => { return a.series_title < b.series_title; })
+            this.series.sort((a, b) => { return a.series_title < b.series_title; })
           } else {
-            this.seriess.sort((a, b) => { return a.series_title > b.series_title; })
+            this.series.sort((a, b) => { return a.series_title > b.series_title; })
           }
           break
         case 'movies_in_series':
           if (this.ad_toggle === 'ascending') {
-            this.seriess.sort((a, b) => { return a.series_movies.length > b.series_movies.length; })
+            this.series.sort((a, b) => { return a.series_movies.length > b.series_movies.length; })
           } else {
-            this.seriess.sort((a, b) => { return a.series_movies.length < b.series_movies.length; })
+            this.series.sort((a, b) => { return a.series_movies.length < b.series_movies.length; })
           }
           break
         case 'series_rank':
           if (this.ad_toggle === 'ascending') {
-            this.seriess.sort((a, b) => { return a.series_rank < b.series_rank; })
+            this.series.sort((a, b) => { return a.series_rank < b.series_rank; })
           } else {
-            this.seriess.sort((a, b) => { return a.series_rank > b.series_rank; })
+            this.series.sort((a, b) => { return a.series_rank > b.series_rank; })
           }
           break
         default:

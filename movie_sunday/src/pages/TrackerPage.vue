@@ -5,7 +5,7 @@
           size="md"
           color="primary"
           icon="add"
-          @click="add = true"
+          @click="addTrackerDialog = true"
           title="Add Tracker"
           label="Add Tracker"
         />
@@ -54,34 +54,6 @@
       </q-btn-toggle>
     </q-toolbar>
     <div class="q-pa-md q-mt-xl q-gutter-md row flex-center">
-      <!-- TODO no-backdrop-dismiss fixes a bug on my dev machine -->
-      <q-dialog no-backdrop-dismiss v-model="add">
-        <q-card class="q-pa-md">
-          <q-form
-            @submit="onSubmit"
-            @reset="onReset"
-            class="q-gutter-md"
-            style="min-width: 400px"
-          >
-            <div class="row">
-              <q-item-label>Add Tracker</q-item-label>
-            </div>
-            <q-input
-              filled
-              ref="inputTracker"
-              label="Tracker"
-              required
-              hint="Tracker text that will be displayed on the tracker screen"
-            />
-            <div class="row">
-              <q-btn dense flat color="primary" label="Cancel" v-close-popup />
-              <q-space />
-              <q-btn dense flat color="primary" label="Clear" type="reset" class="q-mr-md" />
-              <q-btn dense color="primary" label="Submit" type="submit" />
-            </div>
-          </q-form>
-        </q-card>
-      </q-dialog>
       <q-card v-for="tracker in trackers" :key="tracker" bordered style="min-width: 300px; max-width: 350px">
         <q-card-section>
           <!-- HEADER -->
@@ -107,6 +79,35 @@
         </q-card-section>
       </q-card>
     </div>
+    <!-- DIALOGS -->
+    <!-- TODO no-backdrop-dismiss fixes a bug on my dev machine -->
+    <q-dialog no-backdrop-dismiss v-model="addTrackerDialog">
+      <q-card class="q-pa-md">
+        <q-form
+          @submit="onSubmit"
+          @reset="onReset"
+          class="q-gutter-md"
+          style="min-width: 400px"
+        >
+          <div class="row">
+            <q-item-label>Add Tracker</q-item-label>
+          </div>
+          <q-input
+            v-model="inputTrackerText"
+            filled
+            label="Tracker"
+            required
+            hint="Tracker text that will be displayed on the tracker screen"
+          />
+          <div class="row">
+            <q-btn dense flat color="primary" label="Cancel" v-close-popup />
+            <q-space />
+            <q-btn dense flat color="primary" label="Clear" type="reset" class="q-mr-md" />
+            <q-btn dense color="primary" label="Submit" type="submit" />
+          </div>
+        </q-form>
+      </q-card>
+    </q-dialog>
   </q-page>
 </template>
 <script>
@@ -122,23 +123,12 @@ export default defineComponent({
     }
   },
   setup () {
-    const $q = useQuasar()
     return {
-      add: ref(false),
-      inputTracker: ref('inputTracker'),
+      addTrackerDialog: ref(false),
+      inputTrackerText: ref(''),
       pua_toggle: ref('tracker_rank'),
       ad_toggle: ref('descending'),
-      onReset () {
-        $refs.inputTracker.value = ''
-      },
-      onSubmit () {
-        $q.notify({
-          color: 'green-4',
-          textColor: 'white',
-          icon: 'cloud_done',
-          message: 'Submitted'
-        })
-      },
+      $q: useQuasar(),
     }
   },
   async created () {
@@ -146,6 +136,17 @@ export default defineComponent({
     this.trackers = response.data
   },
   methods: {
+    onReset () {
+      this.inputTrackerText = ''
+    },
+    onSubmit () {
+      this.$q.notify({
+        color: 'green-4',
+        textColor: 'white',
+        icon: 'cloud_done',
+        message: 'Submitted'
+      })
+    },
     sortTrackers() {
       switch (this.pua_toggle) {
         case 'tracker_rank':
