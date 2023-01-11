@@ -58,7 +58,7 @@
           />
         </div>
       </q-toolbar>
-      <q-toolbar class="bg-amber-1">
+      <q-toolbar class="bg-white">
         <q-icon name="movie" class="col-1" size="xl" color=primary />
         <q-item v-for="item in headerItems" :key="item" class="col-2">
           <q-icon :name="item.icon_name" size="md" color=primary class="q-gutter-sm q-mt-md" />
@@ -128,7 +128,4 @@ export default defineComponent({
 })
 </script>
 <style lang="scss" scoped>
-q-toolbar {
-  background-color: $amber-1;
-}
 </style>

@@ -2,25 +2,86 @@
   <q-page class="flex flex-center">
     <q-toolbar class="absolute-top bg-grey-2">
       <q-btn
-          dense
           size="md"
           color="primary"
           icon="add"
           @click="add = true"
           title="Add Tracker"
-          label=""
+          label="Add Tracker"
         />
       <q-space />
+      <q-btn-toggle
+        v-model="pua_toggle"
+        size="md"
+        title="Sort by Popularity/Last Updated/Alphabetical"
+        @click="sortTrackers()"
+        text-color="primary"
+        :options="[
+          { slot: 'rank', value: 'tracker_rank'},
+          { slot: 'time', value: 'tracker_created_on'},
+          { slot: 'text', value: 'tracker_text'},
+        ]"
+        class="q-ma-sm"
+      >
+        <template v-slot:rank>
+          <q-icon name="hotel_class" />
+        </template>
+        <template v-slot:time>
+          <q-icon name="history" />
+        </template>
+        <template v-slot:text>
+          <q-icon name="list" />
+        </template>
+      </q-btn-toggle>
+      <q-btn-toggle
+        v-model="ad_toggle"
+        size="md"
+        title="Sort Ascending/Descending"
+        @click="sortTrackers()"
+        text-color="primary"
+        :options="[
+          { slot: 'ascending', value: 'ascending'},
+          { slot: 'descending', value: 'descending'},
+        ]"
+        class="q-ma-sm"
+      >
+        <template v-slot:ascending>
+          <q-icon name="arrow_upward" />
+        </template>
+        <template v-slot:descending>
+          <q-icon name="arrow_downward" />
+        </template>
+      </q-btn-toggle>
     </q-toolbar>
-    <div class="q-pa-md q-mt-lg q-gutter-md row flex-center">
+    <div class="q-pa-md q-mt-xl q-gutter-md row flex-center">
       <!-- TODO no-backdrop-dismiss fixes a bug on my dev machine -->
-    <q-dialog no-backdrop-dismiss v-model="add">
-      <q-card>
-        <q-card-section>
-          <q-btn icon="close" color="primary" v-close-popup />
-        </q-card-section>
-      </q-card>
-    </q-dialog>
+      <q-dialog no-backdrop-dismiss v-model="add">
+        <q-card class="q-pa-md">
+          <q-form
+            @submit="onSubmit"
+            @reset="onReset"
+            class="q-gutter-md"
+            style="min-width: 400px"
+          >
+            <div class="row">
+              <q-item-label>Add Tracker</q-item-label>
+            </div>
+            <q-input
+              filled
+              ref="inputTracker"
+              label="Tracker"
+              required
+              hint="Tracker text that will be displayed on the tracker screen"
+            />
+            <div class="row">
+              <q-btn dense flat color="primary" label="Cancel" v-close-popup />
+              <q-space />
+              <q-btn dense flat color="primary" label="Clear" type="reset" class="q-mr-md" />
+              <q-btn dense color="primary" label="Submit" type="submit" />
+            </div>
+          </q-form>
+        </q-card>
+      </q-dialog>
       <q-card v-for="tracker in trackers" :key="tracker" bordered style="min-width: 300px; max-width: 350px">
         <q-card-section>
           <!-- HEADER -->
@@ -51,6 +112,7 @@
 <script>
 import { ref, defineComponent } from 'vue'
 import axios from 'axios'
+import { useQuasar } from 'quasar'
 
 export default defineComponent({
   name: 'TrackerPage',
@@ -60,8 +122,23 @@ export default defineComponent({
     }
   },
   setup () {
+    const $q = useQuasar()
     return {
-      add: ref(false)
+      add: ref(false),
+      inputTracker: ref('inputTracker'),
+      pua_toggle: ref('tracker_rank'),
+      ad_toggle: ref('descending'),
+      onReset () {
+        $refs.inputTracker.value = ''
+      },
+      onSubmit () {
+        $q.notify({
+          color: 'green-4',
+          textColor: 'white',
+          icon: 'cloud_done',
+          message: 'Submitted'
+        })
+      },
     }
   },
   async created () {
@@ -69,6 +146,33 @@ export default defineComponent({
     this.trackers = response.data
   },
   methods: {
+    sortTrackers() {
+      switch (this.pua_toggle) {
+        case 'tracker_rank':
+          if (this.ad_toggle === 'ascending') {
+            this.trackers.sort((a, b) => { return a.tracker_rank < b.tracker_rank; })
+          } else {
+            this.trackers.sort((a, b) => { return a.tracker_rank > b.tracker_rank; })
+          }
+          break
+        case 'tracker_text':
+          if (this.ad_toggle === 'ascending') {
+            this.trackers.sort((a, b) => { return a.tracker_text < b.tracker_text; })
+          } else {
+            this.trackers.sort((a, b) => { return a.tracker_text > b.tracker_text; })
+          }
+          break
+        case 'tracker_created_on':
+          if (this.ad_toggle === 'ascending') {
+            this.trackers.sort((a, b) => { return a.tracker_created_on > b.tracker_created_on; })
+          } else {
+            this.trackers.sort((a, b) => { return a.tracker_created_on < b.tracker_created_on; })
+          }
+          break
+        default:
+          console.warn("Invalid sorting options", this.pua_toggle, this.ad_toggle)
+      }
+    },
     toTitleCase (str) {
       return str.charAt(0).toUpperCase() + str.substr(1).toLowerCase()
     }

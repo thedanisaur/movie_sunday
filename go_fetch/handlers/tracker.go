@@ -47,6 +47,7 @@ func trackerGet() []types.Tracker {
 	}
 
 	var trackers []types.Tracker
+	i := 0
 	for rows.Next() {
 		var tracker types.Tracker
 		err = rows.Scan(&tracker.ID,
@@ -59,7 +60,9 @@ func trackerGet() []types.Tracker {
 			fmt.Printf("Failed to scan row\n%s\n", err.Error())
 			return nil
 		}
+		tracker.Rank = i
 		trackers = append(trackers, tracker)
+		i = i + 1
 	}
 
 	err = rows.Err()

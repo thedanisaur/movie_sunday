@@ -1,6 +1,14 @@
 <template>
   <q-page class="flex flex-center row">
     <q-toolbar class="absolute-top bg-grey-2">
+      <q-btn
+          size="md"
+          color="primary"
+          icon="add"
+          @click="add = true"
+          title="Add Series"
+          label="Add Series"
+        />
       <q-space />
       <q-btn-toggle
         v-model="ttr_toggle"
@@ -61,7 +69,7 @@
             </q-parallax>
             <q-tabs v-model="tabs" color="primary" align="justify">
               <q-tab flat dense name="overview" label="overview" />
-              <q-tab flat dense name="votes" label="votes" />
+              <q-tab flat dense name="movies" label="movies" />
             </q-tabs>
             <q-separator />
             <q-tab-panels v-model="tabs" animated transition-prev="jump-left" transition-next="jump-right" style="height: 200px; min-width: 350px;">
@@ -88,7 +96,7 @@
                   <q-icon name="star" size="lg" color=primary class="q-mt-md q-mr-sm" />
                 </q-card-section>
               </q-tab-panel>
-              <q-tab-panel round horizontal name="votes" class="q-pa-none bg-grey-1">
+              <q-tab-panel round horizontal name="movies" class="q-pa-none bg-grey-1">
                 <q-card-section round horizontal class="q-pt-sm bg-grey-4">
                   <q-item dense class="q-pl-lg col-6">Title</q-item>
                   <q-item dense class="col-2">Dan</q-item>

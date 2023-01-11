@@ -51,7 +51,4 @@ export default defineComponent({
 })
 </script>
 <style lang="scss" scoped>
-div {
-  background-color: $amber-1;
-}
 </style>
