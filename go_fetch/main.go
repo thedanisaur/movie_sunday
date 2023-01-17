@@ -9,7 +9,6 @@ import (
 
 func main() {
 	defer db.GetInstance().Close()
-	http.HandleFunc(handlers.UserRoute(), handlers.UserHandler)
 	http.HandleFunc(handlers.RatingRoute(), handlers.RatingHandler)
 	http.HandleFunc(handlers.TimelineRoute(), handlers.TimelineHandler)
 	http.HandleFunc(handlers.TrackerRoute(), handlers.TrackerHandler)
