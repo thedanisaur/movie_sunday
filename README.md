@@ -23,12 +23,6 @@ cd movie_sunday
 quasar dev
 ```
 
-Go
-
-```
-go run ./go_fetch/main.go
-```
-
 ## Teardown dev environment
 MySql
 
