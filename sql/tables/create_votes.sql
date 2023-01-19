@@ -17,7 +17,6 @@ CREATE TABLE votes (
 );
 
 DROP TRIGGER IF EXISTS bi_votes;
-DELIMITER $$
 CREATE TRIGGER bi_votes BEFORE INSERT ON votes FOR EACH ROW
 BEGIN
     IF (NEW.vote_created_on IS NULL) THEN

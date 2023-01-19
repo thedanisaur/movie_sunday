@@ -15,10 +15,6 @@ mysql -u root movie_sunday < ./sql/db_build.sql
 
 mysql -u root movie_sunday < ./sql/db_populate.sql
 
-cd movie_sunday
-quasar dev
-
-go run ./go_fetch/main.gop
 ```
 
 Quasar
@@ -30,7 +26,7 @@ quasar dev
 Go
 
 ```
-go run ./go_fetch/main.gop
+go run ./go_fetch/main.go
 ```
 
 ## Teardown dev environment
