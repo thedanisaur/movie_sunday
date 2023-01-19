@@ -92,7 +92,9 @@ export default defineComponent({
           console.log(error)
         }
       })
-      this.$router.push('/')
+      if (sessionStorage.getItem('username')) {
+        this.$router.push('/')
+      }
     },
   }
 })

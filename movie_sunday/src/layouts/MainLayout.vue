@@ -75,7 +75,7 @@
             @click="toggleLeftDrawer"
             class="col-2"
           /> -->
-          <q-btn v-if="loggedIn" flat icon-right="logout" label="Logout" @click="logout()" :to="'/'" />
+          <q-btn v-if="isLoggedIn" flat icon-right="logout" label="Logout" @click="logout()" :to="'/'" />
           <q-btn v-else flat icon-right="login" label="Login" :to="'/login'" />
         </div>
       </q-toolbar>
@@ -115,7 +115,7 @@ export default defineComponent({
   },
   data () {
     return {
-      loggedIn: sessionStorage.getItem('username') !== null
+      isLoggedIn: sessionStorage.getItem('username') !== null
     }
   },
   setup () {
@@ -130,7 +130,7 @@ export default defineComponent({
     }
   },
   computed: {
-    isLoggedIn() {
+    loggedIn() {
       return sessionStorage.getItem('username') !== null
     }
   },
@@ -138,7 +138,7 @@ export default defineComponent({
     logout () {
       sessionStorage.removeItem('username')
       sessionStorage.removeItem('jwt_token')
-      this.loggedIn = false
+      this.isLoggedIn = false
     }
   },
 })

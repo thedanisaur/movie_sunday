@@ -2,6 +2,7 @@
   <q-page class="flex flex-center">
     <q-toolbar class="absolute-top bg-grey-2">
       <q-btn
+          v-if="isLoggedIn"
           size="md"
           color="primary"
           icon="add"
@@ -119,7 +120,8 @@ export default defineComponent({
   name: 'TrackerPage',
   data () {
     return {
-      trackers: null
+      trackers: null,
+      isLoggedIn: sessionStorage.getItem('username') !== null
     }
   },
   setup () {

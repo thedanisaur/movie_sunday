@@ -2,6 +2,7 @@
   <q-page class="flex flex-center row">
     <q-toolbar class="absolute-top bg-grey-2">
       <q-btn
+          v-if="isLoggedIn"
           size="md"
           color="primary"
           icon="add"
@@ -210,7 +211,8 @@ export default defineComponent({
       series: null,
       timeline: {},
       scrollStop: false,
-      movieData: [ { id: 0, title: '' } ]
+      movieData: [ { id: 0, title: '' } ],
+      isLoggedIn: sessionStorage.getItem('username') !== null
     }
   },
   setup () {
