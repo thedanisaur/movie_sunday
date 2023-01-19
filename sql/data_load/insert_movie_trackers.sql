@@ -19,7 +19,7 @@ FROM (
 				, person_id AS movie_tracker_created_by
 				, CURDATE() AS movie_tracker_created_on
 		FROM    people
-		WHERE   person_username = 'DAN'
+		WHERE   person_username = 'dan'
 	) p,
     (
         SELECT  tracker_id
@@ -49,7 +49,7 @@ FROM (
 				, person_id AS movie_tracker_created_by 
 				, CURDATE() AS movie_tracker_created_on
 		FROM    people
-		WHERE   person_username = 'DAN'
+		WHERE   person_username = 'dan'
 	) p,
     (
         SELECT  tracker_id
@@ -79,7 +79,7 @@ FROM (
 				, person_id AS movie_tracker_created_by 
 				, CURDATE() AS movie_tracker_created_on
 		FROM    people
-		WHERE   person_username = 'DAN'
+		WHERE   person_username = 'dan'
 	) p,
     (
         SELECT  tracker_id
@@ -109,7 +109,7 @@ FROM (
 				, person_id AS movie_tracker_created_by 
 				, CURDATE() AS movie_tracker_created_on
 		FROM    people
-		WHERE   person_username = 'DAN'
+		WHERE   person_username = 'dan'
 	) p,
     (
         SELECT  tracker_id
@@ -139,7 +139,7 @@ FROM (
 				, person_id AS movie_tracker_created_by 
 				, CURDATE() AS movie_tracker_created_on
 		FROM    people
-		WHERE   person_username = 'DAN'
+		WHERE   person_username = 'dan'
 	) p,
     (
         SELECT  tracker_id
@@ -169,7 +169,7 @@ FROM (
 				, person_id AS movie_tracker_created_by 
 				, CURDATE() AS movie_tracker_created_on
 		FROM    people
-		WHERE   person_username = 'DAN'
+		WHERE   person_username = 'dan'
 	) p,
     (
         SELECT  tracker_id
@@ -199,7 +199,7 @@ FROM (
 				, person_id AS movie_tracker_created_by 
 				, CURDATE() AS movie_tracker_created_on
 		FROM    people
-		WHERE   person_username = 'DAN'
+		WHERE   person_username = 'dan'
 	) p,
     (
         SELECT  tracker_id
@@ -229,7 +229,7 @@ FROM (
 				, person_id AS movie_tracker_created_by 
 				, CURDATE() AS movie_tracker_created_on
 		FROM    people
-		WHERE   person_username = 'DAN'
+		WHERE   person_username = 'dan'
 	) p,
     (
         SELECT  tracker_id
@@ -259,7 +259,7 @@ FROM (
 				, person_id AS movie_tracker_created_by
 				, CURDATE() AS movie_tracker_created_on
 		FROM    people
-		WHERE   person_username = 'DAN'
+		WHERE   person_username = 'dan'
 	) p,
     (
         SELECT  tracker_id
@@ -289,7 +289,7 @@ FROM (
 				, person_id AS movie_tracker_created_by 
 				, CURDATE() AS movie_tracker_created_on
 		FROM    people
-		WHERE   person_username = 'DAN'
+		WHERE   person_username = 'dan'
 	) p,
     (
         SELECT  tracker_id
@@ -319,7 +319,7 @@ FROM (
 				, person_id AS movie_tracker_created_by
 				, CURDATE() AS movie_tracker_created_on
 		FROM    people
-		WHERE   person_username = 'DAN'
+		WHERE   person_username = 'dan'
 	) p,
     (
         SELECT  tracker_id
@@ -349,7 +349,7 @@ FROM (
 				, person_id AS movie_tracker_created_by
 				, CURDATE() AS movie_tracker_created_on
 		FROM    people
-		WHERE   person_username = 'DAN'
+		WHERE   person_username = 'dan'
 	) p,
     (
         SELECT  tracker_id

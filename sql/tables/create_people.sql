@@ -13,6 +13,7 @@ DROP TRIGGER IF EXISTS bi_people;
 DELIMITER $$
 CREATE TRIGGER bi_people BEFORE INSERT ON people FOR EACH ROW
 BEGIN
+    SET NEW.person_username = LOWER(NEW.person_username);
     IF (NEW.person_id IS NULL) THEN
         SET NEW.person_id = UUID_TO_BIN(UUID());
     END IF;

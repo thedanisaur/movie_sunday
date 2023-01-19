@@ -113,7 +113,7 @@
 <script>
 import { ref, defineComponent } from 'vue'
 import axios from 'axios'
-import { useQuasar } from 'quasar'
+import { Notify } from 'quasar'
 
 export default defineComponent({
   name: 'TrackerPage',
@@ -128,7 +128,6 @@ export default defineComponent({
       inputTrackerText: ref(''),
       pua_toggle: ref('tracker_rank'),
       ad_toggle: ref('descending'),
-      $q: useQuasar(),
     }
   },
   async created () {
@@ -140,10 +139,8 @@ export default defineComponent({
       this.inputTrackerText = ''
     },
     onSubmit () {
-      this.$q.notify({
-        color: 'green-4',
-        textColor: 'white',
-        icon: 'cloud_done',
+      Notify.create({
+        type: 'positive',
         message: 'Submitted'
       })
     },

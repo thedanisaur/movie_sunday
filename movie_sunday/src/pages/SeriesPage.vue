@@ -201,7 +201,7 @@
 <script>
 import { defineComponent, ref } from 'vue'
 import axios from 'axios'
-import { useQuasar } from 'quasar'
+import { Notify } from 'quasar'
 
 export default defineComponent({
   name: 'SeriesPage',
@@ -258,10 +258,8 @@ export default defineComponent({
       this.movieData.splice(1)
     },
     onSubmit () {
-      this.useQuasar().notify({
-        color: 'green-4',
-        textColor: 'white',
-        icon: 'cloud_done',
+      Notify.create({
+        type: 'positive',
         message: 'Submitted'
       })
     },

@@ -5,7 +5,7 @@ SELECT  UUID_TO_BIN(UUID())
         , NULL
         , person_id
 FROM people
-WHERE person_username = 'DAN';
+WHERE person_username = 'dan';
 
 INSERT INTO trackers (tracker_id, tracker_text, tracker_created_on, tracker_updated_on, person_id)
 SELECT  UUID_TO_BIN(UUID())
@@ -14,7 +14,7 @@ SELECT  UUID_TO_BIN(UUID())
         , NULL
         , person_id
 FROM people
-WHERE person_username = 'DAN';
+WHERE person_username = 'dan';
 
 INSERT INTO trackers (tracker_id, tracker_text, tracker_created_on, tracker_updated_on, person_id)
 SELECT  UUID_TO_BIN(UUID())
@@ -23,7 +23,7 @@ SELECT  UUID_TO_BIN(UUID())
         , NULL
         , person_id
 FROM people
-WHERE person_username = 'NICK';
+WHERE person_username = 'nick';
 
 INSERT INTO trackers (tracker_id, tracker_text, tracker_created_on, tracker_updated_on, person_id)
 SELECT  UUID_TO_BIN(UUID())
@@ -32,7 +32,7 @@ SELECT  UUID_TO_BIN(UUID())
         , NULL
         , person_id
 FROM people
-WHERE person_username = 'DAN';
+WHERE person_username = 'dan';
 
 INSERT INTO trackers (tracker_id, tracker_text, tracker_created_on, tracker_updated_on, person_id)
 SELECT  UUID_TO_BIN(UUID())
@@ -41,7 +41,7 @@ SELECT  UUID_TO_BIN(UUID())
         , NULL
         , person_id
 FROM people
-WHERE person_username = 'NICK';
+WHERE person_username = 'nick';
 
 INSERT INTO trackers (tracker_id, tracker_text, tracker_created_on, tracker_updated_on, person_id)
 SELECT  UUID_TO_BIN(UUID())
@@ -50,7 +50,7 @@ SELECT  UUID_TO_BIN(UUID())
         , NULL
         , person_id
 FROM people
-WHERE person_username = 'NICK';
+WHERE person_username = 'nick';
 
 INSERT INTO trackers (tracker_id, tracker_text, tracker_created_on, tracker_updated_on, person_id)
 SELECT  UUID_TO_BIN(UUID())
@@ -59,7 +59,7 @@ SELECT  UUID_TO_BIN(UUID())
         , NULL
         , person_id
 FROM people
-WHERE person_username = 'DAN';
+WHERE person_username = 'dan';
 
 INSERT INTO trackers (tracker_id, tracker_text, tracker_created_on, tracker_updated_on, person_id)
 SELECT  UUID_TO_BIN(UUID())
@@ -68,7 +68,7 @@ SELECT  UUID_TO_BIN(UUID())
         , NULL
         , person_id
 FROM people
-WHERE person_username = 'DAN';
+WHERE person_username = 'dan';
 
 INSERT INTO trackers (tracker_id, tracker_text, tracker_created_on, tracker_updated_on, person_id)
 SELECT  UUID_TO_BIN(UUID())
@@ -77,7 +77,7 @@ SELECT  UUID_TO_BIN(UUID())
         , NULL
         , person_id
 FROM people
-WHERE person_username = 'NICK';
+WHERE person_username = 'nick';
 
 INSERT INTO trackers (tracker_id, tracker_text, tracker_created_on, tracker_updated_on, person_id)
 SELECT  UUID_TO_BIN(UUID())
@@ -86,4 +86,4 @@ SELECT  UUID_TO_BIN(UUID())
         , NULL
         , person_id
 FROM people
-WHERE person_username = 'NICK';
+WHERE person_username = 'nick';

@@ -41,19 +41,21 @@
 
 <script>
 import { defineComponent, ref } from 'vue'
+import axios from 'axios'
+import { Notify } from 'quasar'
 
 export default defineComponent({
   name: 'RatingsPage',
   data () {
     return {
-      ratings: null
+      ratings: null,
     }
   },
   setup () {
     return {
       inputUsername: ref(''),
       inputPassword: ref(''),
-      inputIsPwd: ref(true)
+      inputIsPwd: ref(true),
     }
   },
   async created () {
@@ -62,15 +64,35 @@ export default defineComponent({
     onReset () {
       this.inputUsername = ''
       this.inputPassword = ''
-      inputIsPwd = true
+      this.inputIsPwd = true
     },
-    onSubmit () {
-      this.useQuasar().notify({
-        color: 'green-4',
-        textColor: 'white',
-        icon: 'cloud_done',
-        message: 'Submitted'
+    async onSubmit () {
+      const token = btoa(`${this.inputUsername.toLowerCase()}:${this.inputPassword}`)
+      console.log("Token: ", token)
+      const response = await axios.post('http://localhost:4321/login', {}, {
+        headers: {
+          'Authorization': `Basic ${token}`
+        },
+      }).then(function(response) {
+        console.log(response.data)
+        Notify.create({
+          type: 'positive',
+          message: 'Submitted'
+        })
+        sessionStorage.setItem('username', response.data.username)
+        sessionStorage.setItem('jwt_token', response.data.token)
+      }).catch(function(error) {
+        if (error.response) {
+          Notify.create({
+            type: 'negative',
+            message: error.response.data
+          })
+          console.log(error.response.data)
+        } else {
+          console.log(error)
+        }
       })
+      this.$router.push('/')
     },
   }
 })

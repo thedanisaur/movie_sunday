@@ -34,7 +34,7 @@
           class="q-mr-md col-2"
         />
 
-        <q-tabs no-caps align="justify" class="col-9">
+        <q-tabs no-caps align="justify" class="col-8">
           <q-route-tab
             flat
             dense
@@ -43,14 +43,14 @@
             title="Series"
             label="Series"
           />
-          <q-route-tab
+          <!-- <q-route-tab
             flat
             dense
             size="lg"
             to="/ratings"
             title="Ratings"
             label="Ratings"
-          />
+          /> -->
           <q-route-tab
             flat
             dense
@@ -65,8 +65,8 @@
 
         <div>
           <!-- v{{ $q.version }} -->
-          v0.1.0
-          <q-btn
+          <!-- v0.1.0 -->
+          <!-- <q-btn
             flat
             dense
             round
@@ -74,7 +74,9 @@
             aria-label="Menu"
             @click="toggleLeftDrawer"
             class="col-2"
-          />
+          /> -->
+          <q-btn v-if="loggedIn" flat icon-right="logout" label="Logout" @click="logout()" :to="'/'" />
+          <q-btn v-else flat icon-right="login" label="Login" :to="'/login'" />
         </div>
       </q-toolbar>
     </q-header>
@@ -111,6 +113,11 @@ export default defineComponent({
   components: {
     // EssentialLink
   },
+  data () {
+    return {
+      loggedIn: sessionStorage.getItem('username') !== null
+    }
+  },
   setup () {
     const leftDrawerOpen = ref(false)
 
@@ -121,6 +128,18 @@ export default defineComponent({
         leftDrawerOpen.value = !leftDrawerOpen.value
       }
     }
-  }
+  },
+  computed: {
+    isLoggedIn() {
+      return sessionStorage.getItem('username') !== null
+    }
+  },
+  methods: {
+    logout () {
+      sessionStorage.removeItem('username')
+      sessionStorage.removeItem('jwt_token')
+      this.loggedIn = false
+    }
+  },
 })
 </script>
