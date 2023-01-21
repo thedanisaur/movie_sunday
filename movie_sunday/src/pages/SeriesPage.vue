@@ -176,8 +176,9 @@
               <q-separator />
               <q-input
                 dense
-                v-model="movie.title"
+                v-model="movie.movie_title"
                 filled
+                required
                 label="Title"
                 class="q-ma-sm"
               >
@@ -232,7 +233,7 @@ export default defineComponent({
   methods: {
     addMovieData() {
       const id = this.movieData[this.movieData.length - 1].id + 1
-      this.movieData.push({ id: id, title: '' })
+      this.movieData.push({ id: id, movie_title: '' })
     },
     removeMovieData(movie) {
       this.movieData.splice(this.movieData.indexOf(movie), 1)
@@ -258,11 +259,63 @@ export default defineComponent({
     onReset () {
       this.inputSeriesTitle = ''
       this.movieData.splice(1)
+      this.movieData[0].movie_title = ''
     },
-    onSubmit () {
-      Notify.create({
-        type: 'positive',
-        message: 'Submitted'
+    async onSubmit () {
+      const username = sessionStorage.getItem('username')
+      const jwt_token = sessionStorage.getItem('jwt_token')
+      const series_title = this.inputSeriesTitle
+      const series_json = JSON.stringify(
+        {
+          "series_title": series_title,
+          "series_chosen_by": username
+        }
+      )
+      const movie_json = JSON.stringify(this.movieData)
+      const response = await axios.post('http://localhost:1234/series', series_json, {
+        headers: {
+          'Authorization': `Basic ${jwt_token}`,
+          'Content-Type': 'application/json'
+        },
+      }).then(function(series_response) {
+        const series_name = series_response.data.series_name
+        const response = axios.post(`http://localhost:1234/movies/${series_name}`, movie_json, {
+          headers: {
+            'Authorization': `Basic ${jwt_token}`,
+            'Content-Type': 'application/json'
+          },
+        }).then(function(movies_response) {
+          console.log(movies_response.data)
+          Notify.create({
+            type: 'positive',
+            message: 'Movies Added'
+          })
+        }).catch(function(movie_error) {
+          if (movie_error.response) {
+            Notify.create({
+              type: 'negative',
+              message: movie_error.response.data
+            })
+            console.log(movie_error.response.data)
+          } else {
+            console.log(movie_error)
+          }
+        })
+        console.log(series_response.data)
+        Notify.create({
+          type: 'positive',
+          message: 'Series Added'
+        })
+      }).catch(function(series_error) {
+        if (series_error.response) {
+          Notify.create({
+            type: 'negative',
+            message: series_error.response.data
+          })
+          console.log(series_error.response.data)
+        } else {
+          console.log(series_error)
+        }
       })
     },
     onScroll(index, done) {
