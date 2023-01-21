@@ -104,7 +104,7 @@
                   <q-item dense class="col-2">Nick</q-item>
                   <q-item dense class="q-pl-xs col-2">{{ parseFloat(series.series_rating).toFixed(1) }}%</q-item>
                 </q-card-section>
-                <div v-if="series.series_movies">
+                <div v-if="series.series_movies && series.series_movies.length > 0">
                   <q-scroll-area style="height: 200px;">
                     <q-card-section v-for="movie in series.series_movies" :key="movie" class="bg-grey-2">
                       <q-card-section horizontal>

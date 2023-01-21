@@ -1,4 +1,5 @@
 CREATE TABLE series (
+    -- TODO This auto increments even when failing to insert a row...ordering can't have gaps
      series_order int NOT NULL AUTO_INCREMENT PRIMARY KEY
     , series_name VARCHAR(255) NOT NULL
     , series_title TEXT NOT NULL

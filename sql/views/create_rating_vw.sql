@@ -18,7 +18,7 @@ AS
                   , series.series_order
                   , series.series_created_on
                   , people.person_username AS "chosen_by"
-                  , movies_in_series_vw.movies_in_series
+                  , IFNULL(movies_in_series_vw.movies_in_series, 0) AS "movies_in_series"
                   , IFNULL(good_votes_vw.number, 0) AS "good_votes"
                   , IFNULL(bad_votes_vw.number, 0) AS "bad_votes"
                   , IFNULL(good_votes_vw.number, 0) + IFNULL(bad_votes_vw.number,0) AS "total_votes"
@@ -27,7 +27,7 @@ AS
                   series.series_name = good_votes_vw.series_name
             LEFT JOIN bad_votes_vw ON
                   series.series_name = bad_votes_vw.series_name
-            INNER JOIN movies_in_series_vw ON
+            LEFT JOIN movies_in_series_vw ON
                   series.series_name = movies_in_series_vw.series_name
             INNER JOIN people ON
                   series.person_id = people.person_id
