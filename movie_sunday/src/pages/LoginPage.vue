@@ -77,7 +77,7 @@ export default defineComponent({
         console.log(response.data)
         Notify.create({
           type: 'positive',
-          message: 'Submitted'
+          message: 'Logged In'
         })
         sessionStorage.setItem('username', response.data.username)
         sessionStorage.setItem('jwt_token', response.data.token)

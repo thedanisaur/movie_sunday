@@ -16,7 +16,7 @@ AS
           , ( SELECT SUM(dan_liked) AS "total" FROM dn_ranking_vw ) d
           , ( SELECT SUM(nick_liked) AS "total" FROM dn_ranking_vw ) n
           , ( SELECT SUM(rnk) AS "total" FROM dn_ranking_vw ) rnk
-          , ( SELECT ROUND(SUM(rnk) / COUNT(1), 3) AS "total" FROM dn_ranking_vw WHERE pick = 'DAN' ) d_avg_rnk
-          , ( SELECT ROUND(SUM(rnk) / COUNT(1), 3) AS "total" FROM dn_ranking_vw WHERE pick = 'NICK' ) n_avg_rnk
+          , ( SELECT ROUND(SUM(rnk) / COUNT(1), 3) AS "total" FROM dn_ranking_vw WHERE pick = 'dan' ) d_avg_rnk
+          , ( SELECT ROUND(SUM(rnk) / COUNT(1), 3) AS "total" FROM dn_ranking_vw WHERE pick = 'nick' ) n_avg_rnk
           , ( SELECT SUM(movies_in_series) AS "total" FROM movies_in_series_vw ) mis_vw
 ;

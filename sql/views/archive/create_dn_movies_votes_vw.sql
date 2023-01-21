@@ -21,8 +21,8 @@ AS
             , people pn
             , people pd
     WHERE   m.movie_name = vw.movie_name
-    AND     vw.movie_name = n.movie_name AND n.person_id = pn.person_id AND pn.person_username = 'NICK'
-    AND     vw.movie_name = d.movie_name AND d.person_id = pd.person_id AND pd.person_username = 'DAN'
+    AND     vw.movie_name = n.movie_name AND n.person_id = pn.person_id AND pn.person_username = 'nick'
+    AND     vw.movie_name = d.movie_name AND d.person_id = pd.person_id AND pd.person_username = 'dan'
     GROUP BY  vw.movie_name
             , m.series_name
             , n.vote_value
