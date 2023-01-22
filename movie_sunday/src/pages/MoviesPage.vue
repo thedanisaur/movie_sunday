@@ -93,8 +93,11 @@
               </q-card-section>
               <q-separator vertical inset color="primary" />
             </q-card-section>
-            <q-card-section class="col-2">
+            <q-card-section v-if="movie.movie_trackers && movie.movie_trackers.length > 0" class="col-2">
               <q-chip v-for="tracker in movie.movie_trackers" :key="tracker" square color="secondary" class="q-ml-md">{{ tracker.tracker_text }}: {{ tracker.tracker_count }}</q-chip>
+            </q-card-section>
+            <q-card-section v-else class="col-2">
+              <q-chip square color="secondary" text-color="black" icon-right="sentiment_very_dissatisfied" label="No Trackers" class="q-ml-md" />
             </q-card-section>
           </q-card-section>
         </q-card>
