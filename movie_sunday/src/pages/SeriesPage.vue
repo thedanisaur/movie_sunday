@@ -324,7 +324,7 @@ export default defineComponent({
         const offset = 9
         this.timeline = Object.values(this.timeline).concat(Object.values(this.series.slice(i * offset, i * offset + offset)))
         done(i * offset + offset > this.series.length)
-      }, 2000)
+      }, 100)
     },
     sortSeries() {
       switch (this.ttr_toggle) {

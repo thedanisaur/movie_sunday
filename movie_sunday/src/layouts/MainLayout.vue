@@ -43,14 +43,14 @@
             title="Series"
             label="Series"
           />
-          <!-- <q-route-tab
+          <q-route-tab
             flat
             dense
             size="lg"
-            to="/ratings"
-            title="Ratings"
-            label="Ratings"
-          /> -->
+            to="/movies"
+            title="Movies"
+            label="Movies"
+          />
           <q-route-tab
             flat
             dense

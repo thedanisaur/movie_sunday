@@ -22,6 +22,13 @@ const routes = [
     ]
   },
   {
+    path: '/movies',
+    component: () => import('layouts/MainLayout.vue'),
+    children: [
+      { path: '', component: () => import('pages/MoviesPage.vue') }
+    ]
+  },
+  {
     path: '/trackers',
     component: () => import('layouts/MainLayout.vue'),
     children: [
