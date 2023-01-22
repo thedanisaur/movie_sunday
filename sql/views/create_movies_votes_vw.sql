@@ -6,6 +6,7 @@ AS
         , s.series_title
         , m.movie_name
         , m.movie_title
+        , m.movie_created_on
         , vw.person_username
         , vw.vote_value
   FROM  movies m

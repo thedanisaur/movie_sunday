@@ -6,6 +6,7 @@ AS
           , series_title
           , movie_name
           , movie_title
+          , movie_created_on
           , IFNULL(MAX(CASE WHEN person_username = 'dan' THEN vote_value ELSE NULL END), 'NULL') AS 'dan_vote'
           , IFNULL(MAX(CASE WHEN person_username = 'nick' THEN vote_value ELSE NULL END), 'NULL') AS 'nick_vote'
     FROM    movies_votes_vw

@@ -20,14 +20,15 @@
         </template>
       </q-input>
       <q-btn-toggle
-        v-model="sm_toggle"
+        v-model="smd_toggle"
         size="md"
-        title="Sort by Series/Movie"
+        title="Sort by Series/Movie/Date Added"
         @click="sortMovies()"
         text-color="primary"
         :options="[
           { slot: 'series', value: 'series'},
           { slot: 'movie', value: 'movie'},
+          { slot: 'date', value: 'date'},
         ]"
         class="q-ma-sm"
       >
@@ -36,6 +37,9 @@
         </template>
         <template v-slot:movie>
           <q-icon name="movie" />
+        </template>
+        <template v-slot:date>
+          <q-icon name="calendar_month" />
         </template>
       </q-btn-toggle>
       <q-btn-toggle
@@ -59,9 +63,8 @@
       </q-btn-toggle>
     </q-toolbar>
     <div class="q-pa-md q-mt-xl" style="min-width: 100%">
-    <q-infinite-scroll v-if="filteredMovies.length > 0" ref="iscroller" @load="onScroll" style="min-width: 100%">
-      <q-button glossy ripple v-for="movie in scrollerMovies" :key="movie" @click="onClick(movie.movie_name)">
-        <q-card bordered class="q-ma-md btn-card">
+      <q-infinite-scroll v-if="filteredMovies.length > 0" ref="iscroller" @load="onScroll" style="min-width: 100%">
+        <q-card v-for="movie in scrollerMovies" :key="movie" @click="onClick(movie.movie_name)" bordered class="q-ma-md btn-card">
           <q-card-section horizontal>
             <q-img
               spinner-color="white"
@@ -74,6 +77,7 @@
             <q-card-section class="col-6">
               <q-item dense>{{ movie.series_title }}:</q-item>
               <q-item class="text-h4 text-bold">{{ movie.movie_title }}</q-item>
+              <q-item dense>{{ movie.movie_created_on }}</q-item>
             </q-card-section>
             <q-space />
             <q-card-section horizontal class="col-2">
@@ -100,26 +104,25 @@
               <q-chip square color="secondary" text-color="black" icon-right="sentiment_very_dissatisfied" label="No Trackers" class="q-ml-md" />
             </q-card-section>
           </q-card-section>
+          <q-tooltip
+            anchor="bottom middle"
+            self="bottom middle"
+            :delay="1000"
+            transition-show="scale"
+            transition-hide="scale"
+            :offset="[14, 14]"
+            class="bg-primary text-body2 shadow-4"
+          >
+            Edit: {{ movie.movie_title }}
+          </q-tooltip>
         </q-card>
-        <q-tooltip
-          anchor="bottom middle"
-          self="bottom middle"
-          :delay="1000"
-          transition-show="scale"
-          transition-hide="scale"
-          :offset="[14, 14]"
-          class="bg-primary text-body2 shadow-4"
-        >
-          Edit: {{ movie.movie_title }}
-        </q-tooltip>
-      </q-button>
-      <template v-slot:loading>
-        <div class="row flex-center q-my-md">
-          <q-spinner-dots color="primary" size="40px" />
-        </div>
-      </template>
-    </q-infinite-scroll>
-    <q-item-label v-else-if="this.searchText" class="text-h3 text-bold row">No results for {{ this.searchText }}</q-item-label>
+        <template v-slot:loading>
+          <div class="row flex-center q-my-md">
+            <q-spinner-dots color="primary" size="40px" />
+          </div>
+        </template>
+      </q-infinite-scroll>
+      <q-item-label v-else-if="this.searchText" class="text-h3 text-bold row">No results for {{ this.searchText }}</q-item-label>
     </div>
   </q-page>
 </template>
@@ -167,7 +170,7 @@ export default defineComponent({
   setup () {
     return {
       iscroller: ref('iscroller'),
-      sm_toggle: ref('movie'),
+      smd_toggle: ref('movie'),
       ad_toggle: ref('descending'),
     }
   },
@@ -196,7 +199,7 @@ export default defineComponent({
       return image
     },
     sortMovies () {
-      switch (this.sm_toggle) {
+      switch (this.smd_toggle) {
         case 'series':
           if (this.ad_toggle === 'ascending') {
             this.movies.sort((a, b) => { return a.series_title < b.series_title; })
@@ -211,8 +214,15 @@ export default defineComponent({
             this.movies.sort((a, b) => { return a.movie_title > b.movie_title; })
           }
           break
+        case 'date':
+          if (this.ad_toggle === 'ascending') {
+            this.movies.sort((a, b) => { return a.movie_created_on > b.movie_created_on; })
+          } else {
+            this.movies.sort((a, b) => { return a.movie_created_on < b.movie_created_on; })
+          }
+          break
         default:
-          console.warn("Invalid sorting options", this.sm_toggle, this.ad_toggle)
+          console.warn("Invalid sorting options", this.smd_toggle, this.ad_toggle)
       }
       this.scrollerMovies = {}
       this.$refs.iscroller.reset()
