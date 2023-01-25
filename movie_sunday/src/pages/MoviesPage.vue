@@ -151,7 +151,7 @@ export default defineComponent({
     },
   },
   watch: {
-    filteredMovies(n, old) {
+    filteredMovies(newList, oldList) {
       if (old.length != 0) {
         this.scrollerMovies = {}
         this.$refs.iscroller.reset()
@@ -224,10 +224,12 @@ export default defineComponent({
         default:
           console.warn("Invalid sorting options", this.smd_toggle, this.ad_toggle)
       }
+      if (this.scrollerMovies.length >= this.movies.length) {
+        this.$refs.iscroller.reset()
+        this.$refs.iscroller.resume()
+        this.$refs.iscroller.trigger()
+      }
       this.scrollerMovies = {}
-      this.$refs.iscroller.reset()
-      this.$refs.iscroller.resume()
-      this.$refs.iscroller.trigger()
     },
     toTitleCase (str) {
       return str.charAt(0).toUpperCase() + str.substr(1).toLowerCase()
