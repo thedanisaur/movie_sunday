@@ -152,7 +152,7 @@ export default defineComponent({
   },
   watch: {
     filteredMovies(newList, oldList) {
-      if (old.length != 0) {
+      if (oldList.length != 0) {
         this.scrollerMovies = {}
         this.$refs.iscroller.reset()
         this.$refs.iscroller.resume()
