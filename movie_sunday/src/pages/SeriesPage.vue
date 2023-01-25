@@ -164,14 +164,13 @@
             filled
             label="Series"
             required
-            hint="None"
           />
           <div class="row">
             <q-item-label>Add Movies</q-item-label>
             <q-space />
             <q-btn color="primary" icon="add" @click="addMovieData()" class="q-mr-xs"/>
           </div>
-          <q-scroll-area class="bg-grey-2" style="height: 280px;">
+          <q-scroll-area class="bg-grey-2" style="height: 200px;">
             <div v-for="movie in movieData" :key="movie.id">
               <q-separator />
               <q-input
@@ -212,7 +211,7 @@ export default defineComponent({
       series: null,
       timeline: {},
       scrollStop: false,
-      movieData: [ { id: 0, title: '' } ],
+      movieData: [ { id: 0, movie_title: '' } ],
       isLoggedIn: sessionStorage.getItem('username') !== null
     }
   },
@@ -274,14 +273,14 @@ export default defineComponent({
       const movie_json = JSON.stringify(this.movieData)
       const response = await axios.post('http://localhost:1234/series', series_json, {
         headers: {
-          'Authorization': `Basic ${jwt_token}`,
+          'Authorization': `Bearer ${jwt_token}`,
           'Content-Type': 'application/json'
         },
       }).then(function(series_response) {
         const series_name = series_response.data.series_name
         const response = axios.post(`http://localhost:1234/movies/${series_name}`, movie_json, {
           headers: {
-            'Authorization': `Basic ${jwt_token}`,
+            'Authorization': `Bearer ${jwt_token}`,
             'Content-Type': 'application/json'
           },
         }).then(function(movies_response) {
@@ -322,8 +321,10 @@ export default defineComponent({
       setTimeout(() => {
         const i = index - 1
         const offset = 9
-        this.timeline = Object.values(this.timeline).concat(Object.values(this.series.slice(i * offset, i * offset + offset)))
-        done(i * offset + offset > this.series.length)
+        if (this.series) {
+          this.timeline = Object.values(this.timeline).concat(Object.values(this.series.slice(i * offset, i * offset + offset)))
+          done(i * offset + offset > this.series.length)
+        }
       }, 100)
     },
     sortSeries() {

@@ -8,11 +8,13 @@
           icon="add"
           title="Add Movie"
           label="Add Movie"
+          @click="addMovieDialog = true"
         />
       <q-space />
       <q-input
         v-model="searchText"
         filled
+        dense
         label="Search"
       >
         <template v-slot:append>
@@ -124,12 +126,81 @@
       </q-infinite-scroll>
       <q-item-label v-else-if="this.searchText" class="text-h3 text-bold row">No results for {{ this.searchText }}</q-item-label>
     </div>
+    <!-- DIALOGS -->
+    <!-- TODO no-backdrop-dismiss fixes a bug on my dev machine -->
+    <q-dialog no-backdrop-dismiss v-model="addMovieDialog">
+      <q-card class="q-pa-md">
+        <q-form
+          @submit="onSubmit"
+          @reset="onReset"
+          class="q-gutter-md"
+          style="min-width: 500px"
+        >
+          <q-select
+            v-model="selectSeriesModel"
+            ref="seriesSelect"
+            filled
+            clearable
+            use-input
+            hide-selected
+            required
+            fill-input
+            autocomplete="series_name"
+            label="Select Series"
+            :options="filteredSeries"
+            :option-value="opt => Object(opt) === opt && 'series_name' in opt ? opt.series_name : null"
+            :option-label="opt => Object(opt) === opt && 'series_title' in opt ? opt.series_title : '- Null -'"
+            emit-value
+            map-options
+            @filter="filterSeries"
+            style="width: 250px; padding-bottom: 32px"
+          >
+            <template v-slot:no-option>
+              <q-item>
+                <q-item-section class="text-grey">
+                  No results
+                </q-item-section>
+              </q-item>
+            </template>
+          </q-select>
+          <div class="row">
+            <q-item-label>Add Movies</q-item-label>
+            <q-space />
+            <q-btn color="primary" icon="add" @click="addMovieData()" class="q-mr-xs"/>
+          </div>
+          <q-scroll-area class="bg-grey-2" style="height: 200px;">
+            <div v-for="movie in movieData" :key="movie.id">
+              <q-separator />
+              <q-input
+                dense
+                v-model="movie.movie_title"
+                filled
+                required
+                label="Title"
+                class="q-ma-sm"
+              >
+                <template v-slot:append>
+                  <q-btn v-if="movieData.length > 1" dense color="primary" icon="remove" @click="removeMovieData(movie)" />
+                </template>
+              </q-input>
+            </div>
+          </q-scroll-area>
+          <div class="row">
+            <q-btn dense flat color="primary" label="Cancel" @click="onReset()" v-close-popup />
+            <q-space />
+            <q-btn dense flat color="primary" label="Clear" type="reset" class="q-mr-md" />
+            <q-btn dense color="primary" label="Submit" type="submit" />
+          </div>
+        </q-form>
+      </q-card>
+    </q-dialog>
   </q-page>
 </template>
 
 <script>
 import { defineComponent, ref } from 'vue'
 import axios from 'axios'
+import { Notify } from 'quasar'
 
 export default defineComponent({
   name: 'MoviesPage',
@@ -137,7 +208,9 @@ export default defineComponent({
     return {
       movies: null,
       scrollerMovies: {},
+      filteredSeries: [],
       searchText: ref(''),
+      movieData: [ { id: 0, movie_title: '' } ],
       isLoggedIn: sessionStorage.getItem('username') !== null,
     }
   },
@@ -161,22 +234,87 @@ export default defineComponent({
     }
   },
   async created () {
-    const response = await axios.get('http://localhost:1234/movies')
-    response.data.forEach((item, arr) => {
+    const movie_response = await axios.get('http://localhost:1234/movies')
+    movie_response.data.forEach((item, arr) => {
       item.movie_image = this.randomImage()
     })
-    this.movies = response.data
+    this.movies = movie_response.data
+
+    const series_response = await axios.get('http://localhost:1234/series')
+    this.series = series_response.data
+    this.filteredSeries = this.series
   },
   setup () {
     return {
+      series: [],
       iscroller: ref('iscroller'),
       smd_toggle: ref('movie'),
       ad_toggle: ref('descending'),
+      seriesSelect: ref('seriesSelect'),
+      selectSeriesModel: ref(null),
+      addMovieDialog: ref(false),
     }
   },
   methods: {
+    addMovieData() {
+      const id = this.movieData[this.movieData.length - 1].id + 1
+      this.movieData.push({ id: id, movie_title: '' })
+    },
+    removeMovieData(movie) {
+      this.movieData.splice(this.movieData.indexOf(movie), 1)
+    },
     onClick(movie_name) {
       console.log(movie_name)
+    },
+    filterSeries (value, update, abort) {
+      if (value === '') {
+        update(() => {
+          this.filteredSeries = this.series
+        })
+        return
+      }
+      update(() => {
+        const needle = value.toLowerCase()
+        this.filteredSeries = this.series.filter(series => series.series_title.toLowerCase().indexOf(needle) > -1)
+      })
+      const seriesSelect = this.$refs.seriesSelect
+      if (value !== '' && seriesSelect.options.length === 1) {
+        seriesSelect.setOptionIndex(-1) // reset optionIndex in case there is something selected
+        seriesSelect.moveOptionSelection(1) // focus the first selectable option and do not update the input-value
+        seriesSelect.add(seriesSelect.options[seriesSelect.getOptionIndex()])
+      }
+    },
+    onReset () {
+      this.selectSeriesModel = null
+      this.movieData.splice(1)
+      this.movieData[0].movie_title = ''
+    },
+    async onSubmit () {
+      const jwt_token = sessionStorage.getItem('jwt_token')
+      const series_name = this.selectSeriesModel
+      const movie_json = JSON.stringify(this.movieData)
+      axios.post(`http://localhost:1234/movies/${series_name}`, movie_json, {
+        headers: {
+          'Authorization': `Bearer ${jwt_token}`,
+          'Content-Type': 'application/json'
+        },
+      }).then(function(response) {
+        console.log(response.data)
+        Notify.create({
+          type: 'positive',
+          message: 'Movie(s) Added'
+        })
+      }).catch(function(error) {
+        if (error.response) {
+          Notify.create({
+            type: 'negative',
+            message: error.response.data
+          })
+          console.log(error.response.data)
+        } else {
+          console.log(error)
+        }
+      })
     },
     onScroll(index, done) {
       setTimeout(() => {
