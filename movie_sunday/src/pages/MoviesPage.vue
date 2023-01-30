@@ -593,9 +593,6 @@ export default defineComponent({
     randomImage () {
       const images = [
           'module-6.jpg',
-          'i8148hnowoo91.jpg',
-          'mb34g6daf4h91.jpg',
-          'nw0prizii5x91.jpg',
         ]
       const image = images[Math.floor(Math.random() * images.length)]
       return image
