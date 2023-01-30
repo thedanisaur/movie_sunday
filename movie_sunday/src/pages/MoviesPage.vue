@@ -198,7 +198,7 @@
     <q-dialog no-backdrop-dismiss v-model="editMovieDialog">
       <q-card class="q-pa-md">
         <q-form
-          @submit="!this.editMovie.has_vote && this.editMovie.dan_vote !== 'NULL' ? confirmVoteDialog = true : onSubmitEditMovieDialog()"
+          @submit="!this.editMovie.has_vote && this.editMovie.user_vote !== 'NULL' ? confirmVoteDialog = true : onSubmitEditMovieDialog()"
           @reset="onResetEditMovieDialog(false)"
           style="min-width: 500px"
         >
@@ -209,9 +209,9 @@
               <!-- TODO make this work for nick -->
               <q-card-section horizontal>
                 <q-icon
-                  :name="calcThumb(this.editMovie.dan_vote).name"
-                  :size="calcThumb(this.editMovie.dan_vote).size"
-                  :color="calcThumb(this.editMovie.dan_vote).color"
+                  :name="calcThumb(this.editMovie.user_vote).name"
+                  :size="calcThumb(this.editMovie.user_vote).size"
+                  :color="calcThumb(this.editMovie.user_vote).color"
                   class="q-mt-sm q-ml-xl q-mr-xl q-pa-sm" />
                 <q-separator v-if="!this.editMovie.has_vote" vertical />
                 <q-card-section v-if="!this.editMovie.has_vote" class="column">
@@ -291,7 +291,7 @@
     <q-dialog v-model="confirmVoteDialog" persistent>
       <q-card>
         <q-card-section class="items-center">
-          <q-item-label class="text-h5 text-bold">Are you sure {{ this.editMovie.movie_title }} is "{{ toTitleCase(this.editMovie.dan_vote) }}"?</q-item-label>
+          <q-item-label class="text-h5 text-bold">Are you sure {{ this.editMovie.movie_title }} is "{{ toTitleCase(this.editMovie.user_vote) }}"?</q-item-label>
           <q-item-label caption>Your vote can not be changed once submitted!</q-item-label>
         </q-card-section>
         <q-card-actions>
@@ -402,15 +402,17 @@ export default defineComponent({
       this.selectTrackersModel.splice(0)
     },
     updateVote (vote) {
-      this.editMovie.dan_vote = vote
+      this.editMovie.user_vote = vote
       this.editMovie.modified = true
     },
     async openEditMovieDialog (movie) {
+      const username = sessionStorage.getItem('username')
       this.editMovie = movie
       this.editMovie.modified = false
-      this.editMovie.has_vote = this.editMovie.dan_vote !== "NULL"
+      // TODO this is stupid
+      username === 'dan' ? this.editMovie.user_vote = this.editMovie.dan_vote : this.editMovie.user_vote = this.editMovie.nick_vote
+      this.editMovie.has_vote = this.editMovie.user_vote !== "NULL"
       const movie_name = movie.movie_name
-      const username = sessionStorage.getItem('username')
       const response = await axios.get(`http://localhost:1234/movie_trackers/${movie_name}/${username}`)
       if (response.data) {
         response.data.forEach((curr_movie_tracker) => {
@@ -450,7 +452,8 @@ export default defineComponent({
       this.editMovie.modified = false
       this.selectTrackersModel.splice(0)
       if (!this.editMovie.has_vote) {
-        this.editMovie.dan_vote = "NULL"
+        // TODO this is still stupid
+        username === 'dan' ? this.editMovie.user_vote = this.editMovie.dan_vote : this.editMovie.user_vote = this.editMovie.nick_vote
       }
 
       // Remove unsubmitted trackers
@@ -500,10 +503,10 @@ export default defineComponent({
       const username = sessionStorage.getItem('username')
 
       // Add vote
-      if (!this.editMovie.has_vote && this.editMovie.dan_vote) {
+      if (!this.editMovie.has_vote && this.editMovie.user_vote) {
         const vote_json = JSON.stringify({
           movie_name: this.editMovie.movie_name,
-          vote_value: this.editMovie.dan_vote,
+          vote_value: this.editMovie.user_vote,
           username: username,
         })
         axios.post(`http://localhost:1234/votes/`, vote_json, {
