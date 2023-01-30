@@ -61,7 +61,7 @@
           <q-parallax src="../assets/module-6.jpg" :height="150" style="opacity: 0.8;">
             <q-item class="q-pa-sm">
               <q-item-section class="side">
-                <q-avatar color="grey-10" size="56px" class="text-h2 text-white text-weight-bold">
+                <q-avatar color="grey-10" size="64px" :font-size="tracker.tracker_count < 1000 ? '32px' : tracker.tracker_count < 10000 ? '26px' : '22px'" class="text-h2 text-white text-weight-bold">
                   {{ tracker.tracker_count }}
                 </q-avatar>
               </q-item-section>
