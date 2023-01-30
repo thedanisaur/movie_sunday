@@ -13,5 +13,5 @@ AS
     GROUP BY  series_name
             , movie_name
             , movie_title
-    ORDER BY  movie_name
+    ORDER BY  movie_created_on DESC
 ;

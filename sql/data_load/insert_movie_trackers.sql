@@ -447,3 +447,34 @@ FROM (
         WHERE   tracker_text = 'Naked Chicks'
     ) t
 ;
+
+-- TODO remove this, it's not real
+INSERT INTO movie_trackers (
+    movie_tracker_id
+    , movie_name
+    , tracker_id
+    , tracker_count
+    , movie_tracker_created_by
+    , movie_tracker_created_on
+    )
+SELECT p.movie_tracker_id
+, p.movie_name
+, t.tracker_id
+, p.tracker_count
+, p.movie_tracker_created_by
+, p.movie_tracker_created_on
+FROM (
+		SELECT  UUID_TO_BIN(UUID()) AS movie_tracker_id
+				, 'mission_impossible_2' AS movie_name
+				, 3 AS tracker_count
+				, person_id AS movie_tracker_created_by
+				, CURDATE() AS movie_tracker_created_on
+		FROM    people
+		WHERE   person_username = 'nick'
+	) p,
+    (
+        SELECT  tracker_id
+        FROM    trackers
+        WHERE   tracker_text = 'Someone said, "Bitch"'
+    ) t
+;

@@ -157,7 +157,7 @@
           style="min-width: 500px"
         >
           <div class="row">
-            <q-item-label>Add Series</q-item-label>
+            <q-item-label header>Add Series</q-item-label>
           </div>
           <q-input
             v-model="inputSeriesTitle"
@@ -166,7 +166,7 @@
             required
           />
           <div class="row">
-            <q-item-label>Add Movies</q-item-label>
+            <q-item-label header >Add Movies</q-item-label>
             <q-space />
             <q-btn color="primary" icon="add" @click="addMovieData()" class="q-mr-xs"/>
           </div>
