@@ -22,6 +22,15 @@ CREATE TABLE movie_trackers (
         ON UPDATE NO ACTION ON DELETE NO ACTION
 );
 
+DROP TRIGGER IF EXISTS bi_movie_trackers;
+DELIMITER $$
+CREATE TRIGGER bi_movie_trackers BEFORE INSERT ON movie_trackers FOR EACH ROW
+BEGIN
+    SET NEW.movie_tracker_id = UUID_TO_BIN(UUID());
+    SET NEW.movie_tracker_created_on = CURDATE();
+END;
+$$
+
 DROP TRIGGER IF EXISTS bu_movie_trackers;
 CREATE TRIGGER bu_movie_trackers BEFORE UPDATE ON movie_trackers FOR EACH ROW
     SET NEW.movie_tracker_updated_on = CURDATE();

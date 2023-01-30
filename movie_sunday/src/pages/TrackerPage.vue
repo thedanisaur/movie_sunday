@@ -81,8 +81,7 @@
       </q-card>
     </div>
     <!-- DIALOGS -->
-    <!-- TODO no-backdrop-dismiss fixes a bug on my dev machine -->
-    <q-dialog no-backdrop-dismiss v-model="addTrackerDialog">
+    <q-dialog v-model="addTrackerDialog">
       <q-card class="q-pa-md">
         <q-form
           @submit="onSubmit"

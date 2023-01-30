@@ -147,8 +147,7 @@
       </template>
     </q-infinite-scroll>
     <!-- DIALOGS -->
-    <!-- TODO no-backdrop-dismiss fixes a bug on my dev machine -->
-    <q-dialog no-backdrop-dismiss v-model="addSeriesDialog">
+    <q-dialog v-model="addSeriesDialog">
       <q-card class="q-pa-md">
         <q-form
           @submit="onSubmit"

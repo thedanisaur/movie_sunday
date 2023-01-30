@@ -100,11 +100,34 @@
               </q-card-section>
               <q-separator vertical inset color="primary" />
             </q-card-section>
-            <q-card-section v-if="movie.movie_trackers && movie.movie_trackers.length > 0" class="col-2">
-              <q-chip v-for="tracker in movie.movie_trackers" :key="tracker" square color="secondary" class="q-ml-md">{{ tracker.tracker_text }}: {{ tracker.tracker_count }}</q-chip>
+            <q-card-section v-if="movie.movie_trackers && movie.movie_trackers.length > 0">
+              <q-chip
+                v-for="tracker in movie.movie_trackers"
+                :key="tracker"
+                square
+                color="secondary"
+                class="q-ml-md"
+                :class="{ 'truncate-chip-labels': true}"
+              >
+                <q-avatar color="teal-2" :font-size="tracker.tracker_count < 1000 ? '18px' : tracker.tracker_count < 10000 ? '12px' : '10px'" size="md" text-color="black">{{ tracker.tracker_count }}</q-avatar>
+                <div class="ellipsis">
+                  {{ tracker.tracker_text }}
+                  <q-tooltip>{{ tracker.tracker_text }}: {{ tracker.tracker_count }}</q-tooltip>
+                </div>
+              </q-chip>
             </q-card-section>
             <q-card-section v-else class="col-2">
-              <q-chip square color="secondary" text-color="black" icon-right="sentiment_very_dissatisfied" label="No Trackers" class="q-ml-md" />
+              <q-chip
+                square
+                color="secondary"
+                class="q-ml-md"
+              >
+                <q-avatar color="teal-2" size="md" icon="sentiment_very_dissatisfied" text-color="black"></q-avatar>
+                <div class="ellipsis">
+                  No Trackers
+                  <q-tooltip>No Trackers</q-tooltip>
+                </div>
+              </q-chip>
             </q-card-section>
           </q-card-section>
           <q-tooltip
@@ -128,8 +151,7 @@
       <q-item-label v-else-if="this.searchText" class="text-h3 text-bold row">No results for {{ this.searchText }}</q-item-label>
     </div>
     <!-- DIALOGS -->
-    <!-- TODO no-backdrop-dismiss fixes a bug on my dev machine -->
-    <q-dialog no-backdrop-dismiss v-model="addMovieDialog">
+    <q-dialog v-model="addMovieDialog">
       <q-card class="q-pa-md">
         <q-form
           @submit="onSubmitAddMovieDialog"
@@ -195,7 +217,7 @@
         </q-form>
       </q-card>
     </q-dialog>
-    <q-dialog no-backdrop-dismiss v-model="editMovieDialog">
+    <q-dialog v-model="editMovieDialog">
       <q-card class="q-pa-md">
         <q-form
           @submit="!this.editMovie.has_vote && this.editMovie.user_vote !== 'NULL' ? confirmVoteDialog = true : onSubmitEditMovieDialog()"
@@ -206,13 +228,14 @@
             <div class="column">
               <q-item-label class="text-h5 text-bold">{{ this.editMovie.movie_title }}</q-item-label>
               <q-item-label caption>Your Vote:</q-item-label>
-              <!-- TODO make this work for nick -->
               <q-card-section horizontal>
-                <q-icon
-                  :name="calcThumb(this.editMovie.user_vote).name"
-                  :size="calcThumb(this.editMovie.user_vote).size"
-                  :color="calcThumb(this.editMovie.user_vote).color"
-                  class="q-mt-sm q-ml-xl q-mr-xl q-pa-sm" />
+                <q-card-section>
+                  <q-icon
+                    :name="calcThumb(this.editMovie.user_vote).name"
+                    :size="calcThumb(this.editMovie.user_vote).size"
+                    :color="calcThumb(this.editMovie.user_vote).color"
+                    class="q-mt-sm q-ml-xl q-mr-xl q-pa-sm" />
+                  </q-card-section>
                 <q-separator v-if="!this.editMovie.has_vote" vertical />
                 <q-card-section v-if="!this.editMovie.has_vote" class="column">
                   <q-btn flat icon="thumb_up" color="secondary" style="border-style: solid; border-radius: 10px;" @click="updateVote('GOOD')" />
@@ -268,13 +291,14 @@
                   outlined
                   required
                   lazy-rules
+                  @update:model-value="this.editMovie.modified = true"
                   :rules="[value => !!value && value > 0 || 'Value > 0']"
                   input-class="text-right"
                   style="width: 70px"
                   class="q-ma-sm" />
                 <div class="column">
-                  <q-btn dense color="primary" icon="add" size='xs' class="q-mt-sm q-mb-xs q-mr-md" @click="tracker.person_tracker_count = tracker.person_tracker_count + 1" />
-                  <q-btn dense color="primary" icon="remove" size='xs' class="q-mb-md q-mr-md" @click="tracker.person_tracker_count = tracker.person_tracker_count - 1" />
+                  <q-btn dense color="primary" icon="add" size='xs' class="q-mt-sm q-mb-xs q-mr-md" @click="tracker.person_tracker_count = tracker.person_tracker_count + 1; this.editMovie.modified = true" />
+                  <q-btn dense color="primary" icon="remove" size='xs' class="q-mb-md q-mr-md" @click="tracker.person_tracker_count = tracker.person_tracker_count - 1; this.editMovie.modified = true" />
                 </div>
               </div>
             </div>
@@ -479,13 +503,13 @@ export default defineComponent({
           'Authorization': `Bearer ${jwt_token}`,
           'Content-Type': 'application/json'
         },
-      }).then(function(response) {
+      }).then(response => {
         console.log(response.data)
         Notify.create({
           type: 'positive',
           message: 'Movie(s) Added'
         })
-      }).catch(function(error) {
+      }).catch(error => {
         if (error.response) {
           Notify.create({
             type: 'negative',
@@ -507,20 +531,23 @@ export default defineComponent({
         const vote_json = JSON.stringify({
           movie_name: this.editMovie.movie_name,
           vote_value: this.editMovie.user_vote,
-          username: username,
+          person_username: username,
         })
-        axios.post(`http://localhost:1234/votes/`, vote_json, {
+        axios.post(`http://localhost:1234/vote`, vote_json, {
           headers: {
             'Authorization': `Bearer ${jwt_token}`,
             'Content-Type': 'application/json'
           },
-        }).then(function(response) {
+        }).then(response => {
           console.log(response.data)
           Notify.create({
             type: 'positive',
             message: 'Vote Added'
           })
-        }).catch(function(error) {
+          // TODO it's getting more stupid
+          username === 'dan' ? this.editMovie.dan_vote = this.editMovie.user_vote : this.editMovie.nick_vote = this.editMovie.user_vote
+          this.editMovie.has_vote = true
+        }).catch(error => {
           if (error.response) {
             Notify.create({
               type: 'negative',
@@ -534,20 +561,24 @@ export default defineComponent({
       }
 
       // Edit movie trackers
-      const movie_name = this.editMovie.movie_name
+      // Reuse tracker_count field for insert/update
+      this.editMovie.movie_trackers.forEach(movie_tracker => {
+        movie_tracker.tracker_count = parseInt(movie_tracker.person_tracker_count)
+      })
       const trackers_json = JSON.stringify(this.editMovie.movie_trackers)
-      axios.post(`http://localhost:1234/movie_trackers/${movie_name}`, trackers_json, {
+      axios.post(`http://localhost:1234/movie_trackers/${username}`, trackers_json, {
         headers: {
           'Authorization': `Bearer ${jwt_token}`,
           'Content-Type': 'application/json'
         },
-      }).then(function(response) {
+      }).then(response => {
+        this.editMovie.added_trackers = []
         console.log(response.data)
         Notify.create({
           type: 'positive',
           message: 'Movie Tracker(s) Added/Updated'
         })
-      }).catch(function(error) {
+      }).catch(error => {
         if (error.response) {
           Notify.create({
             type: 'negative',
@@ -639,6 +670,9 @@ export default defineComponent({
 <style lang="scss" scoped>
 .btn-card:hover {
   box-shadow: 0px 0px 10px 2px $primary;
+}
+.truncate-chip-labels {
+  max-width: 200px
 }
 </style>
 
