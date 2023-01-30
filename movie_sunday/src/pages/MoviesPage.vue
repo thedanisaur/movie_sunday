@@ -435,7 +435,7 @@ export default defineComponent({
       this.editMovie.modified = false
       // TODO this is stupid
       username === 'dan' ? this.editMovie.user_vote = this.editMovie.dan_vote : this.editMovie.user_vote = this.editMovie.nick_vote
-      this.editMovie.has_vote = this.editMovie.user_vote !== "NULL"
+      this.editMovie.has_vote = this.editMovie.user_vote !== 'NULL'
       const movie_name = movie.movie_name
       const response = await axios.get(`http://localhost:1234/movie_trackers/${movie_name}/${username}`)
       if (response.data) {
@@ -527,7 +527,7 @@ export default defineComponent({
       const username = sessionStorage.getItem('username')
 
       // Add vote
-      if (!this.editMovie.has_vote && this.editMovie.user_vote) {
+      if (!this.editMovie.has_vote && this.editMovie.user_vote !== 'NULL') {
         const vote_json = JSON.stringify({
           movie_name: this.editMovie.movie_name,
           vote_value: this.editMovie.user_vote,
@@ -573,11 +573,13 @@ export default defineComponent({
         },
       }).then(response => {
         this.editMovie.added_trackers = []
-        console.log(response.data)
-        Notify.create({
-          type: 'positive',
-          message: 'Movie Tracker(s) Added/Updated'
-        })
+        if (response.data.inserts > 0 || response.data.updates > 0) {
+          console.log(response.data)
+          Notify.create({
+            type: 'positive',
+            message: 'Movie Tracker(s) Added/Updated'
+          })
+        }
       }).catch(error => {
         if (error.response) {
           Notify.create({
