@@ -500,7 +500,7 @@ export default defineComponent({
       const movie_json = JSON.stringify(this.movieData)
       axios.post(`http://localhost:1234/movies/${series_name}`, movie_json, {
         headers: {
-          'Authorization': `Bearer ${jwt_token}`,
+          'Authorization': `${jwt_token}`,
           'Content-Type': 'application/json'
         },
       }).then(response => {
@@ -535,7 +535,7 @@ export default defineComponent({
         })
         axios.post(`http://localhost:1234/vote`, vote_json, {
           headers: {
-            'Authorization': `Bearer ${jwt_token}`,
+            'Authorization': `${jwt_token}`,
             'Content-Type': 'application/json'
           },
         }).then(response => {
@@ -568,7 +568,7 @@ export default defineComponent({
       const trackers_json = JSON.stringify(this.editMovie.movie_trackers)
       axios.post(`http://localhost:1234/movie_trackers/${username}`, trackers_json, {
         headers: {
-          'Authorization': `Bearer ${jwt_token}`,
+          'Authorization': `${jwt_token}`,
           'Content-Type': 'application/json'
         },
       }).then(response => {

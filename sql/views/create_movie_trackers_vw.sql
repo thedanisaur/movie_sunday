@@ -1,4 +1,4 @@
-DROP VIEW IF EXISTS trackers_vw;
+DROP VIEW IF EXISTS movie_trackers_vw;
 
 CREATE OR REPLACE VIEW movie_trackers_vw
 AS

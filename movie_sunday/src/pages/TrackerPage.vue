@@ -55,8 +55,8 @@
       </q-btn-toggle>
     </q-toolbar>
     <div class="q-pa-md q-mt-xl q-gutter-md row flex-center">
-      <q-card v-for="tracker in trackers" :key="tracker" bordered style="min-width: 300px; max-width: 350px">
-        <q-card-section>
+      <q-card v-for="tracker in trackers" :key="tracker" bordered style="min-width: 300px; max-width: 350px" class="btn-card">
+        <q-card-section @click="openMovieListDialog(tracker)">
           <!-- HEADER -->
           <q-parallax src="../assets/module-6.jpg" :height="150" style="opacity: 0.8;">
             <q-item class="q-pa-sm">
@@ -108,6 +108,49 @@
         </q-form>
       </q-card>
     </q-dialog>
+    <q-dialog v-model="movieListDialog">
+      <q-card class="q-pa-md">
+        <q-card-section>
+          <q-item class="text-h5 text-bold">
+            {{ currentTracker.tracker_text }}:  {{ currentTracker.tracker_count }}
+          </q-item>
+        </q-card-section>
+        <q-separator />
+        <q-item class="flex-center text-bold">MOVIES</q-item>
+        <q-separator size="2px" color="dark" />
+        <q-card-section style="min-height:200px; min-width: 350px;" class="q-pa-none bg-grey-1">
+          <q-card-section round horizontal class="q-pt-sm bg-grey-4">
+            <q-item dense>Title</q-item>
+            <q-space />
+            <q-item dense>Count</q-item>
+          </q-card-section>
+          <div v-if="trackerData && trackerData.length > 0">
+            <q-scroll-area style="height: 200px;" class="bg-grey-2">
+              <q-card-section v-for="data in trackerData" :key="data">
+                <q-card-section horizontal>
+                  <q-item>{{ data.movie_title }}</q-item>
+                  <q-space />
+                  <q-item>{{ data.tracker_count }}</q-item>
+                </q-card-section>
+                <q-separator />
+              </q-card-section>
+            </q-scroll-area>
+          </div>
+          <div v-else>
+            <q-card-section class="bg-grey-2">
+              <q-card-section horizontal>
+                <q-item class="text-h6 text-bold">No movies currently use this tracker. (^-^*)</q-item>
+              </q-card-section>
+            </q-card-section>
+          </div>
+        </q-card-section>
+        <q-separator />
+        <q-card-actions>
+          <q-space />
+          <q-btn dense flat color="primary" label="Close" v-close-popup />
+        </q-card-actions>
+      </q-card>
+    </q-dialog>
   </q-page>
 </template>
 <script>
@@ -120,15 +163,19 @@ export default defineComponent({
   data () {
     return {
       trackers: null,
+      currentTracker: null,
+      trackerData: null,
       isLoggedIn: sessionStorage.getItem('username') !== null
     }
   },
   setup () {
     return {
       addTrackerDialog: ref(false),
+      movieListDialog: ref(false),
       inputTrackerText: ref(''),
       pua_toggle: ref('tracker_rank'),
       ad_toggle: ref('descending'),
+      tabs: ref('movies'),
     }
   },
   async created () {
@@ -144,6 +191,13 @@ export default defineComponent({
         type: 'positive',
         message: 'Submitted'
       })
+    },
+    async openMovieListDialog (tracker) {
+      const tracker_id = tracker.tracker_id
+      const response = await axios.get(`http://localhost:1234/movie_trackers/${tracker_id}`)
+      this.trackerData = response.data
+      this.currentTracker = tracker
+      this.movieListDialog = true
     },
     sortTrackers() {
       switch (this.pua_toggle) {
@@ -178,3 +232,8 @@ export default defineComponent({
   },
 })
 </script>
+<style lang="scss" scoped>
+.btn-card:hover {
+  box-shadow: 0px 0px 10px 2px $primary;
+}
+</style>

@@ -20,6 +20,8 @@ CREATE TABLE movie_trackers (
     , CONSTRAINT movie_tracker_person_id_fkey FOREIGN KEY (movie_tracker_created_by)
         REFERENCES people (person_id) MATCH SIMPLE
         ON UPDATE NO ACTION ON DELETE NO ACTION
+
+    , CONSTRAINT movie_tracker_tracker_count_gtz CHECK (`tracker_count` > 0)
 );
 
 DROP TRIGGER IF EXISTS bi_movie_trackers;

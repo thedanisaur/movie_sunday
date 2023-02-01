@@ -272,23 +272,23 @@ export default defineComponent({
       const movie_json = JSON.stringify(this.movieData)
       const response = await axios.post('http://localhost:1234/series', series_json, {
         headers: {
-          'Authorization': `Bearer ${jwt_token}`,
+          'Authorization': `${jwt_token}`,
           'Content-Type': 'application/json'
         },
-      }).then(function(series_response) {
+      }).then(series_response => {
         const series_name = series_response.data.series_name
         const response = axios.post(`http://localhost:1234/movies/${series_name}`, movie_json, {
           headers: {
-            'Authorization': `Bearer ${jwt_token}`,
+            'Authorization': `${jwt_token}`,
             'Content-Type': 'application/json'
           },
-        }).then(function(movies_response) {
+        }).then(movies_response => {
           console.log(movies_response.data)
           Notify.create({
             type: 'positive',
             message: 'Movies Added'
           })
-        }).catch(function(movie_error) {
+        }).catch(movie_error => {
           if (movie_error.response) {
             Notify.create({
               type: 'negative',
@@ -304,7 +304,7 @@ export default defineComponent({
           type: 'positive',
           message: 'Series Added'
         })
-      }).catch(function(series_error) {
+      }).catch(series_error => {
         if (series_error.response) {
           Notify.create({
             type: 'negative',
