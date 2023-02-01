@@ -110,8 +110,8 @@
     </q-dialog>
     <q-dialog v-model="movieListDialog">
       <q-card class="q-pa-md">
-        <q-card-section>
-          <q-item class="text-h5 text-bold">
+        <q-card-section class="bg-primary">
+          <q-item class="text-white text-h5 text-bold">
             {{ currentTracker.tracker_text }}:  {{ currentTracker.tracker_count }}
           </q-item>
         </q-card-section>
