@@ -225,7 +225,7 @@ export default defineComponent({
     }
   },
   async created () {
-    const response = await axios.get("http://localhost:1234/timeline")
+    const response = await axios.get("https://localhost:1234/timeline")
     this.series = response.data
   },
   methods: {
@@ -270,14 +270,14 @@ export default defineComponent({
         }
       )
       const movie_json = JSON.stringify(this.movieData)
-      const response = await axios.post('http://localhost:1234/series', series_json, {
+      const response = await axios.post('https://localhost:1234/series', series_json, {
         headers: {
           'Authorization': `${jwt_token}`,
           'Content-Type': 'application/json'
         },
       }).then(series_response => {
         const series_name = series_response.data.series_name
-        const response = axios.post(`http://localhost:1234/movies/${series_name}`, movie_json, {
+        const response = axios.post(`https://localhost:1234/movies/${series_name}`, movie_json, {
           headers: {
             'Authorization': `${jwt_token}`,
             'Content-Type': 'application/json'

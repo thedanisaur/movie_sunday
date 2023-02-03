@@ -179,7 +179,7 @@ export default defineComponent({
     }
   },
   async created () {
-    const response = await axios.get("http://localhost:1234/trackers")
+    const response = await axios.get("https://localhost:1234/trackers")
     this.trackers = response.data
   },
   methods: {
@@ -194,7 +194,7 @@ export default defineComponent({
     },
     async openMovieListDialog (tracker) {
       const tracker_id = tracker.tracker_id
-      const response = await axios.get(`http://localhost:1234/movie_trackers/${tracker_id}`)
+      const response = await axios.get(`https://localhost:1234/movie_trackers/${tracker_id}`)
       this.trackerData = response.data
       this.currentTracker = tracker
       this.movieListDialog = true

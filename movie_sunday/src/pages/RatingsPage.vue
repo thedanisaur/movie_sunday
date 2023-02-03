@@ -40,7 +40,7 @@ export default defineComponent({
     }
   },
   async created () {
-    const response = await axios.get('http://localhost:1234/ratings')
+    const response = await axios.get('https://localhost:1234/ratings')
     this.ratings = response.data
   },
   methods: {

@@ -68,12 +68,12 @@ export default defineComponent({
     },
     async onSubmit () {
       const token = btoa(`${this.inputUsername.toLowerCase()}:${this.inputPassword}`)
-      console.log("Token: ", token)
-      const response = await axios.post('http://localhost:4321/login', {}, {
+      console.log(token)
+      const response = await axios.post('https://localhost:4321/login', {}, {
         headers: {
           'Authorization': `Basic ${token}`
         },
-      }).then(function(response) {
+      }).then(response => {
         console.log(response.data)
         Notify.create({
           type: 'positive',
@@ -81,7 +81,7 @@ export default defineComponent({
         })
         sessionStorage.setItem('username', response.data.username)
         sessionStorage.setItem('jwt_token', response.data.token)
-      }).catch(function(error) {
+      }).catch(error => {
         if (error.response) {
           Notify.create({
             type: 'negative',

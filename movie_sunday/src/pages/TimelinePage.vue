@@ -69,7 +69,7 @@ export default defineComponent({
     }
   },
   async created () {
-    const response = await axios.get("http://localhost:1234/timeline")
+    const response = await axios.get("https://localhost:1234/timeline")
     response.data.forEach((item, arr) => {
       item.series_image = this.randomImage()
     })

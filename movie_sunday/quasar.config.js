@@ -83,7 +83,15 @@ module.exports = configure(function (ctx) {
     // Full list of options: https://v2.quasar.dev/quasar-cli-webpack/quasar-config-js#Property%3A-devServer
     devServer: {
       server: {
-        type: 'http'
+        type: 'https',
+        
+        options: {
+          key: path.join(__dirname, "keys/key.key"),
+          // pfx: path.join(__dirname, "/path/to/server.pfx"),
+          cert: path.join(__dirname, "certs/cert.crt"),
+          // ca: path.join(__dirname, "/path/to/ca.pem"),
+          // passphrase: 'webpack-dev-server' // do you need it?
+        }
       },
       port: 8080,
       open: true // opens browser window automatically

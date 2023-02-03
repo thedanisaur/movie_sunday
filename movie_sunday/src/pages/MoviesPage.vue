@@ -366,18 +366,18 @@ export default defineComponent({
     }
   },
   async created () {
-    const movie_response = await axios.get('http://localhost:1234/movies')
+    const movie_response = await axios.get('https://localhost:1234/movies')
     movie_response.data.forEach((movie, arr) => {
       movie.movie_image = this.randomImage()
       movie.added_trackers = []
     })
     this.movies = movie_response.data
 
-    const series_response = await axios.get('http://localhost:1234/series')
+    const series_response = await axios.get('https://localhost:1234/series')
     this.series = series_response.data
     this.filteredSeries = this.series
 
-    const tracker_response = await axios.get('http://localhost:1234/trackers')
+    const tracker_response = await axios.get('https://localhost:1234/trackers')
     this.trackers = tracker_response.data
   },
   setup () {
@@ -437,7 +437,7 @@ export default defineComponent({
       username === 'dan' ? this.editMovie.user_vote = this.editMovie.dan_vote : this.editMovie.user_vote = this.editMovie.nick_vote
       this.editMovie.has_vote = this.editMovie.user_vote !== 'NULL'
       const movie_name = movie.movie_name
-      const response = await axios.get(`http://localhost:1234/movie_trackers/${movie_name}/${username}`)
+      const response = await axios.get(`https://localhost:1234/movie_trackers/${movie_name}/${username}`)
       if (response.data) {
         response.data.forEach((curr_movie_tracker) => {
           const curr_tracker_id = curr_movie_tracker.tracker_id
@@ -498,7 +498,7 @@ export default defineComponent({
       const jwt_token = sessionStorage.getItem('jwt_token')
       const series_name = this.selectSeriesModel
       const movie_json = JSON.stringify(this.movieData)
-      axios.post(`http://localhost:1234/movies/${series_name}`, movie_json, {
+      axios.post(`https://localhost:1234/movies/${series_name}`, movie_json, {
         headers: {
           'Authorization': `${jwt_token}`,
           'Content-Type': 'application/json'
@@ -533,7 +533,7 @@ export default defineComponent({
           vote_value: this.editMovie.user_vote,
           person_username: username,
         })
-        axios.post(`http://localhost:1234/vote`, vote_json, {
+        axios.post(`https://localhost:1234/vote`, vote_json, {
           headers: {
             'Authorization': `${jwt_token}`,
             'Content-Type': 'application/json'
@@ -566,7 +566,7 @@ export default defineComponent({
         movie_tracker.tracker_count = parseInt(movie_tracker.person_tracker_count)
       })
       const trackers_json = JSON.stringify(this.editMovie.movie_trackers)
-      axios.post(`http://localhost:1234/movie_trackers/${username}`, trackers_json, {
+      axios.post(`https://localhost:1234/movie_trackers/${username}`, trackers_json, {
         headers: {
           'Authorization': `${jwt_token}`,
           'Content-Type': 'application/json'
