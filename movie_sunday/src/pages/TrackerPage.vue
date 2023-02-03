@@ -189,6 +189,7 @@ export default defineComponent({
     onSubmit () {
       Notify.create({
         type: 'positive',
+        timeout: 1000,
         message: 'Submitted'
       })
     },

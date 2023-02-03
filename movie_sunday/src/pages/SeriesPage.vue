@@ -286,6 +286,7 @@ export default defineComponent({
           console.log(movies_response.data)
           Notify.create({
             type: 'positive',
+            timeout: 1000,
             message: 'Movies Added'
           })
         }).catch(movie_error => {
@@ -302,6 +303,7 @@ export default defineComponent({
         console.log(series_response.data)
         Notify.create({
           type: 'positive',
+          timeout: 1000,
           message: 'Series Added'
         })
       }).catch(series_error => {

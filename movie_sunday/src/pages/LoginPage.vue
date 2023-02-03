@@ -68,7 +68,6 @@ export default defineComponent({
     },
     async onSubmit () {
       const token = btoa(`${this.inputUsername.toLowerCase()}:${this.inputPassword}`)
-      console.log(token)
       const response = await axios.post('https://localhost:4321/login', {}, {
         headers: {
           'Authorization': `Basic ${token}`
@@ -77,6 +76,7 @@ export default defineComponent({
         console.log(response.data)
         Notify.create({
           type: 'positive',
+          timeout: 1000,
           message: 'Logged In'
         })
         sessionStorage.setItem('username', response.data.username)

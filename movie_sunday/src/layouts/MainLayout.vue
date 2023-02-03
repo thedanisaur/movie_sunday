@@ -1,24 +1,5 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <!-- <q-drawer
-      v-model="leftDrawerOpen"
-      overlay=true
-      show-if-above
-      bordered
-    >
-      <q-list>
-        <q-item-label header>
-          Essential Links
-        </q-item-label>
-
-        <EssentialLink
-          v-for="link in essentialLinks"
-          :key="link.title"
-          v-bind="link"
-        />
-      </q-list>
-    </q-drawer> -->
-    
     <q-header elevated>
       <q-toolbar>
         <q-btn
@@ -27,8 +8,7 @@
           size="lg"
           to="/"
           icon="theaters"
-          aria-label="Menu"
-          @click="toggleLeftDrawer"
+          aria-label="Timeline"
           title="Movie Sunday"
           label="Movie Sunday"
           class="q-mr-md col-2"
@@ -89,53 +69,54 @@
 
 <script>
 import { defineComponent, ref } from 'vue'
-import EssentialLink from 'components/EssentialLink.vue'
-import { fasFontAwesome } from '@quasar/extras/fontawesome-v6'
-
-const linksList = [
-  {
-    title: 'Docs',
-    caption: 'quasar.dev',
-    icon: 'school',
-    link: 'https://quasar.dev'
-  },
-  {
-    title: 'Github',
-    caption: 'github.com/quasarframework',
-    icon: 'code',
-    link: 'https://github.com/quasarframework'
-  },
-]
+import axios from 'axios'
+import { Notify } from 'quasar'
 
 export default defineComponent({
   name: 'MainLayout',
 
   components: {
-    // EssentialLink
   },
   data () {
     return {
-      isLoggedIn: sessionStorage.getItem('username') !== null
+      isLoggedIn: sessionStorage.getItem('username') !== null,
+      loginVerificationInterval: setInterval(() => {
+        this.isLoggedIn = sessionStorage.getItem('username') !== null
+      }, 1000)
     }
   },
   setup () {
-    const leftDrawerOpen = ref(false)
 
     return {
-      // essentialLinks: linksList,
-      leftDrawerOpen,
-      toggleLeftDrawer () {
-        leftDrawerOpen.value = !leftDrawerOpen.value
-      }
-    }
-  },
-  computed: {
-    loggedIn() {
-      return sessionStorage.getItem('username') !== null
     }
   },
   methods: {
-    logout () {
+    async logout () {
+      const username = sessionStorage.getItem('username')
+      const jwt_token = sessionStorage.getItem('jwt_token')
+      const response = await axios.post('https://localhost:4321/logout', {}, {
+        headers: {
+          'Authorization': `${jwt_token}`,
+          'Username': `${username}`
+        },
+      }).then(response => {
+        console.log(response.data)
+        Notify.create({
+          type: 'positive',
+          timeout: 1000,
+          message: 'Logged Out'
+        })
+      }).catch(error => {
+        if (error.response) {
+          Notify.create({
+            type: 'negative',
+            message: error.response.data
+          })
+          console.log(error.response.data)
+        } else {
+          console.log(error)
+        }
+      })
       sessionStorage.removeItem('username')
       sessionStorage.removeItem('jwt_token')
       this.isLoggedIn = false

@@ -507,6 +507,7 @@ export default defineComponent({
         console.log(response.data)
         Notify.create({
           type: 'positive',
+          timeout: 1000,
           message: 'Movie(s) Added'
         })
       }).catch(error => {
@@ -542,6 +543,7 @@ export default defineComponent({
           console.log(response.data)
           Notify.create({
             type: 'positive',
+            timeout: 1000,
             message: 'Vote Added'
           })
           // TODO it's getting more stupid
@@ -577,6 +579,7 @@ export default defineComponent({
           console.log(response.data)
           Notify.create({
             type: 'positive',
+            timeout: 1000,
             message: 'Movie Tracker(s) Added/Updated'
           })
         }
