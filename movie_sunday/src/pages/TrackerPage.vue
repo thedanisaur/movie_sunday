@@ -187,10 +187,35 @@ export default defineComponent({
       this.inputTrackerText = ''
     },
     onSubmit () {
-      Notify.create({
-        type: 'positive',
-        timeout: 1000,
-        message: 'Submitted'
+      const username = sessionStorage.getItem('username')
+      const jwt_token = sessionStorage.getItem('jwt_token')
+      const tracker_json = JSON.stringify({
+        'tracker_text': this.inputTrackerText,
+        'tracker_created_by': username
+      })
+      axios.post(`https://localhost:1234/trackers`, tracker_json, {
+        headers: {
+          'Authorization': `${jwt_token}`,
+          'Content-Type': 'application/json',
+          'Username': `${username}`,
+        },
+      }).then(response => {
+        console.log(response.data)
+        Notify.create({
+          type: 'positive',
+          timeout: 1000,
+          message: 'Tracker Added'
+        })
+      }).catch(error => {
+        if (error.response) {
+          Notify.create({
+            type: 'negative',
+            message: error.response.data
+          })
+          console.log(error.response.data)
+        } else {
+          console.log(error)
+        }
       })
     },
     async openMovieListDialog (tracker) {

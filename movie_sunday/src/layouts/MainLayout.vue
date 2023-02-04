@@ -86,8 +86,37 @@ export default defineComponent({
     }
   },
   setup () {
-
     return {
+      refreshLoginInterval: setInterval(async () => {
+        if (!this.isLoggedIn) return
+        const username = sessionStorage.getItem('username')
+        const jwt_token = sessionStorage.getItem('jwt_token')
+        const response = await axios.post(`https://localhost:4321/refresh/${username}`, {}, {
+          headers: {
+            'Authorization': `${jwt_token}`,
+            'Username': `${username}`
+          },
+        }).then(response => {
+          console.log(response.data)
+          Notify.create({
+            type: 'positive',
+            timeout: 1000,
+            message: 'Refreshed Token'
+          })
+          sessionStorage.setItem('username', response.data.username)
+          sessionStorage.setItem('jwt_token', response.data.token)
+        }).catch(error => {
+          if (error.response) {
+            Notify.create({
+              type: 'negative',
+              message: error.response.data
+            })
+            console.log(error.response.data)
+          } else {
+            console.log(error)
+          }
+        })
+      }, 240000)
     }
   },
   methods: {

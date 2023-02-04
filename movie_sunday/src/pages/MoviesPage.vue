@@ -495,13 +495,15 @@ export default defineComponent({
       }
     },
     async onSubmitAddMovieDialog () {
+      const username = sessionStorage.getItem('username')
       const jwt_token = sessionStorage.getItem('jwt_token')
       const series_name = this.selectSeriesModel
       const movie_json = JSON.stringify(this.movieData)
       axios.post(`https://localhost:1234/movies/${series_name}`, movie_json, {
         headers: {
           'Authorization': `${jwt_token}`,
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Username': `${username}`,
         },
       }).then(response => {
         console.log(response.data)
@@ -537,7 +539,8 @@ export default defineComponent({
         axios.post(`https://localhost:1234/vote`, vote_json, {
           headers: {
             'Authorization': `${jwt_token}`,
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Username': `${username}`,
           },
         }).then(response => {
           console.log(response.data)
@@ -571,7 +574,8 @@ export default defineComponent({
       axios.post(`https://localhost:1234/movie_trackers/${username}`, trackers_json, {
         headers: {
           'Authorization': `${jwt_token}`,
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Username': `${username}`,
         },
       }).then(response => {
         this.editMovie.added_trackers = []

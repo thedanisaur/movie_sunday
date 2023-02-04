@@ -273,14 +273,16 @@ export default defineComponent({
       const response = await axios.post('https://localhost:1234/series', series_json, {
         headers: {
           'Authorization': `${jwt_token}`,
-          'Content-Type': 'application/json'
+          'Content-Type': 'application/json',
+          'Username': `${username}`,
         },
       }).then(series_response => {
         const series_name = series_response.data.series_name
         const response = axios.post(`https://localhost:1234/movies/${series_name}`, movie_json, {
           headers: {
             'Authorization': `${jwt_token}`,
-            'Content-Type': 'application/json'
+            'Content-Type': 'application/json',
+            'Username': `${username}`,
           },
         }).then(movies_response => {
           console.log(movies_response.data)
