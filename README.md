@@ -1,31 +1,41 @@
-# Movie Sunday
+# Movie Sunday (movie-sunday)
 
-Star Wars is bad.
+A Quasar Project
 
-
-## Setup dev environment
-MySql
-
-```
-mysql.server start
-
-mysql -u root -e "CREATE SCHEMA movie_sunday CHARACTER SET utf8 COLLATE utf8_bin ;"
-
-mysql -u root movie_sunday < ./sql/db_build.sql
-
-mysql -u root movie_sunday < ./sql/db_populate.sql
-
+## Install the dependencies
+```bash
+yarn
+# or
+npm install
 ```
 
-Quasar
-```
-cd movie_sunday
+### Start the app in development mode (hot-code reloading, error reporting, etc.)
+```bash
 quasar dev
 ```
 
-## Teardown dev environment
-MySql
 
+### Lint the files
+```bash
+yarn lint
+# or
+npm run lint
 ```
-mysql -u root movie_sunday < ./sql/db_destroy.sql
+
+
+### Format the files
+```bash
+yarn format
+# or
+npm run format
 ```
+
+
+
+### Build the app for production
+```bash
+quasar build
+```
+
+### Customize the configuration
+See [Configuring quasar.config.js](https://v2.quasar.dev/quasar-cli-webpack/quasar-config-js).
