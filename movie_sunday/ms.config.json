@@ -1,0 +1,21 @@
+{
+    "service": {
+        "movie": {
+            "host": "localhost",
+            "port": 1234,
+            "movies": "/movies",
+            "movie_trackers": "/movie_trackers",
+            "series": "/series",
+            "timeline": "/timeline",
+            "trackers": "/trackers",
+            "votes": "/vote"
+        },
+        "user": {
+            "host": "localhost",
+            "port": 4321,
+            "login": "/login",
+            "logout": "/logout",
+            "refresh": "/refresh"
+        }
+    }
+}

@@ -202,6 +202,7 @@
 import { defineComponent, ref } from 'vue'
 import axios from 'axios'
 import { Notify } from 'quasar'
+import cfg from '../../ms.config.json'
 
 export default defineComponent({
   name: 'SeriesPage',
@@ -225,7 +226,10 @@ export default defineComponent({
     }
   },
   async created () {
-    const response = await axios.get("https://localhost:1234/timeline")
+    const host = cfg.service.movie.host
+    const port = cfg.service.movie.port
+    const timeline = cfg.service.movie.timeline
+    const response = await axios.get(`https://${host}:${port}${timeline}`)
     this.series = response.data
   },
   methods: {
@@ -270,7 +274,10 @@ export default defineComponent({
         }
       )
       const movie_json = JSON.stringify(this.movieData)
-      const response = await axios.post('https://localhost:1234/series', series_json, {
+      const host = cfg.service.movie.host
+      const port = cfg.service.movie.port
+      const series = cfg.service.movie.series
+      const response = await axios.post(`https://${host}:${port}${series}`, series_json, {
         headers: {
           'Authorization': `${jwt_token}`,
           'Content-Type': 'application/json',
@@ -278,7 +285,10 @@ export default defineComponent({
         },
       }).then(series_response => {
         const series_name = series_response.data.series_name
-        const response = axios.post(`https://localhost:1234/movies/${series_name}`, movie_json, {
+        const host = cfg.service.movie.host
+        const port = cfg.service.movie.port
+        const movies = cfg.service.movie.movies
+        const response = axios.post(`https://${host}:${port}${movies}/${series_name}`, movie_json, {
           headers: {
             'Authorization': `${jwt_token}`,
             'Content-Type': 'application/json',

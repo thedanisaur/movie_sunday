@@ -90,9 +90,9 @@ module.exports = configure(function (ctx) {
         type: 'https',
         
         options: {
-          key: path.join(__dirname, "keys/key.key"),
+          key: path.join(__dirname, "secrets/key.key"),
           // pfx: path.join(__dirname, "/path/to/server.pfx"),
-          cert: path.join(__dirname, "certs/cert.crt"),
+          cert: path.join(__dirname, "secrets/cert.crt"),
           // ca: path.join(__dirname, "/path/to/ca.pem"),
           // passphrase: 'webpack-dev-server' // do you need it?
         }

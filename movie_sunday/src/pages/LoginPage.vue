@@ -43,12 +43,12 @@
 import { defineComponent, ref } from 'vue'
 import axios from 'axios'
 import { Notify } from 'quasar'
+import cfg from '../../ms.config.json'
 
 export default defineComponent({
-  name: 'RatingsPage',
+  name: 'LoginPage',
   data () {
     return {
-      ratings: null,
     }
   },
   setup () {
@@ -68,7 +68,10 @@ export default defineComponent({
     },
     async onSubmit () {
       const token = btoa(`${this.inputUsername.toLowerCase()}:${this.inputPassword}`)
-      const response = await axios.post('https://localhost:4321/login', {}, {
+      const host = cfg.service.user.host
+      const port = cfg.service.user.port
+      const login = cfg.service.user.login
+      const response = await axios.post(`https://${host}:${port}${login}`, {}, {
         headers: {
           'Authorization': `Basic ${token}`
         },

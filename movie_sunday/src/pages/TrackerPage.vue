@@ -157,6 +157,7 @@
 import { ref, defineComponent } from 'vue'
 import axios from 'axios'
 import { Notify } from 'quasar'
+import cfg from '../../ms.config.json'
 
 export default defineComponent({
   name: 'TrackerPage',
@@ -179,7 +180,10 @@ export default defineComponent({
     }
   },
   async created () {
-    const response = await axios.get("https://localhost:1234/trackers")
+    const host = cfg.service.movie.host
+    const port = cfg.service.movie.port
+    const trackers = cfg.service.movie.trackers
+    const response = await axios.get(`https://${host}:${port}${trackers}`)
     this.trackers = response.data
   },
   methods: {
@@ -193,7 +197,10 @@ export default defineComponent({
         'tracker_text': this.inputTrackerText,
         'tracker_created_by': username
       })
-      axios.post(`https://localhost:1234/trackers`, tracker_json, {
+      const host = cfg.service.movie.host
+      const port = cfg.service.movie.port
+      const trackers = cfg.service.movie.trackers
+      axios.post(`https://${host}:${port}${trackers}`, tracker_json, {
         headers: {
           'Authorization': `${jwt_token}`,
           'Content-Type': 'application/json',
@@ -220,7 +227,10 @@ export default defineComponent({
     },
     async openMovieListDialog (tracker) {
       const tracker_id = tracker.tracker_id
-      const response = await axios.get(`https://localhost:1234/movie_trackers/${tracker_id}`)
+      const host = cfg.service.movie.host
+      const port = cfg.service.movie.port
+      const movie_trackers = cfg.service.movie.movie_trackers
+      const response = await axios.get(`https://${host}:${port}${movie_trackers}/${tracker_id}`)
       this.trackerData = response.data
       this.currentTracker = tracker
       this.movieListDialog = true

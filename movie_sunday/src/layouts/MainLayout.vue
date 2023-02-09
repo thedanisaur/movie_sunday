@@ -71,6 +71,7 @@
 import { defineComponent, ref } from 'vue'
 import axios from 'axios'
 import { Notify } from 'quasar'
+import cfg from '../../ms.config.json'
 
 export default defineComponent({
   name: 'MainLayout',
@@ -91,7 +92,10 @@ export default defineComponent({
         if (!this.isLoggedIn) return
         const username = sessionStorage.getItem('username')
         const jwt_token = sessionStorage.getItem('jwt_token')
-        const response = await axios.post(`https://localhost:4321/refresh/${username}`, {}, {
+        const host = cfg.service.user.host
+        const port = cfg.service.user.port
+        const refresh = cfg.service.user.refresh
+        const response = await axios.post(`https://${host}:${port}${refresh}/${username}`, {}, {
           headers: {
             'Authorization': `${jwt_token}`,
             'Username': `${username}`
@@ -123,7 +127,10 @@ export default defineComponent({
     async logout () {
       const username = sessionStorage.getItem('username')
       const jwt_token = sessionStorage.getItem('jwt_token')
-      const response = await axios.post('https://localhost:4321/logout', {}, {
+      const host = cfg.service.user.host
+      const port = cfg.service.user.port
+      const logout = cfg.service.user.logout
+      const response = await axios.post(`https://${host}:${port}${logout}`, {}, {
         headers: {
           'Authorization': `${jwt_token}`,
           'Username': `${username}`

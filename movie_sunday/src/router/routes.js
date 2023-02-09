@@ -15,13 +15,6 @@ const routes = [
     ]
   },
   {
-    path: '/ratings',
-    component: () => import('layouts/RatingsLayout.vue'),
-    children: [
-      { path: '', component: () => import('pages/RatingsPage.vue') }
-    ]
-  },
-  {
     path: '/movies',
     component: () => import('layouts/MainLayout.vue'),
     children: [

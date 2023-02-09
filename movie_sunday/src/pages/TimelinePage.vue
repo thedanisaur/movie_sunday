@@ -58,6 +58,7 @@
 <script>
 import { ref, defineComponent } from 'vue'
 import axios from 'axios'
+import cfg from '../../ms.config.json'
 
 export default defineComponent({
   name: 'TimelinePage',
@@ -69,7 +70,10 @@ export default defineComponent({
     }
   },
   async created () {
-    const response = await axios.get("https://localhost:1234/timeline")
+    const host = cfg.service.movie.host
+    const port = cfg.service.movie.port
+    const timeline = cfg.service.movie.timeline
+    const response = await axios.get(`https://${host}:${port}${timeline}`)
     response.data.forEach((item, arr) => {
       item.series_image = this.randomImage()
     })
