@@ -217,6 +217,7 @@
         </q-form>
       </q-card>
     </q-dialog>
+    <!-- Add edit functionality so we can update when a movie was watched for more accurate reporting. -->
     <q-dialog v-model="editMovieDialog">
       <q-card class="q-pa-md">
         <q-form
