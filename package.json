@@ -13,8 +13,15 @@
   "dependencies": {
     "@quasar/extras": "^1.0.0",
     "axios": "^1.2.2",
+    "buffer": "^6.0.3",
     "core-js": "^3.6.5",
+    "crypto-browserify": "^3.12.0",
+    "fs": "^0.0.1-security",
+    "jsencrypt": "^3.3.2",
+    "node-jsencrypt": "^1.0.0",
     "quasar": "^2.6.0",
+    "stream": "^0.0.2",
+    "stream-browserify": "^3.0.0",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0"
   },

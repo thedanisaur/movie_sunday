@@ -229,7 +229,7 @@ export default defineComponent({
     const host = cfg.service.movie.host
     const port = cfg.service.movie.port
     const timeline = cfg.service.movie.timeline
-    const response = await axios.get(`https://${host}:${port}${timeline}`)
+    const response = await axios.get(`${host}:${port}${timeline}`)
     this.series = response.data
   },
   methods: {
@@ -277,7 +277,7 @@ export default defineComponent({
       const host = cfg.service.movie.host
       const port = cfg.service.movie.port
       const series = cfg.service.movie.series
-      const response = await axios.post(`https://${host}:${port}${series}`, series_json, {
+      const response = await axios.post(`${host}:${port}${series}`, series_json, {
         headers: {
           'Authorization': `${jwt_token}`,
           'Content-Type': 'application/json',
@@ -288,7 +288,7 @@ export default defineComponent({
         const host = cfg.service.movie.host
         const port = cfg.service.movie.port
         const movies = cfg.service.movie.movies
-        const response = axios.post(`https://${host}:${port}${movies}/${series_name}`, movie_json, {
+        const response = axios.post(`${host}:${port}${movies}/${series_name}`, movie_json, {
           headers: {
             'Authorization': `${jwt_token}`,
             'Content-Type': 'application/json',

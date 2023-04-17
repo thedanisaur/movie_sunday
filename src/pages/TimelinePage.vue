@@ -73,7 +73,7 @@ export default defineComponent({
     const host = cfg.service.movie.host
     const port = cfg.service.movie.port
     const timeline = cfg.service.movie.timeline
-    const response = await axios.get(`https://${host}:${port}${timeline}`)
+    const response = await axios.get(`${host}:${port}${timeline}`)
     response.data.forEach((item, arr) => {
       item.series_image = this.randomImage()
     })

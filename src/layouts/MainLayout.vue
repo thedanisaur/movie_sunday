@@ -83,11 +83,7 @@ export default defineComponent({
       isLoggedIn: sessionStorage.getItem('username') !== null,
       loginVerificationInterval: setInterval(() => {
         this.isLoggedIn = sessionStorage.getItem('username') !== null
-      }, 1000)
-    }
-  },
-  setup () {
-    return {
+      }, 1000),
       refreshLoginInterval: setInterval(async () => {
         if (!this.isLoggedIn) return
         const username = sessionStorage.getItem('username')
@@ -95,7 +91,7 @@ export default defineComponent({
         const host = cfg.service.user.host
         const port = cfg.service.user.port
         const refresh = cfg.service.user.refresh
-        const response = await axios.post(`https://${host}:${port}${refresh}/${username}`, {}, {
+        const response = await axios.post(`${host}:${port}${refresh}/${username}`, {}, {
           headers: {
             'Authorization': `${jwt_token}`,
             'Username': `${username}`
@@ -120,7 +116,12 @@ export default defineComponent({
             console.log(error)
           }
         })
-      }, 240000)
+      }, 100000) // 100000 is just under 2 min
+    }
+  },
+  setup () {
+    return {
+      
     }
   },
   methods: {
@@ -130,7 +131,7 @@ export default defineComponent({
       const host = cfg.service.user.host
       const port = cfg.service.user.port
       const logout = cfg.service.user.logout
-      const response = await axios.post(`https://${host}:${port}${logout}`, {}, {
+      const response = await axios.post(`${host}:${port}${logout}`, {}, {
         headers: {
           'Authorization': `${jwt_token}`,
           'Username': `${username}`

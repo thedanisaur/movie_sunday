@@ -183,7 +183,7 @@ export default defineComponent({
     const host = cfg.service.movie.host
     const port = cfg.service.movie.port
     const trackers = cfg.service.movie.trackers
-    const response = await axios.get(`https://${host}:${port}${trackers}`)
+    const response = await axios.get(`${host}:${port}${trackers}`)
     this.trackers = response.data
   },
   methods: {
@@ -200,7 +200,7 @@ export default defineComponent({
       const host = cfg.service.movie.host
       const port = cfg.service.movie.port
       const trackers = cfg.service.movie.trackers
-      axios.post(`https://${host}:${port}${trackers}`, tracker_json, {
+      axios.post(`${host}:${port}${trackers}`, tracker_json, {
         headers: {
           'Authorization': `${jwt_token}`,
           'Content-Type': 'application/json',
@@ -230,7 +230,7 @@ export default defineComponent({
       const host = cfg.service.movie.host
       const port = cfg.service.movie.port
       const movie_trackers = cfg.service.movie.movie_trackers
-      const response = await axios.get(`https://${host}:${port}${movie_trackers}/${tracker_id}`)
+      const response = await axios.get(`${host}:${port}${movie_trackers}/${tracker_id}`)
       this.trackerData = response.data
       this.currentTracker = tracker
       this.movieListDialog = true

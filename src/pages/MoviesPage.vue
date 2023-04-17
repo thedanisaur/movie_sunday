@@ -371,7 +371,7 @@ export default defineComponent({
     const host = cfg.service.movie.host
     const port = cfg.service.movie.port
     const movies = cfg.service.movie.movies
-    const movie_response = await axios.get(`https://${host}:${port}${movies}`)
+    const movie_response = await axios.get(`${host}:${port}${movies}`)
     movie_response.data.forEach((movie, arr) => {
       movie.movie_image = this.randomImage()
       movie.added_trackers = []
@@ -379,12 +379,12 @@ export default defineComponent({
     this.movies = movie_response.data
 
     const series = cfg.service.movie.series
-    const series_response = await axios.get(`https://${host}:${port}${series}`)
+    const series_response = await axios.get(`${host}:${port}${series}`)
     this.series = series_response.data
     this.filteredSeries = this.series
 
     const trackers = cfg.service.movie.trackers
-    const tracker_response = await axios.get(`https://${host}:${port}${trackers}`)
+    const tracker_response = await axios.get(`${host}:${port}${trackers}`)
     this.trackers = tracker_response.data
   },
   setup () {
@@ -447,7 +447,7 @@ export default defineComponent({
       const port = cfg.service.movie.port
       const movie_trackers = cfg.service.movie.movie_trackers
       const movie_name = movie.movie_name
-      const response = await axios.get(`https://${host}:${port}${movie_trackers}/${movie_name}/${username}`)
+      const response = await axios.get(`${host}:${port}${movie_trackers}/${movie_name}/${username}`)
       if (response.data) {
         response.data.forEach((curr_movie_tracker) => {
           const curr_tracker_id = curr_movie_tracker.tracker_id
@@ -512,7 +512,7 @@ export default defineComponent({
       const host = cfg.service.movie.host
       const port = cfg.service.movie.port
       const movies = cfg.service.movie.movies
-      axios.post(`https://${host}:${port}${movies}/${series_name}`, movie_json, {
+      axios.post(`${host}:${port}${movies}/${series_name}`, movie_json, {
         headers: {
           'Authorization': `${jwt_token}`,
           'Content-Type': 'application/json',
@@ -552,7 +552,7 @@ export default defineComponent({
         const host = cfg.service.movie.host
         const port = cfg.service.movie.port
         const votes = cfg.service.movie.votes
-        axios.post(`https://${host}:${port}${votes}`, vote_json, {
+        axios.post(`${host}:${port}${votes}`, vote_json, {
           headers: {
             'Authorization': `${jwt_token}`,
             'Content-Type': 'application/json',
@@ -590,7 +590,7 @@ export default defineComponent({
       const host = cfg.service.movie.host
       const port = cfg.service.movie.port
       const movie_trackers = cfg.service.movie.movie_trackers
-      axios.post(`https://${host}:${port}${movie_trackers}/${username}`, trackers_json, {
+      axios.post(`${host}:${port}${movie_trackers}/${username}`, trackers_json, {
         headers: {
           'Authorization': `${jwt_token}`,
           'Content-Type': 'application/json',
