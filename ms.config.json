@@ -1,7 +1,7 @@
 {
     "service": {
         "movie": {
-            "host": "http://localhost",
+            "host": "ec2-100-25-117-200.compute-1.amazonaws.com",
             "port": 1234,
             "movies": "/movies",
             "movie_trackers": "/movie_trackers",
@@ -11,7 +11,7 @@
             "votes": "/vote"
         },
         "user": {
-            "host": "http://localhost",
+            "host": "ec2-100-25-117-200.compute-1.amazonaws.com",
             "port": 4321,
             "login": "/login",
             "logout": "/logout",
