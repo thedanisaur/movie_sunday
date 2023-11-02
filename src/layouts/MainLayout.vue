@@ -71,7 +71,7 @@
 import { defineComponent, ref } from 'vue'
 import axios from 'axios'
 import { Notify } from 'quasar'
-import cfg from '../../ms.config.json'
+import cfg from '../../movie_sunday.config.json'
 
 export default defineComponent({
   name: 'MainLayout',

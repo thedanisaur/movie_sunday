@@ -1,7 +1,7 @@
 {
     "service": {
         "movie": {
-            "host": "localhost",
+            "host": "http://localhost",
             "port": 1234,
             "movies": "/movies",
             "movie_trackers": "/movie_trackers",
@@ -11,12 +11,17 @@
             "votes": "/vote"
         },
         "user": {
-            "host": "localhost",
+            "host": "http://localhost",
             "port": 4321,
             "login": "/login",
             "logout": "/logout",
             "public_key": "/publickey",
             "refresh": "/refresh"
+        },
+        "image": {
+            "host": "http://localhost",
+            "port": 7331,
+            "images": "/images"
         }
     }
 }

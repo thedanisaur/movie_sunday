@@ -58,7 +58,7 @@
 <script>
 import { ref, defineComponent } from 'vue'
 import axios from 'axios'
-import cfg from '../../ms.config.json'
+import cfg from '../../movie_sunday.config.json'
 
 export default defineComponent({
   name: 'TimelinePage',
