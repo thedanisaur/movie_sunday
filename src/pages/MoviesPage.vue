@@ -69,65 +69,73 @@
       <q-infinite-scroll v-if="filteredMovies.length > 0" ref="iscroller" @load="onScroll" style="min-width: 100%">
         <q-card v-for="movie in scrollerMovies" :key="movie" bordered class="q-ma-md btn-card">
           <q-card-section horizontal @click="openEditMovieDialog(movie)">
-            <q-img
-              spinner-color="white"
-              width="160px"
-              height="140px"
-              fit="fill"
-              :src="require('../assets/' + movie.movie_image)"
-              class="col-1"
-            />
-            <q-separator vertical size=".125em" color="primary" />
-            <q-card-section class="col-6">
-              <q-item dense>{{ movie.series_title }}:</q-item>
-              <q-item class="text-h4 text-bold">{{ movie.movie_title }}</q-item>
-              <q-item dense>{{ movie.movie_created_on }}</q-item>
+            <q-card-section class="q-pa-none q-ma-none">
+              <q-img
+                spinner-color="white"
+                width="180px"
+                fit="fill"
+                :src="require('../assets/' + movie.movie_image)"
+              />
+              <q-separator vertical size=".125em" color="primary" />
             </q-card-section>
-            <q-card-section horizontal class="col-2">
-              <q-separator vertical inset color="primary" />
-              <q-card-section>
-                <q-item-label>Dan Vote:</q-item-label>
-                <q-icon dense v-if="movie.dan_vote == 'GOOD'" name="thumb_up" size="xl" color=secondary class="q-ma-sm q-pa-sm"/>
-                <q-icon dense v-else-if="movie.dan_vote == 'BAD'" name="thumb_down" size="xl" color=red class="q-ma-sm q-pa-sm"/>
-                <q-icon dense v-else name="do_not_disturb" size="xl" color=primary class="q-ma-sm q-pa-sm"/>
+            <q-card-section style="width: 100%;" class="q-pa-none q-ma-none">
+              <q-card-section style="width: 98%;" horizontal class="q-pa-none q-ma-none">
+                <q-card-section>
+                  <q-item>{{ movie.series_title }}:</q-item>
+                  <q-item dense class="text-h3 text-bold">{{ movie.movie_title }}</q-item>
+                  <q-item >{{ movie.movie_created_on }}</q-item>
+                </q-card-section>
+                <q-space />
+                <q-card-section horizontal>
+                  <q-separator vertical color="primary" />
+                  <q-card-section>
+                    <q-item-label>Dan Vote:</q-item-label>
+                    <q-icon dense v-if="movie.dan_vote == 'GOOD'" name="thumb_up" style="font-size: 52px;" color=secondary class="q-ma-sm q-pa-sm"/>
+                    <q-icon dense v-else-if="movie.dan_vote == 'BAD'" name="thumb_down" style="font-size: 52px;" color=red class="q-ma-sm q-pa-sm"/>
+                    <q-icon dense v-else name="do_not_disturb" style="font-size: 52px;" color=primary class="q-ma-sm q-pa-sm"/>
+                  </q-card-section>
+                  <q-separator vertical inset color="primary" />
+                  <q-card-section>
+                    <q-item-label>Nick Vote:</q-item-label>
+                    <q-icon dense v-if="movie.nick_vote == 'GOOD'" name="thumb_up" style="font-size: 52px;" color=secondary class="q-ma-sm q-pa-sm"/>
+                    <q-icon dense v-else-if="movie.nick_vote == 'BAD'" name="thumb_down" style="font-size: 52px;" color=red class="q-ma-sm q-pa-sm"/>
+                    <q-icon dense v-else name="do_not_disturb" style="font-size: 52px;" color=primary class="q-ma-sm q-pa-sm"/>
+                  </q-card-section>
+                  <q-separator vertical color="primary" />
+                </q-card-section>
               </q-card-section>
-              <q-separator vertical inset color="primary" />
-              <q-card-section>
-                <q-item-label>Nick Vote:</q-item-label>
-                <q-icon dense v-if="movie.nick_vote == 'GOOD'" name="thumb_up" size="xl" color=secondary class="q-ma-sm q-pa-sm"/>
-                <q-icon dense v-else-if="movie.nick_vote == 'BAD'" name="thumb_down" size="xl" color=red class="q-ma-sm q-pa-sm"/>
-                <q-icon dense v-else name="do_not_disturb" size="xl" color=primary class="q-ma-sm q-pa-sm"/>
+              <q-card-section horizontal class="q-pa-none q-ma-none" >
+                <!-- <q-space /> -->
+                <q-card-section v-if="movie.movie_trackers && movie.movie_trackers.length > 0">
+                  <q-chip
+                    v-for="tracker in movie.movie_trackers"
+                    :key="tracker"
+                    square
+                    color="secondary"
+                    class="q-ml-md q-mt-md"
+                    :class="{ 'truncate-chip-labels': true}"
+                  >
+                    <q-avatar color="teal-2" :font-size="tracker.tracker_count < 1000 ? '18px' : tracker.tracker_count < 10000 ? '12px' : '10px'" size="md" text-color="black">{{ tracker.tracker_count }}</q-avatar>
+                    <div class="ellipsis">
+                      {{ tracker.tracker_text }}
+                      <q-tooltip>{{ tracker.tracker_text }}: {{ tracker.tracker_count }}</q-tooltip>
+                    </div>
+                  </q-chip>
+                </q-card-section>
+                <q-card-section v-else>
+                  <q-chip
+                    square
+                    color="secondary"
+                    class="q-ml-md q-mt-md"
+                  >
+                    <q-avatar color="teal-2" size="md" icon="sentiment_very_dissatisfied" text-color="black"></q-avatar>
+                    <div class="ellipsis">
+                      No Trackers
+                      <q-tooltip>No Trackers</q-tooltip>
+                    </div>
+                  </q-chip>
+                </q-card-section>
               </q-card-section>
-              <q-separator vertical inset color="primary" />
-            </q-card-section>
-            <q-card-section v-if="movie.movie_trackers && movie.movie_trackers.length > 0">
-              <q-chip
-                v-for="tracker in movie.movie_trackers"
-                :key="tracker"
-                square
-                color="secondary"
-                class="q-ml-md"
-                :class="{ 'truncate-chip-labels': true}"
-              >
-                <q-avatar color="teal-2" :font-size="tracker.tracker_count < 1000 ? '18px' : tracker.tracker_count < 10000 ? '12px' : '10px'" size="md" text-color="black">{{ tracker.tracker_count }}</q-avatar>
-                <div class="ellipsis">
-                  {{ tracker.tracker_text }}
-                  <q-tooltip>{{ tracker.tracker_text }}: {{ tracker.tracker_count }}</q-tooltip>
-                </div>
-              </q-chip>
-            </q-card-section>
-            <q-card-section v-else class="col-2">
-              <q-chip
-                square
-                color="secondary"
-                class="q-ml-md"
-              >
-                <q-avatar color="teal-2" size="md" icon="sentiment_very_dissatisfied" text-color="black"></q-avatar>
-                <div class="ellipsis">
-                  No Trackers
-                  <q-tooltip>No Trackers</q-tooltip>
-                </div>
-              </q-chip>
             </q-card-section>
           </q-card-section>
           <q-tooltip
@@ -373,7 +381,9 @@ export default defineComponent({
     const movies = cfg.service.movie.movies
     const movie_response = await axios.get(`${host}:${port}${movies}`)
     movie_response.data.forEach((movie, arr) => {
-      movie.movie_image = this.randomImage()
+      if (!movie.movie_image) {
+        movie.movie_image = 'missing.jpg'
+      }
       movie.added_trackers = []
     })
     this.movies = movie_response.data
@@ -648,13 +658,6 @@ export default defineComponent({
           color: "primary"
         }
       }
-    },
-    randomImage () {
-      const images = [
-          'module-6.jpg',
-        ]
-      const image = images[Math.floor(Math.random() * images.length)]
-      return image
     },
     sortMovies () {
       switch (this.smd_toggle) {

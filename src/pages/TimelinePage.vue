@@ -1,7 +1,7 @@
 <template>
   <q-page class="flex flex-center">
     <div class="q-pa-md q-gutter-md" style="width: 90%; min-width: 600px;">
-      <q-item-label class="q-gutter-xl text-h3 text-bold">{{ week }}</q-item-label>
+      <q-item-label class="q-gutter-xl text-h3 text-bold" style="color: #1976d2;">{{ week }}</q-item-label>
       <q-carousel
         v-model="slide"
         ref="slide"
@@ -74,8 +74,10 @@ export default defineComponent({
     const port = cfg.service.movie.port
     const timeline = cfg.service.movie.timeline
     const response = await axios.get(`${host}:${port}${timeline}`)
-    response.data.forEach((item, arr) => {
-      item.series_image = this.randomImage()
+    response.data.forEach((series, arr) => {
+      if (!series.series_image) {
+        series.series_image = 'missing.jpg'
+      }
     })
     this.timeline = response.data
     this.slide = this.timeline[0].series_title
@@ -97,13 +99,6 @@ export default defineComponent({
       } else {
         this.week = series.series_created_on + ":"
       }
-    },
-    randomImage() {
-      const images = [
-          'module-6.jpg',
-        ]
-      const image = images[Math.floor(Math.random() * images.length)]
-      return image
     }
   }
 })

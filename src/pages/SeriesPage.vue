@@ -60,83 +60,69 @@
     </q-toolbar>
     <q-infinite-scroll ref="iscroller" @load="onScroll" style="min-width: 100%">
       <div class="q-pa-md q-mt-xl q-gutter-md row flex-center">
-        <q-card v-for="series in timeline" :key="series" bordered style="min-height: 200px;">
-          <q-card-section>
-            <q-parallax src="../assets/module-6.jpg" :height="100" style="opacity: 0.8;">
-              <q-item dense class="absolute-bottom text-h5 text-white text-weight-bolder q-ma-sm" style="text-shadow: 2px 2px black;">{{ series.series_title }}
-                <q-badge floating transparent color="grey-10" align="bottom">Chosen By: {{ toTitleCase(series.series_chosen_by) }}</q-badge>
-              </q-item>
-              <q-badge floating transparent color="grey-10" align="top" class="text-h6 text-weight-bold">Rank: {{ series.series_rank + 1 }}</q-badge>
-            </q-parallax>
-            <q-tabs v-model="tabs" color="primary" align="justify">
-              <q-tab flat dense name="overview" label="overview" />
-              <q-tab flat dense name="movies" label="movies" />
-            </q-tabs>
-            <q-separator />
-            <q-tab-panels v-model="tabs" animated transition-prev="jump-left" transition-next="jump-right" style="height: 200px; min-width: 350px;">
-              <q-tab-panel round horizontal name="overview" class="q-pa-none bg-grey-1">
-                <q-card-section round horizontal class="q-mt-sm">
-                  <q-icon name="movie" size="md" color=primary class="q-ml-sm col-1" />
-                  <q-space />
-                  <q-item dense class="text-h6 text-bold">Movies in Series: {{ series.series_movies.length }}</q-item>
-                  <q-space />
-                  <q-icon name="movie" size="md" color=primary class="q-mr-sm col-1" />
-                </q-card-section>
-                <q-card-section round horizontal class="q-pa-sm">
-                  <q-space />
-                  <q-icon name="thumb_up" size="lg" color=primary class="q-ml-xl" />
-                  <q-item dense class="text-h4 text-bold">{{ series.series_good_votes }} | {{ series.series_bad_votes }}</q-item>
-                  <q-icon name="thumb_down" size="lg" color=primary class="q-mr-xl" />
-                  <q-space />
-                </q-card-section>
-                <q-card-section horizontal round>
-                  <q-icon name="star" size="lg" color=primary class="q-mt-md q-ml-sm" />
-                  <q-space />
-                  <q-item-label class="text-h2 text-bold text-center">{{ parseFloat(series.series_rating).toFixed(2) }}%</q-item-label>
-                  <q-space />
-                  <q-icon name="star" size="lg" color=primary class="q-mt-md q-mr-sm" />
-                </q-card-section>
-              </q-tab-panel>
-              <q-tab-panel round horizontal name="movies" class="q-pa-none bg-grey-1">
-                <q-card-section round horizontal class="q-pt-sm bg-grey-4">
-                  <q-item dense class="q-pl-lg col-6">Title</q-item>
-                  <q-item dense class="col-2">Dan</q-item>
-                  <q-item dense class="col-2">Nick</q-item>
-                  <q-item dense class="q-pl-xs col-2">{{ parseFloat(series.series_rating).toFixed(1) }}%</q-item>
-                </q-card-section>
-                <div v-if="series.series_movies && series.series_movies.length > 0">
-                  <q-scroll-area style="height: 200px;">
-                    <q-card-section v-for="movie in series.series_movies" :key="movie" class="bg-grey-2">
-                      <q-card-section horizontal>
-                        <q-item dense class="col-6">{{ movie.movie_title }}</q-item>
-                        <q-space />
-                        <q-icon dense v-if="movie.dan_vote == 'GOOD'" name="thumb_up" size="sm" color=secondary class="col-2" />
-                        <q-icon dense v-else-if="movie.dan_vote == 'BAD'" name="thumb_down" size="sm" color=red class="col-2" />
-                        <q-icon dense v-else name="do_not_disturb" size="sm" color=primary class="col-2" />
-                        <q-space />
-                        <q-icon dense v-if="movie.nick_vote == 'GOOD'" name="thumb_up" size="sm" color=secondary class="col-2" />
-                        <q-icon dense v-else-if="movie.nick_vote == 'BAD'" name="thumb_down" size="sm" color=red class="col-2" />
-                        <q-icon dense v-else name="do_not_disturb" size="sm" color=primary class="col-2" />
-                        <q-space />
-                        <q-icon dense :name="calcSmiley(movie.dan_vote, movie.nick_vote).smiley" size="md" :color="calcSmiley(movie.dan_vote, movie.nick_vote).color" class="col-2" />
-                      </q-card-section>
-                      <q-separator />
-                    </q-card-section>
-                  </q-scroll-area>
-                </div>
-                <div v-else>
-                  <q-card-section class="bg-grey-2" style="min-height:200px; min-width: 350px;">
+        <q-card v-for="series in timeline" :key="series" bordered style="width: 380px;">
+          <q-parallax :src="require('../assets/' + series.series_image)" :height="300" :speed="0.1" style="opacity: 0.8;" >
+            <q-item dense class="absolute-bottom text-h5 text-white text-weight-bolder q-ma-sm" style="text-shadow: 2px 2px black;">{{ series.series_title }}
+              <q-badge floating transparent color="grey-10" align="bottom">Chosen By: {{ toTitleCase(series.series_chosen_by) }}</q-badge>
+            </q-item>
+            <q-badge floating transparent color="grey-10" align="top" class="text-h6 text-weight-bold">Rank: {{ series.series_rank + 1 }}</q-badge>
+          </q-parallax>
+          <q-separator />
+          <q-card-section horizontal class="q-pa-md q-mb-sm">
+            <q-icon name="movie" size="lg" color=primary class="q-mt-none" />
+            <q-item dense class="text-h6 text-bold q-mt-none q-pl-xs" >
+              Movies: {{ series.series_movies.length }}
+            </q-item>
+            <q-space />
+            <q-icon name="thumb_up" size="md" color=primary class="q-mt-none q-ml-md" />
+            <q-card-section class="q-ma-none q-pa-none" >
+              <q-item-label class="text-h5 text-bold text-center q-ml-sm q-mr-sm">
+                {{ parseFloat(series.series_rating).toFixed(2) }}%
+              </q-item-label>
+              <q-item-label caption style="font-size:10px;" class="q-ma-none q-mt-none q-pa-none text-center">
+                Ratio {{ series.series_good_votes }} : {{ series.series_bad_votes }}
+              </q-item-label>
+            </q-card-section>
+            <q-icon name="thumb_down" size="md" color=primary class="q-mt-none" />
+          </q-card-section>
+            <!-- <q-tab-panel round horizontal name="movies" class="q-pa-none bg-grey-1">
+              <q-card-section round horizontal class="q-pt-sm bg-grey-4">
+                <q-item dense class="q-pl-lg col-6">Title</q-item>
+                <q-item dense class="col-2">Dan</q-item>
+                <q-item dense class="col-2">Nick</q-item>
+                <q-item dense class="q-pl-xs col-2">{{ parseFloat(series.series_rating).toFixed(1) }}%</q-item>
+              </q-card-section>
+              <div v-if="series.series_movies && series.series_movies.length > 0">
+                <q-scroll-area style="height: 200px;">
+                  <q-card-section v-for="movie in series.series_movies" :key="movie" class="bg-grey-2">
                     <q-card-section horizontal>
-                      <q-item dense>No data available yet for "{{ series.series_title }}"</q-item>
+                      <q-item dense class="col-6">{{ movie.movie_title }}</q-item>
+                      <q-space />
+                      <q-icon dense v-if="movie.dan_vote == 'GOOD'" name="thumb_up" size="sm" color=secondary class="col-2" />
+                      <q-icon dense v-else-if="movie.dan_vote == 'BAD'" name="thumb_down" size="sm" color=red class="col-2" />
+                      <q-icon dense v-else name="do_not_disturb" size="sm" color=primary class="col-2" />
+                      <q-space />
+                      <q-icon dense v-if="movie.nick_vote == 'GOOD'" name="thumb_up" size="sm" color=secondary class="col-2" />
+                      <q-icon dense v-else-if="movie.nick_vote == 'BAD'" name="thumb_down" size="sm" color=red class="col-2" />
+                      <q-icon dense v-else name="do_not_disturb" size="sm" color=primary class="col-2" />
+                      <q-space />
+                      <q-icon dense :name="calcSmiley(movie.dan_vote, movie.nick_vote).smiley" size="md" :color="calcSmiley(movie.dan_vote, movie.nick_vote).color" class="col-2" />
                     </q-card-section>
                     <q-separator />
                   </q-card-section>
-                </div>
-              </q-tab-panel>
-            </q-tab-panels>
-            <q-card-section horizontal>
-              <q-badge floating transparent color="grey-10">Series: #{{ series.series_order }}</q-badge>
-            </q-card-section>
+                </q-scroll-area>
+              </div>
+              <div v-else>
+                <q-card-section class="bg-grey-2" style="min-height:200px; min-width: 350px;">
+                  <q-card-section horizontal>
+                    <q-item dense>No data available yet for "{{ series.series_title }}"</q-item>
+                  </q-card-section>
+                  <q-separator />
+                </q-card-section>
+              </div>
+            </q-tab-panel> -->
+          <q-card-section horizontal>
+            <q-badge floating transparent color="secondary">Series: #{{ series.series_order }}</q-badge>
           </q-card-section>
         </q-card>
       </div>
@@ -230,6 +216,11 @@ export default defineComponent({
     const port = cfg.service.movie.port
     const timeline = cfg.service.movie.timeline
     const response = await axios.get(`${host}:${port}${timeline}`)
+    response.data.forEach((item, arr) => {
+      if (!item.series_image) {
+        item.series_image = 'missing.jpg'
+      }
+    })
     this.series = response.data
   },
   methods: {
@@ -384,3 +375,11 @@ export default defineComponent({
   }
 })
 </script>
+<!-- Notice lang="scss" -->
+<style lang="scss">
+.q-parallax__media > img {
+  width: 100%;
+  height: 180%;
+}
+</style>
+
