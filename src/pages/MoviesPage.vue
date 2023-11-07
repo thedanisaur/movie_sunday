@@ -139,6 +139,7 @@
             </q-card-section>
           </q-card-section>
           <q-tooltip
+            v-if="isLoggedIn"
             anchor="bottom middle"
             self="bottom middle"
             :delay="1000"
@@ -447,6 +448,7 @@ export default defineComponent({
       this.editMovie.modified = true
     },
     async openEditMovieDialog (movie) {
+      if (!this.isLoggedIn) return;
       const username = sessionStorage.getItem('username')
       this.editMovie = movie
       this.editMovie.modified = false
