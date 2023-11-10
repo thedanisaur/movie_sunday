@@ -19,6 +19,7 @@
         padding
         swipeable
         thumbnails
+        height="75vh"
         class="rounded-borders shadow-4"
         @mouseenter="autoplay = false"
         @mouseleave="autoplay = true"
@@ -44,7 +45,7 @@
               </q-item-label>
             </q-item-section>
           </q-item>
-          <q-item class="q-mt-lg">
+          <q-item class="q-mt-lg" style="position: absolute; bottom: 12vh;">
             <q-chip>Chosen By: {{ toTitleCase(series.series_chosen_by) }}</q-chip>
             <q-chip>Series: #{{ series.series_order }}</q-chip>
             <q-chip>Number of Movies:{{ series.series_movies ? series.series_movies.length : 0 }}</q-chip>
