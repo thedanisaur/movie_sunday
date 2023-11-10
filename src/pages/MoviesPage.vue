@@ -346,6 +346,12 @@ import cfg from '../../movie_sunday.config.json'
 
 export default defineComponent({
   name: 'MoviesPage',
+  props: {
+    search: {
+      type: String,
+      default: ''
+    },
+  },
   data () {
     return {
       editMovie: null,
@@ -397,6 +403,7 @@ export default defineComponent({
     const trackers = cfg.service.movie.trackers
     const tracker_response = await axios.get(`${host}:${port}${trackers}`)
     this.trackers = tracker_response.data
+    this.searchText = this.search
   },
   setup () {
     return {

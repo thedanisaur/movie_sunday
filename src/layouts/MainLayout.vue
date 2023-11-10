@@ -172,7 +172,7 @@ export default defineComponent({
             console.log(error)
           }
         });
-      }, 1800000), // Every 30 minutes
+      }, 1800000), // 1800000 = Every 30 minutes
     }
   },
   setup () {
