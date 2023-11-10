@@ -113,7 +113,7 @@
                     square
                     color="secondary"
                     class="q-ml-md q-mt-md"
-                    :class="{ 'truncate-chip-labels': true}"
+                    :class="{ 'truncate-chip-labels': true }"
                   >
                     <q-avatar color="teal-2" :font-size="tracker.tracker_count < 1000 ? '18px' : tracker.tracker_count < 10000 ? '12px' : '10px'" size="md" text-color="black">{{ tracker.tracker_count }}</q-avatar>
                     <div class="ellipsis">

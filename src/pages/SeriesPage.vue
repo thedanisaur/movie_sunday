@@ -60,7 +60,7 @@
     </q-toolbar>
     <q-infinite-scroll ref="iscroller" @load="onScroll" style="min-width: 100%">
       <div class="q-pa-md q-mt-xl q-gutter-md row flex-center">
-        <q-card v-for="series in timeline" :key="series" bordered style="width: 380px;" @click="seriesCardClick(series.series_title)">
+        <q-card v-for="series in timeline" :key="series" bordered style="width: 380px;" @click="seriesCardClick(series.series_title)" class="btn-card">
           <q-parallax :src="require('../assets/' + series.series_image)" :height="300" :speed="0.1" style="opacity: 0.8;" >
             <q-item dense class="absolute-bottom text-h5 text-white text-weight-bolder q-ma-sm" style="text-shadow: 2px 2px black;">{{ series.series_title }}
               <q-badge floating transparent color="grey-10" align="bottom">Chosen By: {{ toTitleCase(series.series_chosen_by) }}</q-badge>
@@ -385,6 +385,9 @@ export default defineComponent({
 .q-parallax__media > img {
   width: 100%;
   height: 180%;
+}
+.btn-card:hover {
+  box-shadow: 0px 0px 10px 2px $primary;
 }
 </style>
 
