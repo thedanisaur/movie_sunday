@@ -18,8 +18,7 @@ const routes = [
     path: '/movies',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/MoviesPage.vue') },
-      { name: 'search', path: '/:search', component: () => import('pages/MoviesPage.vue'), props: true }
+      { path: '', component: () => import('pages/MoviesPage.vue') }
     ]
   },
   {

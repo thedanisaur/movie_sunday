@@ -346,19 +346,14 @@ import cfg from '../../movie_sunday.config.json'
 
 export default defineComponent({
   name: 'MoviesPage',
-  props: {
-    search: {
-      type: String,
-      default: ''
-    },
-  },
   data () {
     return {
       editMovie: null,
       movies: null,
       scrollerMovies: {},
       filteredSeries: [],
-      searchText: ref(''),
+      searchText: this.$route.query.searchText ? ref(this.$route.query.searchText) : ref(''),
+      strictSeriesTitle: this.$route.query.strictSeriesTitle ? this.$route.query.strictSeriesTitle : false,
       movieData: [ { id: 0, movie_title: '' } ],
       isLoggedIn: sessionStorage.getItem('username') !== null,
     }
@@ -366,7 +361,11 @@ export default defineComponent({
   computed: {
     filteredMovies () {
       if (this.movies) {
-        return this.movies.filter((movie) => movie.movie_title.toLowerCase().includes(this.searchText.toLowerCase()) || movie.series_title.toLowerCase().includes(this.searchText.toLowerCase()));
+        if (this.strictSeriesTitle) {
+          return this.movies.filter((movie) => movie.series_title.toLowerCase() === this.searchText.toLowerCase())
+        } else {
+          return this.movies.filter((movie) => movie.movie_title.toLowerCase().includes(this.searchText.toLowerCase()) || movie.series_title.toLowerCase().includes(this.searchText.toLowerCase()));
+        }
       } else {
         return []
       }
@@ -380,6 +379,11 @@ export default defineComponent({
         this.$refs.iscroller.resume()
         this.$refs.iscroller.trigger()
       }
+    },
+    searchText(newText, oldText) {
+      setTimeout(() => {
+        this.strictSeriesTitle = false
+      }, 100)
     }
   },
   async created () {
@@ -403,7 +407,6 @@ export default defineComponent({
     const trackers = cfg.service.movie.trackers
     const tracker_response = await axios.get(`${host}:${port}${trackers}`)
     this.trackers = tracker_response.data
-    this.searchText = this.search
   },
   setup () {
     return {

@@ -128,12 +128,10 @@ export default defineComponent({
           // All this does is wait for the previous movie to finish
           await a;
           // If the previsou movie was found try looking for this image
-          console.log("Querying: " + movie.movie_name)
           const img_host = cfg.service.image.host
           const img_port = cfg.service.image.port
           const images = cfg.service.image.images
           const image_response = await axios.get(`${img_host}:${img_port}${images}/${movie.movie_name}`).catch( error => {
-            console.log("Fetching: " + movie.movie_name)
             const image_json = JSON.stringify({
               "movie_title": movie.movie_title,
               "movie_name": movie.movie_name,
@@ -172,7 +170,7 @@ export default defineComponent({
             console.log(error)
           }
         });
-      }, 1800000), // 1800000 = Every 30 minutes
+      }, 1_800_000), // 1_800_000 = Every 30 minutes
     }
   },
   setup () {

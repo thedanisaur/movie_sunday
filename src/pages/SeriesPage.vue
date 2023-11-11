@@ -371,7 +371,10 @@ export default defineComponent({
     },
     seriesCardClick(series_title) {
       this.$nextTick(() => {
-        this.$router.push({ name: 'search', params: { search: series_title }})
+        this.$router.push({
+          path: '/movies',
+          query: { searchText: series_title, strictSeriesTitle: true },
+        })
       })
     },
     toTitleCase (str) {
