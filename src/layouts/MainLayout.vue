@@ -106,6 +106,7 @@ export default defineComponent({
           sessionStorage.setItem('username', response.data.username)
           sessionStorage.setItem('jwt_token', response.data.token)
         }).catch(error => {
+          this.logout()
           if (error.response) {
             Notify.create({
               type: 'negative',
@@ -127,7 +128,7 @@ export default defineComponent({
         movie_response.data.reduce(async (a, movie) => {
           // All this does is wait for the previous movie to finish
           await a;
-          // If the previsou movie was found try looking for this image
+          // If the previous movie was found try looking for this image
           const img_host = cfg.service.image.host
           const img_port = cfg.service.image.port
           const images = cfg.service.image.images

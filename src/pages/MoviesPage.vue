@@ -255,13 +255,19 @@
               </q-card-section>
             </div>
             <q-space />
-            <q-img
-              spinner-color="white"
-              width="160px"
-              height="140px"
-              fit="fill"
-              :src="require('../assets/' + this.editMovie.movie_image)"
-            />
+            <q-card-section class="q-pa-none">
+              <q-img
+                spinner-color="white"
+                width="140px"
+                height="160px"
+                fit="fill"
+                :src="require('../assets/' + this.editMovie.movie_image)"
+              />
+              <q-card-section horizontal>
+                <q-space />
+                <q-item-label caption>{{ this.editMovie.movie_created_on }}</q-item-label>
+              </q-card-section>
+            </q-card-section>
           </q-card-section>
           <q-item-label caption>Add Trackers</q-item-label>
           <div class="row">
