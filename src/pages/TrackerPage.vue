@@ -231,6 +231,7 @@ export default defineComponent({
       })
     },
     async openMovieListDialog (tracker) {
+      return
       // TODO this doesn't work
       const tracker_id = tracker.tracker_id
       const host = cfg.service.movie.host
