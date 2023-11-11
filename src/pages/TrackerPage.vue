@@ -58,7 +58,7 @@
       <q-card v-for="tracker in trackers" :key="tracker" bordered style="min-width: 300px; max-width: 350px" class="btn-card">
         <q-card-section @click="openMovieListDialog(tracker)">
           <!-- HEADER -->
-          <q-parallax :src="require('../assets/' + tracker.tracker_image)" :height="150" style="opacity: 0.8;">
+          <q-img :src="require('../assets/' + tracker.tracker_image)" :height="100" style="opacity: 0.8;">
             <q-item class="q-pa-sm">
               <q-item-section class="side">
                 <q-avatar color="grey-10" size="64px" :font-size="tracker.tracker_count < 1000 ? '32px' : tracker.tracker_count < 10000 ? '26px' : '22px'" class="text-h2 text-white text-weight-bold">
@@ -71,7 +71,7 @@
                 </q-item-label>
               </q-item-section>
             </q-item>
-          </q-parallax>
+          </q-img>
           <!-- BODY -->
           <!-- FOOTER -->
           <q-chip icon="add_circle_outline">{{ toTitleCase(tracker.tracker_created_by) }}</q-chip>
@@ -185,9 +185,9 @@ export default defineComponent({
     const trackers = cfg.service.movie.trackers
     const response = await axios.get(`${host}:${port}${trackers}`)
     response.data.forEach((item, arr) => {
-      // if (!item.tracker_image) {
-      item.tracker_image = 'missing.jpg'
-      // }
+      if (!item.tracker_image) {
+        item.tracker_image = 'missing.jpg'
+      }
     })
     this.trackers = response.data
   },
