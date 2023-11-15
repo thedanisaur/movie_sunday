@@ -13,7 +13,6 @@
           label="Movie Sunday"
           class="q-mr-md col-2"
         />
-
         <q-tabs no-caps align="justify" class="col-8">
           <q-route-tab
             flat
@@ -40,27 +39,30 @@
             label="Trackers"
           />
         </q-tabs>
-
         <q-space />
-
         <div>
-          <!-- v{{ $q.version }} -->
-          <!-- v0.1.0 -->
-          <!-- <q-btn
-            flat
-            dense
-            round
-            icon="menu"
-            aria-label="Menu"
-            @click="toggleLeftDrawer"
-            class="col-2"
-          /> -->
-          <q-btn v-if="isLoggedIn" flat icon-right="logout" label="Logout" @click="logout()" :to="'/'" />
+          <q-btn v-if="isLoggedIn" flat icon="account_circle" padding="none" size="lg">
+            <q-menu>
+              <div class="row no-wrap q-pa-md">
+                <div class="column" style="min-width: 150px;">
+                  <div class="text-h6 q-mb-none">Settings</div>
+                  <q-item-label caption class="q-mb-md">v{{ $q.version }}&nbsp;-&nbsp;v0.1.0</q-item-label>
+                  <div class="q-mb-none">UI Mode: </div>
+                  <q-toggle v-model="darkMode" toggle-indeterminate @click="toggleDarkMode(darkMode)" :label="darkModeToggleLabel()" />
+                </div>
+                <q-separator vertical inset class="q-mx-lg" />
+                <div class="column items-center" style="min-width: 130px;">
+                  <q-avatar size="72px"><img :src="require('../assets/default_image2.jpg')"></q-avatar>
+                  <div class="text-bold text-h6 q-mt-xs q-mb-md">{{username}}</div>
+                  <q-btn color="primary" flat label="Logout&nbsp;" icon-right="logout" @click="logout()" :to="'/'" v-close-popup />
+                </div>
+              </div>
+            </q-menu>
+          </q-btn>
           <q-btn v-else flat icon-right="login" label="Login" :to="'/login'" />
         </div>
       </q-toolbar>
     </q-header>
-
     <q-page-container>
       <router-view />
     </q-page-container>
@@ -80,6 +82,7 @@ export default defineComponent({
   },
   data () {
     return {
+      darkMode: ref(this.$q.dark.mode),
       isLoggedIn: sessionStorage.getItem('username') !== null,
       loginVerificationInterval: setInterval(() => {
         this.isLoggedIn = sessionStorage.getItem('username') !== null
@@ -138,6 +141,7 @@ export default defineComponent({
               "movie_name": movie.movie_name,
               "series_name": movie.series_name
             })
+            console.log(`fetching: ${movie.movie_name}`)
             axios.post(`${img_host}:${img_port}${images}`, image_json, {
               headers: {
                 'Authorization': `${jwt_token}`,
@@ -170,16 +174,30 @@ export default defineComponent({
           } else {
             console.log(error)
           }
-        });
+        })
       }, 1_800_000), // 1_800_000 = Every 30 minutes
     }
   },
+  computed: {
+    username () {
+      return sessionStorage.getItem('username')
+    },
+  },
   setup () {
     return {
-      
+
     }
   },
   methods: {
+    darkModeToggleLabel () {
+      if (this.$q.dark.mode === "auto") {
+        return "Auto"
+      } else if (this.$q.dark.mode === false) {
+        return "Light"
+      } else if (this.$q.dark.mode === true) {
+        return "Dark"
+      }
+    },
     async logout () {
       const username = sessionStorage.getItem('username')
       const jwt_token = sessionStorage.getItem('jwt_token')
@@ -212,7 +230,13 @@ export default defineComponent({
       sessionStorage.removeItem('username')
       sessionStorage.removeItem('jwt_token')
       this.isLoggedIn = false
-    }
+    },
+    toggleDarkMode (value) {
+      if (value === null) {
+        value = "auto"
+      }
+      this.$q.dark.set(value)
+    },
   },
 })
 </script>

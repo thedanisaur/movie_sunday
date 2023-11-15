@@ -1,6 +1,6 @@
 <template>
   <q-page class="flex flex-center row">
-    <q-toolbar class="absolute-top bg-grey-2">
+    <q-toolbar :class="'absolute-top ' + bgColor()">
       <q-btn
           v-if="isLoggedIn"
           size="md"
@@ -155,7 +155,7 @@
             <q-space />
             <q-btn color="primary" icon="add" @click="addMovieData()" class="q-mr-xs"/>
           </div>
-          <q-scroll-area class="bg-grey-2" style="height: 200px;">
+          <q-scroll-area :class="bgColor()" style="height: 200px;">
             <div v-for="movie in movieData" :key="movie.id">
               <q-separator />
               <q-input
@@ -379,7 +379,14 @@ export default defineComponent({
     },
     toTitleCase (str) {
       return str.charAt(0).toUpperCase() + str.substr(1).toLowerCase()
-    }
+    },
+    bgColor () {
+      if (this.$q.dark.isActive) {
+        return "bg-grey-10"
+      } else {
+        return "bg-grey-2"
+      }
+    },
   }
 })
 </script>

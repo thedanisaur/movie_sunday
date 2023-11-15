@@ -19,7 +19,7 @@
         padding
         swipeable
         thumbnails
-        height="75vh"
+        height="65vh"
         class="rounded-borders shadow-4"
         @mouseenter="autoplay = false"
         @mouseleave="autoplay = true"

@@ -1,6 +1,6 @@
 <template>
   <q-page class="flex flex-center">
-    <q-toolbar class="absolute-top bg-grey-2">
+    <q-toolbar :class="'absolute-top ' + bgColor()">
       <q-btn
           v-if="isLoggedIn"
           size="md"
@@ -58,7 +58,7 @@
       <q-card v-for="tracker in trackers" :key="tracker" bordered style="min-width: 300px; max-width: 350px" class="btn-card">
         <q-card-section @click="openMovieListDialog(tracker)">
           <!-- HEADER -->
-          <q-img :src="require('../assets/' + tracker.tracker_image)" :height="100" style="opacity: 0.8;">
+          <q-img :src="require('../assets/' + tracker.tracker_image)" height="100" style="opacity: 0.8;">
             <q-item class="q-pa-sm">
               <q-item-section class="side">
                 <q-avatar color="grey-10" size="64px" :font-size="tracker.tracker_count < 1000 ? '32px' : tracker.tracker_count < 10000 ? '26px' : '22px'" class="text-h2 text-white text-weight-bold">
@@ -271,7 +271,14 @@ export default defineComponent({
     },
     toTitleCase (str) {
       return str.charAt(0).toUpperCase() + str.substr(1).toLowerCase()
-    }
+    },
+    bgColor () {
+      if (this.$q.dark.isActive) {
+        return "bg-grey-10"
+      } else {
+        return "bg-grey-2"
+      }
+    },
   },
 })
 </script>
