@@ -174,7 +174,7 @@ export default defineComponent({
             console.log(error)
           }
         })
-      }, 30_000), // 1_800_000 = Every 30 minutes
+      }, 1_800_000), // 1_800_000 = Every 30 minutes
     }
   },
   computed: {
