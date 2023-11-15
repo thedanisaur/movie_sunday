@@ -100,7 +100,6 @@ export default defineComponent({
             'Username': `${username}`
           },
         }).then(response => {
-          console.log(response.data)
           Notify.create({
             type: 'positive',
             timeout: 1000,
@@ -175,7 +174,7 @@ export default defineComponent({
             console.log(error)
           }
         })
-      }, 1_800_000), // 1_800_000 = Every 30 minutes
+      }, 30_000), // 1_800_000 = Every 30 minutes
     }
   },
   computed: {
