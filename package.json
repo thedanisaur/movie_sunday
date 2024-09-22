@@ -12,6 +12,7 @@
   },
   "dependencies": {
     "@quasar/extras": "^1.0.0",
+    "apexcharts": "^3.44.0",
     "axios": "^1.2.2",
     "buffer": "^6.0.3",
     "core-js": "^3.6.5",

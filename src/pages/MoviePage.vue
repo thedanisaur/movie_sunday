@@ -351,7 +351,7 @@ import { Notify } from 'quasar'
 import cfg from '../../movie_sunday.config.json'
 
 export default defineComponent({
-  name: 'MoviesPage',
+  name: 'MoviePage',
   data () {
     return {
       editMovie: null,
