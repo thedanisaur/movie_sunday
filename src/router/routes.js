@@ -18,7 +18,7 @@ const routes = [
     path: '/movies',
     component: () => import('layouts/MainLayout.vue'),
     children: [
-      { path: '', component: () => import('pages/MoviesPage.vue') }
+      { path: '', component: () => import('pages/MoviePage.vue') }
     ]
   },
   {
@@ -26,6 +26,13 @@ const routes = [
     component: () => import('layouts/MainLayout.vue'),
     children: [
       { path: '', component: () => import('pages/TrackerPage.vue') }
+    ]
+  },
+  {
+    path: '/graphs',
+    component: () => import('layouts/MainLayout.vue'),
+    children: [
+      { path: '', component: () => import('pages/GraphPage.vue') }
     ]
   },
   {
