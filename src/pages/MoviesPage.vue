@@ -74,7 +74,7 @@
                 spinner-color="white"
                 width="180px"
                 fit="fill"
-                :src="require('../assets/' + movie.movie_image)"
+                :src=movie.movie_image
               />
               <q-separator vertical size=".125em" color="primary" />
             </q-card-section>
@@ -261,7 +261,7 @@
                 width="140px"
                 height="160px"
                 fit="fill"
-                :src="require('../assets/' + this.editMovie.movie_image)"
+                :src=this.editMovie.movie_image
               />
               <q-card-section horizontal>
                 <q-space />
@@ -397,9 +397,11 @@ export default defineComponent({
     const port = cfg.service.movie.port
     const movies = cfg.service.movie.movies
     const movie_response = await axios.get(`${host}:${port}${movies}`)
-    movie_response.data.forEach((movie, arr) => {
-      if (!movie.movie_image) {
-        movie.movie_image = 'missing.jpg'
+    movie_response.data.forEach(async (movie, arr) => {
+      if (movie.movie_image) {
+        movie.movie_image = (await import(`../assets/${movie.movie_image}`)).default
+      } else {
+        movie.movie_image = (await import(`../assets/missing.jpg`)).default
       }
       movie.added_trackers = []
     })

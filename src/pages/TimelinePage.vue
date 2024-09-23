@@ -25,7 +25,7 @@
         @mouseleave="autoplay = true"
         @transition="updateWeek()"
       >
-        <q-carousel-slide v-for="series in timeline" :key="series" :name="series.series_title" :img-src="require('../assets/' + series.series_image)">
+        <q-carousel-slide v-for="series in timeline" :key="series" :name="series.series_title" :img-src=series.series_image>
           <q-item dense class="text-h2 text-white text-weight-bolder q-mt-xl" style="text-shadow: 2px 2px black;">
             <q-item-section>
               <q-item-label>
@@ -75,9 +75,11 @@ export default defineComponent({
     const port = cfg.service.movie.port
     const timeline = cfg.service.movie.timeline
     const response = await axios.get(`${host}:${port}${timeline}`)
-    response.data.forEach((series, arr) => {
-      if (!series.series_image) {
-        series.series_image = 'missing.jpg'
+    response.data.forEach(async (series, arr) => {
+      if (series.series_image) {
+        series.series_image = (await import(`../assets/${series.series_image}`)).default
+      } else {
+        series.series_image = (await import(`../assets/missing.jpg`)).default
       }
     })
     this.timeline = response.data

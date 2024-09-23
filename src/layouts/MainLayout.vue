@@ -52,7 +52,7 @@
                 </div>
                 <q-separator vertical inset class="q-mx-lg" />
                 <div class="column items-center" style="min-width: 130px;">
-                  <q-avatar size="72px"><img :src="require('../assets/default_image2.jpg')"></q-avatar>
+                  <q-avatar size="72px"><img :src=defaultImage></q-avatar>
                   <div class="text-bold text-h6 q-mt-xs q-mb-md">{{username}}</div>
                   <q-btn color="primary" flat label="Logout&nbsp;" icon-right="logout" @click="logout()" :to="'/'" v-close-popup />
                 </div>
@@ -74,6 +74,7 @@ import { defineComponent, ref } from 'vue'
 import axios from 'axios'
 import { Notify } from 'quasar'
 import cfg from '../../movie_sunday.config.json'
+import defaultImage from '../assets/missing.jpg'
 
 export default defineComponent({
   name: 'MainLayout',
@@ -83,6 +84,7 @@ export default defineComponent({
   data () {
     return {
       darkMode: ref(this.$q.dark.mode),
+      defaultImage: defaultImage,
       isLoggedIn: sessionStorage.getItem('username') !== null,
       loginVerificationInterval: setInterval(() => {
         this.isLoggedIn = sessionStorage.getItem('username') !== null
