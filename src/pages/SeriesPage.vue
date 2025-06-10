@@ -11,6 +11,17 @@
           label="Add Series"
         />
       <q-space />
+      <q-input
+        v-model="searchText"
+        filled
+        dense
+        label="Search"
+      >
+        <template v-slot:append>
+          <q-icon v-if="searchText" name="close" @click.stop.prevent="searchText = ''" class="cursor-pointer" />
+          <q-icon name="search" />
+        </template>
+      </q-input>
       <q-btn-toggle
         v-model="ttr_toggle"
         size="md"
@@ -58,10 +69,11 @@
         </template>
       </q-btn-toggle>
     </q-toolbar>
-    <q-infinite-scroll ref="iscroller" @load="onScroll" style="min-width: 100%">
-      <div class="q-pa-md q-mt-xl q-gutter-md row flex-center">
-        <q-card v-for="series in timeline" :key="series" bordered style="width: 380px;" @click="seriesCardClick(series.series_title)" class="btn-card">
+    <q-infinite-scroll v-if="filteredSeries.length > 0" ref="iscroller" @load="onScroll" style="min-width: 100%">
+      <div class="q-pa-md q-mt-xl q-gutter-md row justify-center items-start">
+        <q-card v-for="series in scrollerSeries" :key="series.series_title" bordered style="width: 380px;" @click="seriesCardClick(series.series_title)" class="btn-card">
           <q-parallax :src=series.series_image :height="300" :speed="0.1" style="opacity: 0.8;" >
+            <q-btn dense icon="add" class="bg-secondary absolute-top-left" @click.stop="toggleDetails(series.series_title)" />
             <q-item dense class="absolute-bottom text-h5 text-white text-weight-bolder q-ma-sm" style="text-shadow: 2px 2px black;">{{ series.series_title }}
               <q-badge floating transparent color="grey-10" align="bottom">Chosen By: {{ toTitleCase(series.series_chosen_by) }}</q-badge>
             </q-item>
@@ -85,7 +97,8 @@
             </q-card-section>
             <q-icon name="thumb_down" size="md" color=primary class="q-mt-none" />
           </q-card-section>
-            <!-- <q-tab-panel round horizontal name="movies" class="q-pa-none bg-grey-1">
+          <q-slide-transition>
+            <q-tab-panel v-show="series.showDetails" round horizontal name="movies" class="q-pa-none bg-grey-1">
               <q-card-section round horizontal class="q-pt-sm bg-grey-4">
                 <q-item dense class="q-pl-lg col-6">Title</q-item>
                 <q-item dense class="col-2">Dan</q-item>
@@ -120,7 +133,8 @@
                   <q-separator />
                 </q-card-section>
               </div>
-            </q-tab-panel> -->
+            </q-tab-panel>
+          </q-slide-transition>
           <q-card-section horizontal>
             <q-badge floating transparent color="secondary">Series: #{{ series.series_order }}</q-badge>
           </q-card-section>
@@ -132,6 +146,7 @@
         </div>
       </template>
     </q-infinite-scroll>
+    <q-item-label v-else-if="this.searchText" class="text-h3 text-bold row">No results for {{ this.searchText }}</q-item-label>
     <!-- DIALOGS -->
     <q-dialog v-model="addSeriesDialog">
       <q-card class="q-pa-md">
@@ -195,10 +210,11 @@ export default defineComponent({
   data () {
     return {
       series: null,
-      timeline: {},
+      scrollerSeries: {},
       scrollStop: false,
       movieData: [ { id: 0, movie_title: '' } ],
-      isLoggedIn: sessionStorage.getItem('username') !== null
+      isLoggedIn: sessionStorage.getItem('username') !== null,
+      searchText: this.$route.query.searchText ? ref(this.$route.query.searchText) : ref(''),
     }
   },
   setup () {
@@ -211,17 +227,41 @@ export default defineComponent({
       inputSeriesTitle: ref(''),
     }
   },
+  computed: {
+    filteredSeries () {
+      if (this.series) {
+        return this.series.filter((series) => series.series_title.toLowerCase().includes(this.searchText.toLowerCase()))
+      } else {
+        return []
+      }
+    },
+  },
+  watch: {
+    '$route.query': {
+      handler() {
+        this.syncWithRoute();
+      },
+      immediate: true
+    },
+    filteredSeries(newList, oldList) {
+      if (oldList.length != 0) {
+        this.scrollerSeries = {}
+        this.$refs.iscroller.reset()
+        this.$refs.iscroller.resume()
+        this.$refs.iscroller.trigger()
+      }
+    },
+  },
   async created () {
     const host = cfg.service.movie.host
     const port = cfg.service.movie.port
     const timeline = cfg.service.movie.timeline
     const response = await axios.get(`${host}:${port}${timeline}`)
     response.data.forEach(async (series, arr) => {
-      if (series.series_image) {
-        series.series_image = (await import(`../assets/${series.series_image}`)).default
-      } else {
-        series.series_image = (await import(`../assets/missing.jpg`)).default
+      if (!series.series_image) {
+        series.series_image = `img/missing.jpg`
       }
+      series.showDetails = false
     })
     this.series = response.data
   },
@@ -327,10 +367,10 @@ export default defineComponent({
       setTimeout(() => {
         const i = index - 1
         const offset = 9
-        if (this.series) {
-          this.timeline = Object.values(this.timeline).concat(Object.values(this.series.slice(i * offset, i * offset + offset)))
-          done(i * offset + offset > this.series.length)
-        }
+        const startValue = i * offset
+        const endValue = i * offset + offset
+        this.scrollerSeries = Object.values(this.scrollerSeries).concat(Object.values(this.filteredSeries.slice(startValue, endValue)))
+        done(endValue > this.filteredSeries.length)
       }, 100)
     },
     sortSeries() {
@@ -366,10 +406,12 @@ export default defineComponent({
         default:
           console.warn("Invalid sorting options", this.ttr_toggle, this.ad_toggle)
       }
-      this.timeline = {}
-      this.$refs.iscroller.reset()
-      this.$refs.iscroller.resume()
-      this.$refs.iscroller.trigger()
+      if (this.scrollerSeries.length >= this.series.length) {
+        this.$refs.iscroller.reset()
+        this.$refs.iscroller.resume()
+        this.$refs.iscroller.trigger()
+      }
+      this.scrollerSeries = {}
     },
     seriesCardClick(series_title) {
       this.$nextTick(() => {
@@ -388,6 +430,13 @@ export default defineComponent({
       } else {
         return "bg-grey-2"
       }
+    },
+    syncWithRoute() {
+      this.searchText = this.$route.query.searchText || '';
+    },
+    toggleDetails(series_title) {
+      const series = this.series.find(series => series.series_title === series_title)
+      series.showDetails = !series.showDetails;
     },
   }
 })

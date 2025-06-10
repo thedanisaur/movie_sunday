@@ -1,12 +1,14 @@
 <template>
   <q-page class="flex flex-center">
+    <q-toolbar :class="'absolute-top ' + bgColor()" />
     <div class="q-pa-md q-mt-xl q-gutter-md row flex-center">
-      <div id="rating" class="chart"></div>
-      <div id="vote_ratio" class="chart"></div>
-      <div id="series_average" class="chart"></div>
-      <div id="voting_average" class="chart"></div>
-      <!-- <div id="one_hundred" class="chart"></div> -->
-      <div id="series_votes" class="chart"></div>
+      <q-card
+        v-for="chart in charts"
+        bordered
+        :key="chart.id"
+      >
+        <div :id="chart.id" class="chart"></div>
+      </q-card>
     </div>
   </q-page>
 </template>
@@ -22,6 +24,16 @@ export default defineComponent({
   name: 'TimelinePage',
   data () {
     return {
+      charts: [
+        { id: "rating" },
+        { id: "vote_ratio" },
+        { id: "series_votes" },
+        { id: "series_average" },
+        { id: "voting_average" },
+        { id: "one_hundred" },
+        { id: "vote_breakdown"},
+        { id: "top_by_vote_ratio"},
+      ],
     }
   },
   async created () {
@@ -29,19 +41,14 @@ export default defineComponent({
     const port = cfg.service.movie.port
     const timeline = cfg.service.movie.timeline
     const response = await axios.get(`${host}:${port}${timeline}`)
-    response.data.forEach((series, arr) => {
-      if (!series.series_image) {
-        series.series_image = 'missing.jpg'
-      }
-    })
     this.timeline = response.data
-    console.log(this.timeline)
     const series = []
     const created = []
     const ratings = []
     const vote_ratio = []
     const good_votes = []
     const bad_votes = []
+    const person = []
     var dan_series_avg = 0
     var dan_number_of_series = 0
     var nick_series_avg = 0
@@ -54,6 +61,8 @@ export default defineComponent({
     var nick_vote_avg = 0
     var dan_one_hundred = 0
     var nick_one_hundred = 0
+    var total_good = 0
+    var total_bad = 0
     for (var i = Object.values(this.timeline).length - 1; i >= 0; i--) {
       var s = this.timeline[i]
       series.push(s.series_title)
@@ -62,6 +71,7 @@ export default defineComponent({
       vote_ratio.push(Math.max(s.series_good_votes, 0) / Math.max(s.series_bad_votes, 1))
       good_votes.push(s.series_good_votes)
       bad_votes.push(s.series_bad_votes)
+      person.push(s.series_chosen_by)
       if (s.series_chosen_by === "dan") {
         dan_series_avg += parseFloat(s.series_rating)
         dan_number_of_series += 1
@@ -119,11 +129,44 @@ export default defineComponent({
           // series,
         },
       },
+      yaxis: {
+        min: 0,
+        max: 100
+      },
       stroke: {
         width: 2
       },
       dataLabels: {
         enabled: false,
+      },
+      colors: ['#999999'],
+      fill: {
+        type: 'gradient',
+        gradient: {
+          shade: 'light',
+          type: "vertical",
+          shadeIntensity: 1,
+          inverseColors: false,
+          gradientToColors: ['#FF4560'], // red at top
+          stops: [0, 50, 100],
+          colorStops: [
+            {
+              offset: 0,
+              color: '#00E396', // green at y = 0
+              opacity: 1
+            },
+            {
+              offset: 50,
+              color: '#FEB019', // yellow-orange mid
+              opacity: 1
+            },
+            {
+              offset: 100,
+              color: '#FF4560', // red at y = 10
+              opacity: 1
+            }
+          ]
+        }
       },
     }
     var chart = new ApexCharts(document.querySelector("#rating"), options);
@@ -138,7 +181,7 @@ export default defineComponent({
       },
       series: [
         {
-          name: 'weighted rating',
+          name: '',
           data: [dan_series_avg.toFixed(2), nick_series_avg.toFixed(2)]
         },
       ],
@@ -152,6 +195,34 @@ export default defineComponent({
       stroke: {
         width: 2
       },
+      plotOptions: {
+        bar: {
+          colors: {
+            ranges: [
+              {
+                from: 0,
+                to: 25,
+                color: '#FF4560' // red
+              },
+              {
+                from: 25,
+                to: 50,
+                color: '#FF7B3D' // orange
+              },
+              {
+                from: 50,
+                to: 75,
+                color: '#FEB019' // yellow
+              },
+              {
+                from: 75,
+                to: 100,
+                color: '#00E396' // green
+              }
+            ]
+          }
+        }
+      }
     }
     var chart = new ApexCharts(document.querySelector("#series_average"), options);
     chart.render();
@@ -186,6 +257,60 @@ export default defineComponent({
     var chart = new ApexCharts(document.querySelector("#vote_ratio"), options);
     chart.render();
 
+    const colorMap = {
+      "dan": '#00E396',
+      "nick": '#6045FF'
+    }
+
+    var top_10_vote_ratio = []
+    for (let i = 0; i < series.length; i++) {
+      top_10_vote_ratio.push({ series_name: series[i], vote_ratio: parseFloat(vote_ratio[i]), person: person[i] })
+    }
+    top_10_vote_ratio.sort((a, b) => b.vote_ratio - a.vote_ratio);
+    const top_10_vote_ratio_data = top_10_vote_ratio.map(item => ({
+      x: item.series_name,
+      y: item.vote_ratio,
+      fillColor: colorMap[item.person]
+    })).slice(0, 10);
+
+    var options = {
+      title: {
+        text: 'Top 10 by Vote Ratio'
+      },
+      chart: {
+        type: 'bar'
+      },
+      series: [
+        {
+          name: 'Dan',
+          data: top_10_vote_ratio_data
+        },
+        {
+          name: 'Nick',
+          data: top_10_vote_ratio_data
+        },
+      ],
+      yaxis: {
+        max: 10,
+        min: 0
+      },
+      dataLabels: {
+        enabled: false,
+      },
+      legend: {
+        show: true,
+      },
+      plotOptions: {
+        bar: {
+          horizontal: false,
+        }
+      },
+      colors: ['#00E396', '#6045FF'],
+      // colors: top_10_vote_ratio_data.map(item => colorMap[item.fillColor] || '#999'),
+    }
+    var chart = new ApexCharts(document.querySelector("#top_by_vote_ratio"), options);
+    chart.render();
+
     var options = {
       title: {
         text: 'Vote Breakdown'
@@ -194,6 +319,7 @@ export default defineComponent({
         type: 'area',
         stacked: false
       },
+      colors: ['#00E396', '#FF4560'],
       series: [
         {
           name: 'good votes',
@@ -222,19 +348,19 @@ export default defineComponent({
 
     var options = {
       title: {
-        text: 'Voting Average'
+        text: 'Postive Vote Percentage'
       },
       chart: {
         type: 'bar'
       },
       series: [
         {
-          name: 'Voting Average',
+          name: 'Good Percentage',
           data: [dan_vote_avg.toFixed(2) + '%', nick_vote_avg.toFixed(2) + '%']
         },
       ],
       xaxis: {
-        categories: ['Dan Vote Average', 'Nick Vote Average']
+        categories: ['Dan Postive Percentage', 'Nick Postive Percentage']
       },
       yaxis: {
         min: 0,
@@ -264,6 +390,18 @@ export default defineComponent({
     var chart = new ApexCharts(document.querySelector("#one_hundred"), options);
     chart.render();
 
+    var options = {
+      title: {
+        text: 'Vote Breakdown'
+      },
+      chart: {
+        type: 'donut',
+      },
+      series: [bad_votes.reduce((acc, curr) => acc + Number(curr), 0), good_votes.reduce((acc, curr) => acc + Number(curr), 0)],
+      labels: ['Bad', 'Good'],
+    }
+    var chart = new ApexCharts(document.querySelector("#vote_breakdown"), options);
+    chart.render();
 
   },
   setup () {
@@ -271,18 +409,25 @@ export default defineComponent({
     }
   },
   methods: {
-    toTitleCase (str) {
-      return str.charAt(0).toUpperCase() + str.substr(1).toLowerCase()
+    bgColor () {
+      if (this.$q.dark.isActive) {
+        return "bg-grey-10"
+      } else {
+        return "bg-grey-2"
+      }
     },
     range (number, in_min, in_max, out_min, out_max) {
       return (number - in_min) * (out_max - out_min) / (in_max - in_min) + out_min;
+    },
+    toTitleCase (str) {
+      return str.charAt(0).toUpperCase() + str.substr(1).toLowerCase()
     },
   }
 })
 </script>
 <style lang="scss" scoped>
 .chart {
-  min-width: 500px;
-  margin: 25px auto;
+  min-width: 550px;
+  margin: 25px;
 }
 </style>

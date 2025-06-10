@@ -234,10 +234,10 @@
           @reset="onResetEditMovieDialog(false)"
           style="min-width: 500px"
         >
-          <q-card-section horizontal class="q-ma-sm">
+          <q-card-section horizontal class="flex justify-between items-start q-ma-sm">
             <div class="column">
               <q-item-label class="text-h5 text-bold">{{ this.editMovie.movie_title }}</q-item-label>
-              <q-item-label caption>Your Vote:</q-item-label>
+              <q-item-label caption :class="textColor()">Your Vote:</q-item-label>
               <q-card-section horizontal>
                 <q-card-section>
                   <q-icon
@@ -254,22 +254,16 @@
                 </q-card-section>
               </q-card-section>
             </div>
-            <q-space />
-            <q-card-section class="q-pa-none">
-              <q-img
-                spinner-color="white"
-                width="140px"
-                height="160px"
-                fit="fill"
-                :src=this.editMovie.movie_image
-              />
-              <q-card-section horizontal>
+            <q-card-section class="flex justify-between column q-pa-none">
+              <q-img height="160px" class="absolute" :style="{ filter: 'blur(5px) brightness(0.5)' }" :src=this.editMovie.movie_image />
+              <q-img spinner-color="white" width="120px" height="180px" fit="fill" :src=this.editMovie.movie_image />
+              <q-card-section horizontal class="q-pt-sm">
                 <q-space />
-                <q-item-label caption>{{ this.editMovie.movie_created_on }}</q-item-label>
+                <q-item-label caption :class="textColor()">{{ this.editMovie.movie_created_on }}</q-item-label>
               </q-card-section>
             </q-card-section>
           </q-card-section>
-          <q-item-label caption>Add Trackers</q-item-label>
+          <q-item-label caption :class="textColor()">Add Trackers</q-item-label>
           <div class="row">
             <q-select
               v-model="selectTrackersModel"
@@ -332,7 +326,7 @@
       <q-card>
         <q-card-section class="items-center">
           <q-item-label class="text-h5 text-bold">Are you sure {{ this.editMovie.movie_title }} is "{{ toTitleCase(this.editMovie.user_vote) }}"?</q-item-label>
-          <q-item-label caption>Your vote can not be changed once submitted!</q-item-label>
+          <q-item-label caption :class="textColor()">Your vote can not be changed once submitted!</q-item-label>
         </q-card-section>
         <q-card-actions>
           <q-btn dense flat label="Cancel" color="primary" v-close-popup />
@@ -378,6 +372,12 @@ export default defineComponent({
     },
   },
   watch: {
+    '$route.query': {
+      handler() {
+        this.syncWithRoute();
+      },
+      immediate: true
+    },
     filteredMovies(newList, oldList) {
       if (oldList.length != 0) {
         this.scrollerMovies = {}
@@ -398,10 +398,8 @@ export default defineComponent({
     const movies = cfg.service.movie.movies
     const movie_response = await axios.get(`${host}:${port}${movies}`)
     movie_response.data.forEach(async (movie, arr) => {
-      if (movie.movie_image) {
-        movie.movie_image = (await import(`../assets/${movie.movie_image}`)).default
-      } else {
-        movie.movie_image = (await import(`../assets/missing.jpg`)).default
+      if (!movie.movie_image) {
+        movie.movie_image = `img/missing.jpg`
       }
       movie.added_trackers = []
     })
@@ -516,8 +514,7 @@ export default defineComponent({
       this.editMovie.modified = false
       this.selectTrackersModel.splice(0)
       if (!this.editMovie.has_vote) {
-        // TODO this is still stupid
-        username === 'dan' ? this.editMovie.user_vote = this.editMovie.dan_vote : this.editMovie.user_vote = this.editMovie.nick_vote
+        this.editMovie.user_vote = "NULL"
       }
 
       // Remove unsubmitted trackers
@@ -720,6 +717,15 @@ export default defineComponent({
         return "bg-grey-10"
       } else {
         return "bg-grey-2"
+      }
+    },
+    syncWithRoute() {
+      this.searchText = this.$route.query.searchText || '';
+      this.strictSeriesTitle = this.$route.query.strictSeriesTitle === 'true';
+    },
+    textColor () {
+      if (this.$q.dark.isActive) {
+        return "text-grey"
       }
     },
   }

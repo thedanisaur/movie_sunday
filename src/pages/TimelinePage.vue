@@ -1,5 +1,6 @@
 <template>
   <q-page class="flex flex-center">
+    <q-toolbar :class="'absolute-top ' + bgColor()" />
     <div class="q-pa-md q-gutter-md" style="width: 90%; min-width: 600px;">
       <q-item-label class="q-gutter-xl text-h3 text-bold" style="color: #1976d2;">{{ week }}</q-item-label>
       <q-carousel
@@ -25,7 +26,23 @@
         @mouseleave="autoplay = true"
         @transition="updateWeek()"
       >
-        <q-carousel-slide v-for="series in timeline" :key="series" :name="series.series_title" :img-src=series.series_image>
+        <!-- keep img-src so that we can have thumbnails -->
+        <q-carousel-slide v-for="series in timeline" :key="series" :name="series.series_title" class="relative-position" :img-src="series.series_image">
+          <!-- Burred background image -->
+          <div
+            class="absolute-full"
+            :style="{
+              backgroundImage: `url(${series.series_image})`,
+              backgroundSize: 'cover',
+              backgroundPosition: 'center',
+              filter: 'blur(5px) brightness(0.5)'
+            }"
+          ></div>
+          <!-- Movie Poster -->
+          <div class="absolute-full flex flex-center">
+            <q-img :src="series.series_image" style="max-height: 90%; max-width: 90%;" />
+          </div>
+          <!-- Series Title & Rank -->
           <q-item dense class="text-h2 text-white text-weight-bolder q-mt-xl" style="text-shadow: 2px 2px black;">
             <q-item-section>
               <q-item-label>
@@ -38,6 +55,7 @@
               </q-avatar>
             </q-item-section>
           </q-item>
+          <!-- Rating -->
           <q-item class="text-h4 text-white text-weight-bolder" style="text-shadow: 2px 2px black;">
             <q-item-section>
               <q-item-label class="text-right">
@@ -45,10 +63,11 @@
               </q-item-label>
             </q-item-section>
           </q-item>
+          <!-- Series Details -->
           <q-item class="q-mt-lg" style="position: absolute; bottom: 12vh;">
             <q-chip>Chosen By: {{ toTitleCase(series.series_chosen_by) }}</q-chip>
             <q-chip>Series: #{{ series.series_order }}</q-chip>
-            <q-chip>Number of Movies:{{ series.series_movies ? series.series_movies.length : 0 }}</q-chip>
+            <q-chip>Number of Movies: {{ series.series_movies ? series.series_movies.length : 0 }}</q-chip>
           </q-item>
         </q-carousel-slide>
       </q-carousel>
@@ -76,10 +95,8 @@ export default defineComponent({
     const timeline = cfg.service.movie.timeline
     const response = await axios.get(`${host}:${port}${timeline}`)
     response.data.forEach(async (series, arr) => {
-      if (series.series_image) {
-        series.series_image = (await import(`../assets/${series.series_image}`)).default
-      } else {
-        series.series_image = (await import(`../assets/missing.jpg`)).default
+      if (!series.series_image) {
+        series.series_image = `img/missing.jpg`
       }
     })
     this.timeline = response.data
@@ -91,6 +108,13 @@ export default defineComponent({
     }
   },
   methods: {
+    bgColor () {
+      if (this.$q.dark.isActive) {
+        return "bg-grey-10"
+      } else {
+        return "bg-grey-2"
+      }
+    },
     toTitleCase (str) {
       return str.charAt(0).toUpperCase() + str.substr(1).toLowerCase()
     },
@@ -106,3 +130,8 @@ export default defineComponent({
   }
 })
 </script>
+<style lang="scss" scoped>
+::v-deep(.q-img__image) {
+  object-fit: contain !important;
+}
+</style>

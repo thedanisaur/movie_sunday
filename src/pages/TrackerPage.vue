@@ -60,12 +60,12 @@
           <!-- HEADER -->
           <q-img :src=tracker.tracker_image height="100" style="opacity: 0.8;">
             <q-item class="q-pa-sm">
-              <q-item-section class="side">
-                <q-avatar color="grey-10" size="64px" :font-size="tracker.tracker_count < 1000 ? '32px' : tracker.tracker_count < 10000 ? '26px' : '22px'" class="text-h2 text-white text-weight-bold">
+              <q-item-section>
+                <q-avatar color="primary" size="64px" :font-size="tracker.tracker_count < 1000 ? '32px' : tracker.tracker_count < 10000 ? '26px' : '22px'" class="text-h2 text-white text-weight-bold">
                   {{ tracker.tracker_count }}
                 </q-avatar>
               </q-item-section>
-              <q-item-section class="side">
+              <q-item-section>
                 <q-item-label dense class="text-h5 text-white text-weight-bolder text-right" style="text-shadow: 2px 2px black;">
                   {{ tracker.tracker_text }}
                 </q-item-label>
@@ -109,29 +109,33 @@
       </q-card>
     </q-dialog>
     <q-dialog v-model="movieListDialog">
-      <q-card class="q-pa-md">
-        <q-card-section class="bg-primary">
-          <q-item class="text-white text-h5 text-bold">
-            {{ currentTracker.tracker_text }}:  {{ currentTracker.tracker_count }}
-          </q-item>
-        </q-card-section>
-        <q-separator />
-        <q-item class="flex-center text-bold">MOVIES</q-item>
+      <q-card class="q-pa-md" style="min-width: 500px;">
+        <div class="flex justify-between">
+          <div class="column">
+            <q-item class="text-h5 q-pa-none"> {{ currentTracker.tracker_text }}: </q-item>
+            <q-avatar color="primary" size="128px" class="text-h2 text-white text-weight-bold q-ml-xl q-mb-md"> {{ currentTracker.tracker_count }} </q-avatar>
+          </div>
+          <q-card-section class="flex justify-between column q-pa-none">
+            <q-img spinner-color="white" width="120px" height="180px" fit="fill" class="absolute" :style="{ filter: 'blur(5px) brightness(0.1)' }" :src=this.currentTracker.tracker_image />
+            <q-img spinner-color="white" width="120px" height="180px" fit="fill" :src=this.currentTracker.tracker_image />
+          </q-card-section>
+        </div>
+        <q-item-label caption :class="textColor()">Movies</q-item-label>
         <q-separator size="2px" color="dark" />
-        <q-card-section style="min-height:200px; min-width: 350px;" class="q-pa-none bg-grey-1">
-          <q-card-section round horizontal class="q-pt-sm bg-grey-4">
-            <q-item dense>Title</q-item>
+        <q-card-section class="q-pa-none bg-grey-1">
+          <q-card-section round horizontal class="q-pt-sm bg-primary">
+            <q-item dense class="text-white text-bold">Movie Title</q-item>
             <q-space />
-            <q-item dense>Count</q-item>
+            <q-item dense class="text-white text-bold">Event Count</q-item>
           </q-card-section>
           <div v-if="trackerData && trackerData.length > 0">
-            <q-scroll-area style="height: 200px;" class="bg-grey-2">
-              <q-card-section v-for="data in trackerData" :key="data">
-                <q-card-section horizontal>
-                  <q-item>{{ data.movie_title }}</q-item>
+            <q-scroll-area style="height: 240px;" :class="bgColorMovieRow()">
+              <q-card-section v-for="data in trackerData" :key="data" class="q-pa-none">
+                <q-btn flat dense outline class="full-width" @click="movieRowClick(data.movie_title)">
+                  <q-item class="text-capitalize">{{ data.movie_title }}</q-item>
                   <q-space />
                   <q-item>{{ data.tracker_count }}</q-item>
-                </q-card-section>
+                </q-btn>
                 <q-separator />
               </q-card-section>
             </q-scroll-area>
@@ -185,15 +189,21 @@ export default defineComponent({
     const trackers = cfg.service.movie.trackers
     const response = await axios.get(`${host}:${port}${trackers}`)
     response.data.forEach(async (tracker, arr) => {
-      if (tracker.tracker_image) {
-        tracker.tracker_image = (await import(`../assets/${tracker.tracker_image}`)).default
-      } else {
-        tracker.tracker_image = (await import(`../assets/missing.jpg`)).default
+      if (!tracker.tracker_image) {
+        tracker.tracker_image = `img/missing.jpg`
       }
     })
     this.trackers = response.data
   },
   methods: {
+    movieRowClick(movie_title) {
+      this.$nextTick(() => {
+        this.$router.push({
+          path: '/movies',
+          query: { searchText: movie_title, strictSeriesTitle: false },
+        })
+      })
+    },
     onReset () {
       this.inputTrackerText = ''
     },
@@ -233,8 +243,6 @@ export default defineComponent({
       })
     },
     async openMovieListDialog (tracker) {
-      return
-      // TODO this doesn't work
       const tracker_id = tracker.tracker_id
       const host = cfg.service.movie.host
       const port = cfg.service.movie.port
@@ -274,9 +282,21 @@ export default defineComponent({
     toTitleCase (str) {
       return str.charAt(0).toUpperCase() + str.substr(1).toLowerCase()
     },
+    textColor () {
+      if (this.$q.dark.isActive) {
+        return "text-grey"
+      }
+    },
     bgColor () {
       if (this.$q.dark.isActive) {
         return "bg-grey-10"
+      } else {
+        return "bg-grey-2"
+      }
+    },
+    bgColorMovieRow () {
+      if (this.$q.dark.isActive) {
+        return "bg-grey-8"
       } else {
         return "bg-grey-2"
       }
@@ -287,5 +307,19 @@ export default defineComponent({
 <style lang="scss" scoped>
 .btn-card:hover {
   box-shadow: 0px 0px 10px 2px $primary;
+}
+.q-img .q-img__content .q-item {
+  position: static;
+}
+.blurred-ticket {
+  overflow: hidden;
+}
+.blurred-ticket::before {
+  background-image: url('img/ticket.jpg');
+  background-size: 50px 25px;
+  background-repeat: repeat;
+  background-position: center;
+  filter: blur(5px);
+  z-index: -1;
 }
 </style>

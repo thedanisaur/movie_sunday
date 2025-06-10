@@ -22,6 +22,7 @@
             "host": "http://localhost",
             "port": 7331,
             "images": "/images",
+            "fetch_milliseconds": 1800000
         }
     }
 }

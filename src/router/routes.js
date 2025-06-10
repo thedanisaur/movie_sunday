@@ -29,7 +29,7 @@ const routes = [
     ]
   },
   {
-    path: '/graphs',
+    path: '/analytics',
     component: () => import('layouts/MainLayout.vue'),
     children: [
       { path: '', component: () => import('pages/GraphPage.vue') }
