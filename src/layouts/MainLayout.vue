@@ -178,6 +178,7 @@ export default defineComponent({
         const port = cfg.service.movie.port
         const movies = cfg.service.movie.movies
         const movie_response = await axios.get(`${host}:${port}${movies}`)
+        // TODO remove reverse here
         movie_response.data.slice().reverse().reduce(async (a, movie) => {
           // All this does is wait for the previous movie to finish
           await a;
