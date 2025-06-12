@@ -86,7 +86,7 @@ export default defineComponent({
     return {
       timeline: null,
       slide: null,
-      week: ref('CURRENTLY VIEWING: ')
+      week: ref('LATEST VIEWING: ')
     }
   },
   async created () {
@@ -122,7 +122,7 @@ export default defineComponent({
       const title = this.$refs.slide.modelValue
       const series = this.timeline.find(s => s.series_title == title)
       if (series.series_title === this.timeline[0].series_title) {
-        this.week = 'CURRENTLY VIEWING: '
+        this.week = 'LATEST VIEWING: '
       } else {
         this.week = series.series_created_on + ":"
       }

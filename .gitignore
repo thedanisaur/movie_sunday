@@ -2,6 +2,7 @@
 .thumbs.db
 node_modules
 movie_sunday.config.json
+img/
 
 # Quasar core related directories
 .quasar
