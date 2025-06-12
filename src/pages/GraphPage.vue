@@ -2,13 +2,21 @@
   <q-page class="flex flex-center">
     <q-toolbar :class="'absolute-top ' + bgColor()" />
     <div class="q-pa-md q-mt-xl q-gutter-md row flex-center">
-      <q-card
-        v-for="chart in charts"
-        bordered
-        :key="chart.id"
-      >
+      <div class="q-gutter-md row flex-center">
+        <q-card v-for="chart in charts_group_1" bordered :key="chart.id">
+          <div :id="chart.id" class="chart"></div>
+        </q-card>
+      </div>
+      <div class="q-gutter-md row flex-center">
+      <q-card v-for="chart in charts_group_2" bordered :key="chart.id">
         <div :id="chart.id" class="chart"></div>
       </q-card>
+      </div>
+      <div class="q-gutter-md row flex-center">
+        <q-card v-for="chart in charts_group_3" bordered :key="chart.id">
+          <div :id="chart.id" class="chart"></div>
+        </q-card>
+      </div>
     </div>
   </q-page>
 </template>
@@ -24,15 +32,21 @@ export default defineComponent({
   name: 'TimelinePage',
   data () {
     return {
-      charts: [
-        { id: "rating" },
-        { id: "vote_ratio" },
-        { id: "series_votes" },
+      charts_group_1: [
+        { id: "total_votes" },
         { id: "series_average" },
         { id: "voting_average" },
         { id: "one_hundred" },
-        { id: "vote_breakdown"},
-        { id: "top_by_vote_ratio"},
+      ],
+      charts_group_2: [
+        { id: "rating" },
+        { id: "series_per_year" },
+        { id: "vote_ratio" },
+        { id: "top_by_vote_ratio" },
+      ],
+      charts_group_3: [
+        { id: "series_votes_differential" },
+        { id: "series_votes_breakdown" },
       ],
     }
   },
@@ -49,6 +63,7 @@ export default defineComponent({
     const good_votes = []
     const bad_votes = []
     const person = []
+    const years = {}
     var dan_series_avg = 0
     var dan_number_of_series = 0
     var nick_series_avg = 0
@@ -68,6 +83,13 @@ export default defineComponent({
       series.push(s.series_title)
       created.push(s.series_created_on)
       ratings.push(s.series_rating)
+
+      var year = new Date(s.series_created_on).getFullYear();
+      if (years[year]) {
+        years[year]++;
+      } else {
+        years[year] = 1;
+      }
       vote_ratio.push(Math.max(s.series_good_votes, 0) / Math.max(s.series_bad_votes, 1))
       good_votes.push(s.series_good_votes)
       bad_votes.push(s.series_bad_votes)
@@ -115,7 +137,13 @@ export default defineComponent({
         text: 'Series Ratings'
       },
       chart: {
-        type: 'area'
+        type: 'area',
+        width: 850,
+      },
+      grid: {
+        padding: {
+          bottom: 50
+        }
       },
       series: [{
         name: 'Rating',
@@ -125,8 +153,8 @@ export default defineComponent({
         categories: series,
         labels: {
           show: true,
-
-          // series,
+          rotate: -65,
+          rotateAlways: true,
         },
       },
       yaxis: {
@@ -139,35 +167,6 @@ export default defineComponent({
       dataLabels: {
         enabled: false,
       },
-      colors: ['#999999'],
-      fill: {
-        type: 'gradient',
-        gradient: {
-          shade: 'light',
-          type: "vertical",
-          shadeIntensity: 1,
-          inverseColors: false,
-          gradientToColors: ['#FF4560'], // red at top
-          stops: [0, 50, 100],
-          colorStops: [
-            {
-              offset: 0,
-              color: '#00E396', // green at y = 0
-              opacity: 1
-            },
-            {
-              offset: 50,
-              color: '#FEB019', // yellow-orange mid
-              opacity: 1
-            },
-            {
-              offset: 100,
-              color: '#FF4560', // red at y = 10
-              opacity: 1
-            }
-          ]
-        }
-      },
     }
     var chart = new ApexCharts(document.querySelector("#rating"), options);
     chart.render();
@@ -177,7 +176,8 @@ export default defineComponent({
         text: 'Series Rating Average'
       },
       chart: {
-        type: 'bar'
+        type: 'bar',
+        width: 400,
       },
       series: [
         {
@@ -232,7 +232,13 @@ export default defineComponent({
         text: 'Rating by Vote Ratio'
       },
       chart: {
-        type: 'area'
+        type: 'area',
+        width: 850,
+      },
+      grid: {
+        padding: {
+          bottom: 50
+        }
       },
       series: [
         {
@@ -241,7 +247,12 @@ export default defineComponent({
         },
       ],
       xaxis: {
-        categories: series
+        categories: series,
+        labels: {
+          show: true,
+          rotate: -65,
+          rotateAlways: true,
+        },
       },
       yaxis: {
         max: 10,
@@ -278,7 +289,8 @@ export default defineComponent({
         text: 'Top 10 by Vote Ratio'
       },
       chart: {
-        type: 'bar'
+        type: 'bar',
+        width: 850,
       },
       series: [
         {
@@ -306,52 +318,68 @@ export default defineComponent({
         }
       },
       colors: ['#00E396', '#6045FF'],
-      // colors: top_10_vote_ratio_data.map(item => colorMap[item.fillColor] || '#999'),
     }
     var chart = new ApexCharts(document.querySelector("#top_by_vote_ratio"), options);
     chart.render();
 
+    const vote_differential = []
+    for (let i = 0; i < good_votes.length; i++) {
+      vote_differential.push(good_votes[i] - bad_votes[i])
+    }
+
     var options = {
       title: {
-        text: 'Vote Breakdown'
+        text: 'Vote Differential'
       },
       chart: {
-        type: 'area',
+        type: 'bar',
+        width: 1200,
+        height: 530,
         stacked: false
       },
-      colors: ['#00E396', '#FF4560'],
+      plotOptions: {
+        bar: {
+          colors: {
+            ranges: [
+              {
+                from: -100,
+                to: 0,
+                color: '#FF4560'
+              },
+              {
+                from: 0,
+                to: 100,
+                color: '#00E396'
+              }
+            ]
+          }
+        }
+      },
       series: [
         {
-          name: 'good votes',
-          data: good_votes
-        },
-        {
-          name: 'bad votes',
-          data: bad_votes
+          name: 'vote differential',
+          data: vote_differential
         },
       ],
       xaxis: {
-        categories: series
-      },
-      yaxis: {
-        min: 0,
-      },
-      stroke: {
-        width: 1
-      },
-      dataLabels: {
-        enabled: false,
+        categories: series,
+        labels: {
+          show: true,
+          rotate: -65,
+          rotateAlways: true,
+        },
       },
     }
-    var chart = new ApexCharts(document.querySelector("#series_votes"), options);
+    var chart = new ApexCharts(document.querySelector("#series_votes_differential"), options);
     chart.render();
 
     var options = {
       title: {
-        text: 'Postive Vote Percentage'
+        text: 'Positive Vote Percentage'
       },
       chart: {
-        type: 'bar'
+        type: 'bar',
+        width: 400,
       },
       series: [
         {
@@ -360,7 +388,7 @@ export default defineComponent({
         },
       ],
       xaxis: {
-        categories: ['Dan Postive Percentage', 'Nick Postive Percentage']
+        categories: ['Dan Positive Percentage', 'Nick Positive Percentage']
       },
       yaxis: {
         min: 0,
@@ -376,6 +404,7 @@ export default defineComponent({
       },
       chart: {
         type: 'bar',
+        width: 400,
       },
       series: [
         {
@@ -390,17 +419,86 @@ export default defineComponent({
     var chart = new ApexCharts(document.querySelector("#one_hundred"), options);
     chart.render();
 
+    const badTotal = bad_votes.reduce((acc, curr) => acc + Number(curr), 0);
+    const goodTotal = good_votes.reduce((acc, curr) => acc + Number(curr), 0);
+    var options = {
+      title: {
+        text: 'Total Votes'
+      },
+      chart: {
+        type: 'donut',
+        width: 400,
+      },
+      series: [ badTotal, goodTotal ],
+      labels: [`Bad&nbsp;&nbsp;&nbsp;| ${badTotal}`, `Good&nbsp;| ${goodTotal}`],
+    }
+    var chart = new ApexCharts(document.querySelector("#total_votes"), options);
+    chart.render();
+
+    var sortedYears = Object.keys(years).sort();
+    var yearLabels = sortedYears;
+    var yearCounts = sortedYears.map(function(year) {
+      return years[year];
+    });
+    var options = {
+      title: {
+        text: 'Series watched per year'
+      },
+      chart: {
+        type: 'bar',
+        width: 850,
+      },
+      series: [
+        {
+          name: 'Count',
+          data: yearCounts
+        },
+      ],
+      xaxis: {
+        categories: yearLabels
+      },
+    }
+    var chart = new ApexCharts(document.querySelector("#series_per_year"), options);
+    chart.render();
+
     var options = {
       title: {
         text: 'Vote Breakdown'
       },
       chart: {
-        type: 'donut',
+        type: 'bar',
+        width: 1200,
+        height: 530,
+        stacked: true
       },
-      series: [bad_votes.reduce((acc, curr) => acc + Number(curr), 0), good_votes.reduce((acc, curr) => acc + Number(curr), 0)],
-      labels: ['Bad', 'Good'],
+      colors: [ '#FF4560', '#00E396' ],
+      series: [
+        {
+          name: 'bad votes',
+          data: bad_votes.map(num => -Math.abs(num))
+
+        },
+        {
+          name: 'good votes',
+          data: good_votes
+        },
+      ],
+      xaxis: {
+        categories: series,
+        labels: {
+          show: true,
+          rotate: -65,
+          rotateAlways: true,
+        },
+      },
+      stroke: {
+        width: 1
+      },
+      dataLabels: {
+        enabled: false,
+      },
     }
-    var chart = new ApexCharts(document.querySelector("#vote_breakdown"), options);
+    var chart = new ApexCharts(document.querySelector("#series_votes_breakdown"), options);
     chart.render();
 
   },
@@ -427,7 +525,6 @@ export default defineComponent({
 </script>
 <style lang="scss" scoped>
 .chart {
-  min-width: 550px;
   margin: 25px;
 }
 </style>

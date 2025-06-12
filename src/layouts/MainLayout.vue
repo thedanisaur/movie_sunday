@@ -64,7 +64,7 @@
                 <div class="text-h6 q-mb-none">Settings</div>
                 <q-item-label caption class="q-mb-md">v{{ $q.version }}&nbsp;-&nbsp;v0.1.0</q-item-label>
                 <div class="q-mb-none">UI Mode: </div>
-                <q-toggle v-model="darkMode" toggle-indeterminate @click="toggleDarkMode(darkMode)" :label="darkModeToggleLabel()" />
+                <q-toggle v-model="darkMode" toggle-indeterminate @click="darkModeToggle(darkMode)" :label="darkModeToggleLabel()" />
                 <q-btn color="primary" flat label="Change&nbsp;Password" icon-right="replay" @click="passwordDialogOnToggle()" v-close-popup />
               </div>
               <q-separator vertical inset class="q-mx-lg" />
@@ -130,6 +130,11 @@ export default defineComponent({
 
   components: {
   },
+  created () {
+    if (this.isLoggedIn) {
+      this.scheduleRefreshToken()
+    }
+  },
   data () {
     return {
       darkMode: ref(this.$q.dark.mode),
@@ -138,39 +143,6 @@ export default defineComponent({
       loginVerificationInterval: setInterval(() => {
         this.isLoggedIn = sessionStorage.getItem('username') !== null
       }, 1000),
-      refreshLoginInterval: setInterval(async () => {
-        if (!this.isLoggedIn) return
-        const username = sessionStorage.getItem('username')
-        const jwt_token = sessionStorage.getItem('jwt_token')
-        const host = cfg.service.user.host
-        const port = cfg.service.user.port
-        const refresh = cfg.service.user.refresh
-        const response = await axios.post(`${host}:${port}${refresh}/${username}`, {}, {
-          headers: {
-            'Authorization': `${jwt_token}`,
-            'Username': `${username}`
-          },
-        }).then(response => {
-          Notify.create({
-            type: 'positive',
-            timeout: 1000,
-            message: 'Refreshed Token'
-          })
-          sessionStorage.setItem('username', response.data.username)
-          sessionStorage.setItem('jwt_token', response.data.token)
-        }).catch(error => {
-          this.logout()
-          if (error.response) {
-            Notify.create({
-              type: 'negative',
-              message: error.response.data
-            })
-            console.log(error.response.data)
-          } else {
-            console.log(error)
-          }
-        })
-      }, 100000), // 100000 is just under 2 min
       fetchImageInterval: setInterval(async () => {
         const username = sessionStorage.getItem('username')
         const jwt_token = sessionStorage.getItem('jwt_token')
@@ -178,8 +150,7 @@ export default defineComponent({
         const port = cfg.service.movie.port
         const movies = cfg.service.movie.movies
         const movie_response = await axios.get(`${host}:${port}${movies}`)
-        // TODO remove reverse here
-        movie_response.data.slice().reverse().reduce(async (a, movie) => {
+        movie_response.data.slice().reduce(async (a, movie) => {
           // All this does is wait for the previous movie to finish
           await a;
           // If the previous movie was found try looking for this image
@@ -239,10 +210,22 @@ export default defineComponent({
       return this.logoWidth >= 200
     }
   },
+  watch: {
+    isLoggedIn (newVal) {
+      if (newVal) {
+        this.scheduleRefreshToken()
+      } else if (this.refreshTimeout) {
+        clearTimeout(this.refreshTimeout)
+      }
+    }
+  },
   beforeUnmount () {
     const element = this.$refs.logoRef?.$el
     if (this.logoObserver && element) {
       this.logoObserver.unobserve(element)
+    }
+    if (this.refreshTimeout) {
+      clearTimeout(this.refreshTimeout)
     }
   },
   mounted () {
@@ -266,6 +249,12 @@ export default defineComponent({
     }
   },
   methods: {
+    darkModeToggle (value) {
+      if (value === null) {
+        value = "auto"
+      }
+      this.$q.dark.set(value)
+    },
     darkModeToggleLabel () {
       if (this.$q.dark.mode === "auto") {
         return "Auto"
@@ -308,6 +297,14 @@ export default defineComponent({
       sessionStorage.removeItem('jwt_token')
       this.isLoggedIn = false
     },
+    parseJwt (token) {
+      const base64Url = token.split('.')[1]
+      const base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/')
+      const jsonPayload = decodeURIComponent(atob(base64).split('').map(c => {
+        return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2)
+      }).join(''))
+      return JSON.parse(jsonPayload)
+    },
     passwordDialogButtonDisabledReset () {
       return this.currentPassword.length === 0 && this.newPassword.length === 0 && this.retypePassword.length === 0
     },
@@ -326,11 +323,59 @@ export default defineComponent({
       this.passwordDialogOnReset()
       this.passwordDialog = !this.passwordDialog
     },
-    toggleDarkMode (value) {
-      if (value === null) {
-        value = "auto"
+    async refreshToken () {
+      if (!this.isLoggedIn) return
+      const username = sessionStorage.getItem('username')
+      const jwt_token = sessionStorage.getItem('jwt_token')
+      const host = cfg.service.user.host
+      const port = cfg.service.user.port
+      const refresh = cfg.service.user.refresh
+      const response = await axios.post(`${host}:${port}${refresh}/${username}`, {}, {
+        headers: {
+          'Authorization': `${jwt_token}`,
+          'Username': `${username}`
+        },
+      }).then(response => {
+        sessionStorage.setItem('username', response.data.username)
+        sessionStorage.setItem('jwt_token', response.data.token)
+        Notify.create({
+          type: 'positive',
+          timeout: 1000,
+          message: 'Refreshed Token'
+        })
+        this.scheduleRefreshToken()
+      }).catch(error => {
+        this.logout()
+        if (error.response) {
+          Notify.create({
+            type: 'negative',
+            message: error.response.data
+          })
+          console.log(error.response.data)
+        } else {
+          console.log(error)
+        }
+      })
+    },
+    scheduleRefreshToken () {
+      const payload = this.parseJwt(sessionStorage.getItem('jwt_token'))
+      if (!payload || !payload.exp) {
+        console.error('Invalid token — cannot schedule refresh')
+        return
       }
-      this.$q.dark.set(value)
+
+      const expirationMs = payload.exp * 1000
+      // Refresh at the half way mark of the token expiring
+      const refreshIntervalMs = (payload.exp - payload.iat) * 1000 / 2
+      const now = Date.now()
+      const refreshTimeMs = expirationMs - refreshIntervalMs
+      const delayMs = Math.max(refreshTimeMs - now, 0)
+
+      if (this.refreshTimeout) {
+        clearTimeout(this.refreshTimeout)
+      }
+
+      this.refreshTimeout = setTimeout(this.refreshToken, delayMs)
     },
   },
 })
