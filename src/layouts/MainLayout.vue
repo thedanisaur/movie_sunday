@@ -91,17 +91,17 @@
           class="q-gutter-md"
           style="min-width: 500px"
         >
-          <q-input v-model="currentPassword" filled :type="isPwd ? 'password' : 'text'" hint="Current Password" class="q-mb-lg">
+          <q-input v-model="currentPassword" filled :type="isPwd ? 'password' : 'text'" :rules="[val => !!val || 'Password is required']" hint="Current Password" class="q-mb-lg">
             <template v-slot:append>
               <q-icon :name="isPwd ? 'visibility_off' : 'visibility'" class="cursor-pointer" @click="isPwd = !isPwd"/>
             </template>
           </q-input>
-          <q-input v-model="newPassword" filled :type="isPwd ? 'password' : 'text'" hint="New Password" class="q-mb-lg">
+          <q-input v-model="newPassword" filled :type="isPwd ? 'password' : 'text'" :rules="[val => !!val || 'New Password is required']" hint="New Password" class="q-mb-lg">
             <template v-slot:append>
               <q-icon :name="isPwd ? 'visibility_off' : 'visibility'" class="cursor-pointer" @click="isPwd = !isPwd"/>
             </template>
           </q-input>
-          <q-input v-model="retypePassword" filled :disable="this.newPassword.length === 0" :type="isPwd ? 'password' : 'text'" hint="Retype New Password" class="q-mb-md">
+          <q-input v-model="retypePassword" filled :disable="this.newPassword.length === 0" :type="isPwd ? 'password' : 'text'" :rules="[passwordConfirm]" hint="Retype New Password" class="q-mb-md">
             <template v-slot:append>
               <q-icon :name="isPwd ? 'visibility_off' : 'visibility'" class="cursor-pointer" @click="isPwd = !isPwd"/>
             </template>
@@ -305,11 +305,19 @@ export default defineComponent({
       }).join(''))
       return JSON.parse(jsonPayload)
     },
+    passwordConfirm (val) {
+      if (!val) return 'Please confirm your password';
+      if (val !== this.newPassword) return 'Passwords do not match';
+      return true;
+    },
     passwordDialogButtonDisabledReset () {
       return this.currentPassword.length === 0 && this.newPassword.length === 0 && this.retypePassword.length === 0
     },
     passwordDialogButtonDisabledSubmit () {
-      return this.currentPassword.length === 0 || this.newPassword.length === 0 || this.retypePassword.length === 0
+      return this.currentPassword.length === 0 ||
+        this.newPassword.length === 0 ||
+        this.retypePassword.length === 0 ||
+        this.newPassword !== this.retypePassword
     },
     async passwordDialogOnReset () {
       this.currentPassword = ''
@@ -317,7 +325,38 @@ export default defineComponent({
       this.retypePassword = ''
     },
     async passwordDialogOnSubmit () {
-      console.log('submitted!')
+      console.log("submitted")
+      const jwt_token = sessionStorage.getItem('jwt_token')
+      const host = cfg.service.user.host
+      const port = cfg.service.user.port
+      const user = cfg.service.user.user
+      const payload = {
+        "current": this.currentPassword,
+        "updated": this.newPassword,
+      }
+      const response = await axios.put(`${host}:${port}${user}`, payload, {
+        headers: {
+          'Authorization': `${jwt_token}`,
+          'Content-Type': 'application/json',
+        },
+      }).then(response => {
+        console.log(response.data)
+        Notify.create({
+          type: 'positive',
+          timeout: 1000,
+          message: 'Password Updated'
+        })
+      }).catch(error => {
+        if (error.response) {
+          Notify.create({
+            type: 'negative',
+            message: error.response.data
+          })
+          console.log(error.response.data)
+        } else {
+          console.log(error)
+        }
+      })
     },
     async passwordDialogOnToggle () {
       this.passwordDialogOnReset()

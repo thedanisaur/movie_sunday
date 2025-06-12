@@ -1,6 +1,7 @@
 .DS_Store
 .thumbs.db
 node_modules
+movie_sunday.config.json
 
 # Quasar core related directories
 .quasar
